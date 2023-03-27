@@ -1,25 +1,18 @@
-import logo from './logo.svg';
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [people, setPeople] = useState([])
+
+  useEffect(() => {
+    axios.get('/api').then(res => setPeople(res.data))
+    // axios.get('/api')
+  }, [])
+
+  return people.map((p, i) => {
+    return <p key={i}> {p.id} {p.name} {p.age}</p>
+  });
 }
 
 export default App;
