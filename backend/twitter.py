@@ -35,11 +35,7 @@ def get_followers_liked_tweets():
         print(follower.screen_name)
         for tweet in get_liked_tweets(follower.id).data:
             print(tweet.created_at)
-
+            # for match in re.findall(r"#(\w+)", tweet.text):
+            #     print(match)
 
 get_followers_liked_tweets()
-
-      
-def get_liked_tweets_by_followers():
-    pass
-
