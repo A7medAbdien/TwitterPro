@@ -31,11 +31,17 @@ def get_liked_tweets(id):
     return client.get_liked_tweets(id=id, tweet_fields=['context_annotations','created_at','geo'])
 
 def get_followers_liked_tweets():
+    followers_liked_tweets= {}
     for follower in get_followers():
-        print(follower.screen_name)
+        hashtags = list()
+        # print(follower.screen_name)
         for tweet in get_liked_tweets(follower.id).data:
-            print(tweet.created_at)
-            # for match in re.findall(r"#(\w+)", tweet.text):
-            #     print(match)
+            # print(tweet)
+            for hashtag in re.findall(r"#(\w+)", tweet.text):
+                # print(hashtag)
+                hashtags.append(hashtag)
+        followers_liked_tweets[follower.screen_name] = hashtags
+    # print(followers_liked_tweets)
+    return followers_liked_tweets
 
 get_followers_liked_tweets()
