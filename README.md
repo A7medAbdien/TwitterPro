@@ -23,6 +23,11 @@ google trends for the most trends, But IDK how this might help?!
 4. building the frontend, dashboard
 5. set a database 
 
+# Not sure to add or not
+
+1. let chatGPT write a tweet about the trends and publish it
+2. analyses the result after 7 days
+
 # Recourses
 
 1. set backend and frontend services:
