@@ -1,4 +1,4 @@
-import re
+# import re
 import tweepy
 from conf import *
 
@@ -8,16 +8,16 @@ api = tweepy.API(auth)
 
 
 def get_trends():
-    trends = api.get_place_trends(id = WEOID)
+    trends = api.get_place_trends(id = WEOID, exclude = "hashtags")
     
     TRENDS = []
-    regexp = re.compile(r'[ء-ي]+')
+    # regexp = re.compile(r'[ء-ي]+')
     
     for value in trends:
         for trend in value['trends']:
             trend_name = trend['name']
-            TRENDS.append(trend_name[::-1]) if regexp.search(trend_name) else TRENDS.append(trend_name)
-            
+            # TRENDS.append(trend_name[::-1]) if regexp.search(trend_name) else TRENDS.append(trend_name)
+            TRENDS.append(trend_name)
     return TRENDS
 
 
