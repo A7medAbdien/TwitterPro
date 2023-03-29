@@ -1,14 +1,5 @@
 import re
-import tweepy
 from conf import *
-
-auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-api = tweepy.API(auth)
-
-client = tweepy.Client(bearer_token=BEARER_TOKEN)
-
-MAX_RESULT = 20
 
 def get_trends():
     return api.get_place_trends(id = WOEID, exclude = "hashtags")
@@ -38,7 +29,6 @@ def get_liked_tweets(whom):
             
     return followers_liked_tweets
 
-
 def extract_hashtags(followers_liked_tweets):
     tweets = {}
     for user, tweet in followers_liked_tweets.items():
@@ -47,7 +37,6 @@ def extract_hashtags(followers_liked_tweets):
             hashtags.append(hashtag)
         if len(hashtags) > 0: tweets[user]= hashtags 
     return tweets
-
 
 def get_top_tweets(id,max):
     query_str = f"from:{id}"
