@@ -12,22 +12,22 @@ def get_trends():
     return api.get_place_trends(id = WEOID, exclude = "hashtags")
 
 def get_followers():
-    return client.get_users_followers(MY_ID, max_results=100)
+    # print(client.get_users_followers(E_ID, max_results=100))
+    return client.get_users_following(E_ID, max_results=20)
 
 def get_liked_tweets(id):
-    return client.get_liked_tweets(id=id, tweet_fields=['context_annotations','created_at','geo'])
+    return client.get_liked_tweets(id=id, tweet_fields=['context_annotations','created_at','geo'], max_results=20)
 
 def get_followers_liked_tweets():
     followers_liked_tweets= {}
     
     for follower in get_followers().data:
         hashtags = list()
-        
         for tweet in get_liked_tweets(follower.id).data:
             for hashtag in re.findall(r"#(\w+)", tweet.text):
                 hashtags.append(hashtag)
                 
-        followers_liked_tweets[follower.id] = hashtags
+        if len(hashtags) > 0: followers_liked_tweets[follower.id] = hashtags 
     return followers_liked_tweets
 
 def get_top_tweets(id):

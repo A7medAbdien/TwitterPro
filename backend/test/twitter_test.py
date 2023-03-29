@@ -22,7 +22,7 @@ def test_get_followers_liked_tweets():
 
 def test_get_top_tweets():
     try:
-        for tweet in get_top_tweets().data :
+        for tweet in get_top_tweets(MY_ID).data :
             print(tweet.public_metrics)
     except:
         print(f'It seems that this ID/USERNAME:{id} has no tweets')
