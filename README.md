@@ -23,9 +23,9 @@ google trends for the most trends, But IDK how this might help?!
 
 # My process will be
 
-1. request access to Twitter api - 3/26 
-2. set backend and frontend services - 3/27
-3. start using Twitter api - as soon the Twitter give the access
+1. request access to Twitter api - 3/26 👍 
+2. set backend and frontend services - 3/27 👍
+3. start using Twitter api - 3/28 👍
 4. building the frontend, dashboard
 5. set a database 
 
