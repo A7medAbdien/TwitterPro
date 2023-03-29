@@ -1,9 +1,10 @@
-# Twitter Dashboard
+# Twitter Dashboard, I will take Elon Musk as an example
 
 this project helps to answer, what I can twit today? The Dashboard will show...
 1. the most liked tweets
 2. the tended tweets/ as a hashtags
-3. what the user followers liked yesterday
+3. what the user following liked yesterday
+4. what the user followers liked yesterday
 
 ## would like to add, but only for the enterprise
 
@@ -26,8 +27,8 @@ google trends for the most trends, But IDK how this might help?!
 1. request access to Twitter api - 3/26 👍 
 2. set backend and frontend services - 3/27 👍
 3. start using Twitter api - 3/28 👍
-4. building the frontend, dashboard
-5. set a database 
+4. set a database 
+5. building the frontend, dashboard
 
 # Not sure to add or not
 
