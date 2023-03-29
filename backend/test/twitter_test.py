@@ -1,7 +1,5 @@
 import sys
-# sys.path is a list of absolute path strings
 sys.path.insert(0, 'C:/Users/bashr/TwitterPro/backend')
-# sys.path.append()
 from twitter import *
 from conf import *
 
