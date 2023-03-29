@@ -17,19 +17,21 @@ def test_get_trends():
             TRENDS.append(trend_name)
     print(TRENDS)
 
-def test_get_followers_liked_tweets():
-    print(get_followers_liked_tweets())
+def test_get_liked_tweets():
+    tweets = get_liked_tweets(get_following)
+    print(tweets)
+    print(extract_hashtags(tweets))
 
 def test_get_top_tweets():
     try:
-        for tweet in get_top_tweets(MY_ID).data :
+        for tweet in get_top_tweets(E_ID,20).data :
             print(tweet.public_metrics)
     except:
         print(f'It seems that this ID/USERNAME:{id} has no tweets')
 
 def test():
     test_get_trends()
-    test_get_followers_liked_tweets()
+    test_get_liked_tweets()
     test_get_top_tweets()
 
 test()
