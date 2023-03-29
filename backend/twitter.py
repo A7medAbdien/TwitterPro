@@ -25,23 +25,40 @@ def test_trends():
 
 
 def get_followers():
-    return api.get_followers(user_id = MY_ID)
+    # return api.get_followers(user_id = MY_ID)
+    return client.get_users_followers(MY_ID, max_results=100)
 
 def get_liked_tweets(id):
     return client.get_liked_tweets(id=id, tweet_fields=['context_annotations','created_at','geo'])
 
 def get_followers_liked_tweets():
     followers_liked_tweets= {}
-    for follower in get_followers():
+    for follower in get_followers().data:
         hashtags = list()
-        # print(follower.screen_name)
+        # print(follower.name)
         for tweet in get_liked_tweets(follower.id).data:
             # print(tweet)
             for hashtag in re.findall(r"#(\w+)", tweet.text):
                 # print(hashtag)
                 hashtags.append(hashtag)
-        followers_liked_tweets[follower.screen_name] = hashtags
+        followers_liked_tweets[follower.id] = hashtags
     # print(followers_liked_tweets)
     return followers_liked_tweets
 
 get_followers_liked_tweets()
+
+def get_top_tweets(id):
+    query_str = f"from:{id}"
+    res = client.search_recent_tweets(
+        query=query_str,
+        max_results=10,
+        sort_order="relevancy",
+        tweet_fields=['context_annotations','created_at', 'public_metrics','author_id', 'lang', 'geo', 'entities'])
+    try:
+        for tweet in res.data :
+            print(tweet.public_metrics)
+        return res
+    except:
+        print(f'It seems that this ID/USERNAME:{id} has no tweets')
+
+# get_top_tweets("elonmusk")

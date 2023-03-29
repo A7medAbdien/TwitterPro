@@ -5,6 +5,12 @@ this project helps to answer, what I can twit today? The Dashboard will show...
 2. the tended tweets/ as a hashtags
 3. what the user followers liked yesterday
 
+## would like to add, but only for the enterprise
+
+when the user was active, [Account Activity API](https://developer.twitter.com/en/docs/twitter-api/enterprise/account-activity-api/overview)
+
+I use search_recent_tweets, rather than all cuz I need academic research access to use search_all_tweets
+
 # Concepts
 
 1. using social media API
