@@ -39,7 +39,7 @@ def extract_hashtags(followers_liked_tweets):
     return tweets
 
 def get_top_tweets(id,max):
-    query_str = f"from:{id}"
+    query_str = f"from:{id} -is:reply -is:retweet"
     return client.search_recent_tweets(
         query=query_str,
         max_results = max,
