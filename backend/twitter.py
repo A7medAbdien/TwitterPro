@@ -1,9 +1,10 @@
 import re
 from conf import *
 
-def get_user_info(user_id):
+def get_user_info(user_id=None,username=None):
     return client.get_user(
         id = user_id,
+        username = username,
         user_fields = ['profile_image_url', 'created_at', 'public_metrics'])
 
 def get_trends():
