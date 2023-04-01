@@ -22,10 +22,10 @@ def test_get_liked_tweets():
 
 def test_get_top_tweets():
     try:
-        for tweet in get_top_tweets(E_ID,20).data :
+        for tweet in get_top_tweets("AhmedAbdien10",10).data[:2] :
             print(tweet)
     except:
-        print(f'It seems that this ID/USERNAME:{E_ID} has no tweets')
+        print(f'It seems that this ID/USERNAME:{ELUN_ID} has no tweets')
 
 def test():
     # test_get_trends()

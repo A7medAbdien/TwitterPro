@@ -5,13 +5,16 @@ def get_trends():
     return api.get_place_trends(id = WOEID, exclude = "hashtags")
 
 def get_followers():
-    print(client.get_users_followers(E_ID, max_results=MAX_RESULT))
+    print(client.get_users_followers(ELUN_ID, max_results=FOLLOW_NUM))
 
 def get_following():
-    return client.get_users_following(E_ID, max_results=MAX_RESULT)
+    return client.get_users_following(ELUN_ID, max_results=FOLLOW_NUM)
 
-def get_user_liked_tweets(id):
-    return client.get_liked_tweets(id=id, tweet_fields=['context_annotations','created_at','geo'], max_results=MAX_RESULT)
+def get_user_liked_tweets(user_id):
+    return client.get_liked_tweets(
+        id=user_id,
+        tweet_fields=['context_annotations','created_at','geo','public_metrics'],
+        max_results=TWEETS_NUM)
 
 def get_liked_tweets(whom):
     followers_liked_tweets= {}
@@ -22,7 +25,14 @@ def get_liked_tweets(whom):
             tweets = get_user_liked_tweets(user.id).data
             if len(tweets) > 0:
                 for tweet in tweets:
-                    followers_liked_tweets[user.id] = tweet        
+                    followers_liked_tweets[user.id] = {
+                        "id":tweet.id,
+                        "text":tweet.text,
+                        "created_at":tweet.created_at,
+                        "geo":tweet.geo,
+                        "public_metrics":tweet.public_metrics,
+                        "context_annotations":tweet.context_annotations
+                        }        
         except:
             print(f"This ID {user.id} {user.name} has no liked tweets")
             continue
@@ -38,8 +48,8 @@ def extract_hashtags(followers_liked_tweets):
         if len(hashtags) > 0: tweets[user]= hashtags 
     return tweets
 
-def get_top_tweets(id,max):
-    query_str = f"from:{id} -is:reply -is:retweet"
+def get_top_tweets(id , max = TWEETS_NUM):
+    query_str = f"from:{id} is:reply"
     return client.search_recent_tweets(
         query=query_str,
         max_results = max,
