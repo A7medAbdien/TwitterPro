@@ -40,3 +40,41 @@ google trends for the most trends, But IDK how this might help?!
 1. set backend and frontend services:
    1. [Docker video](https://www.youtube.com/watch?v=Jx39roFmTNg)
    2. [Microsoft doc](https://learn.microsoft.com/en-us/training/modules/dotnet-microservices/5-exercise-create-docker-compose-file)
+
+
+# Analysis
+
+We have main four doorframes:
+
+1. User Tweets
+2. User Replies
+3. User Likes
+4. Following Likes
+5. Followings (will not be analyzed)
+
+
+I will be trying to answer main nine questions as a stoker:
+
+1. What user tweet about? (Bar Chart TF)
+2. When user tweet? Time at day
+
+3. What user replies about? (TF)
+4. When user replies? Time at day
+5. Who user replies to? (ID)
+
+6. What user likes? (TF)
+7. Who user likes? (ID)
+
+8. What followings like? (TF)
+9. Who followings like? (ID)
+
+10. What Twitter says about user tweets? (context_annotations)
+11. What Twitter says about user replies? (context_annotations)
+12. What Twitter says about user likes? (context_annotations)
+13. What Twitter says about following likes? (context_annotations)
+
+14. What common (terms) user likes and following likes? "venn diagram"
+15. What common (context_annotations) user likes and following likes? "venn diagram"
+
+16. How much replies to followings? (Bi Char)
+17. Most replied to following? (Bar Char)
