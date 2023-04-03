@@ -56,17 +56,16 @@ We have main four doorframes:
 I will be trying to answer main nine questions as a stoker:
 
 1. What user tweet about? (Bar Chart TF)
-2. When user tweet? Time at day
+2. What user replies about? (TF)
+3. What user likes? (TF)
+4. What followings like? (TF)
 
-3. What user replies about? (TF)
-4. When user replies? Time at day
-5. Who user replies to? (ID)
+5. When user tweet? Time at day
+6. When user replies? Time at day
 
-6. What user likes? (TF)
-7. Who user likes? (ID)
-
-8. What followings like? (TF)
-9. Who followings like? (ID)
+7. Who most user replies to? (ID)
+8. Who most user likes? (ID)
+9. Who most followings like? (ID)
 
 10. What Twitter says about user tweets? (context_annotations)
 11. What Twitter says about user replies? (context_annotations)
@@ -78,3 +77,9 @@ I will be trying to answer main nine questions as a stoker:
 
 16. How much replies to followings? (Bi Char)
 17. Most replied to following? (Bar Char)
+
+
+# Additional iterations
+
+1. Adding numpy
+2. naming
