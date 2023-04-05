@@ -68,8 +68,8 @@ I will be trying to answer main nine questions as a stoker:
 16. Who common replies and likes? "venn diagram"
 17. Who common user likes and following likes? "venn diagram" (Bi Char)
 
-17. How much replies to followings? (Bi Char)
-18. Most replied to following? (Bar Char)
+18. How much replies to followings? (Bi Char)
+19. Most replied to following? (Bar Char)
 
 # Additional iterations
 
