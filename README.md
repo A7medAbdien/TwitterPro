@@ -44,15 +44,6 @@ google trends for the most trends, But IDK how this might help?!
 
 # Analysis
 
-We have main four doorframes:
-
-1. User Tweets
-2. User Replies
-3. User Likes
-4. Following Likes
-5. Followings (will not be analyzed)
-
-
 I will be trying to answer main nine questions as a stoker:
 
 1. What user tweet about? (Bar Chart TF)
@@ -74,10 +65,11 @@ I will be trying to answer main nine questions as a stoker:
 
 14. What common (terms) user likes and following likes? "venn diagram"
 15. What common (context_annotations) user likes and following likes? "venn diagram"
+16. Who common replies and likes? "venn diagram"
+17. Who common user likes and following likes? "venn diagram" (Bi Char)
 
-16. How much replies to followings? (Bi Char)
-17. Most replied to following? (Bar Char)
-
+17. How much replies to followings? (Bi Char)
+18. Most replied to following? (Bar Char)
 
 # Additional iterations
 
