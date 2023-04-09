@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 
 import numpy as np
 
-from analysis import data
+from analysis import *
 from twitterAPI import get_user_info, USERNAME
 import mpld3 as mp
 
@@ -16,7 +16,6 @@ origins = [
     "http://localhost:3000",
     "http://localhost:5173"
 ]
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -52,6 +51,36 @@ async def random_number(n: int):
 @app.get("/tf")
 async def tf():
     return data
+
+
+term_freq_uni_data = {
+    key: {
+        "data": data,
+        "title": f"Most frequent {key} terms (Uni-Term)",
+        "xLabel": "Term",
+        "yLabel": "Frequency"
+    } for key, data in term_freq_uni_data.items()
+}
+
+
+@app.get("/tf/uni")
+async def tf_uni():
+    return term_freq_uni_data
+
+
+term_freq_bi_data = {
+    key: {
+        "data": data,
+        "title": f"Most frequent {key} terms (Bi-Term)",
+        "xLabel": "Term",
+        "yLabel": "Frequency"
+    } for key, data in term_freq_bi_data.items()
+}
+
+
+@app.get("/tf/bi")
+async def tf_bi():
+    return term_freq_bi_data
 
 
 @app.get("/api")

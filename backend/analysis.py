@@ -1,18 +1,17 @@
 import itertools
 
 import pandas as pd
-import seaborn as sns
 
-from hellpers.analysis import preprocess, get_fig
+from hellpers.term_freq import preprocess, get_fig, get_most_frequent_terms
 
-sns.set_theme(style='dark')
-
-all_dfs = {'user_tweets_df': 0, 'user_replies_df': 0, 'user_liked_df': 0, 'following_liked_tweets_df': 0,
-           'following_users_df': 0}
+all_dfs = {'tweets': 0, 'replies': 0, 'liked tweets': 0, 'following liked tweets': 0,
+           'following accounts': 0}
 all_dfs = {f"{key}": pd.read_csv(f"data/{key}.csv") for key, df in all_dfs.items()}
 
 dfs = dict(itertools.islice(all_dfs.items(), 4))
 
-pre_dfs = {key: preprocess(df.text) for key, df in dfs.items()}
+term_freq_data = {key: preprocess(df.text) for key, df in dfs.items()}
+term_freq_uni_data = {key: get_most_frequent_terms(df.text) for key, df in dfs.items()}
+term_freq_bi_data = {key: get_most_frequent_terms(df.text, 2) for key, df in dfs.items()}
 
-data = get_fig(pre_dfs['user_liked_df'])
+data = get_fig(term_freq_data['liked tweets'])
