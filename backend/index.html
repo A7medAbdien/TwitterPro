@@ -9,41 +9,63 @@
 </head>
 <body>
 <div id="plotly-div"></div>
+
 <script>
     jQuery.ajax({
-        url: "http://127.0.0.1:8000/random/10",
+        url: "http://127.0.0.1:8000/tf",
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            let x = [...data]
-            // for (let i = 0; i < data.length ; i++) {
-            //     x.push(data[i])
-            // }
-            console.log("x:",x)
-            let trace = {
+            const [x, y] = data
+            console.log(x)
+            console.log(y)
+
+            var data = [{
                 x: x,
-                type: 'histogram',
-                xbins: {
-                    start: 0,
-                    end: 100,
-                    size: 10
+                y: y,
+                type: 'bar',
+                text: y,
+                textfont: {
+                    family: 'Arial',
+                    size: 16,
+                    color: '#fcfcfc'
+                }
+            }];
+
+            var layout = {
+                xaxis: {
+                    tickvals: x,
+                    ticktext: x
                 }
             };
-            let layout = {
-                title: 'Histogram API',
-                xaxis: {
-                    title: 'Random Numbers'
-                },
-                yaxis: {
-                    title: 'Frequency'
-                },
-                bargap: 0.2
-            }
-            Plotly.newPlot('plotly-div', [trace], layout)
+
+            Plotly.newPlot('plotly-div', data, layout);
         }
     })
 </script>
+<div id="myDiv"></div>
+<script>
+    var data = [{
+        x: ['A', 'B', 'C', 'D'],
+        y: [10, 20, 15, 25],
+        type: 'bar',
+        text: [10, 20, 15, 25],
+        textfont: {
+            family: 'Arial',
+            size: 16,
+            color: '#fcfcfc'
+        }
+    }];
 
+    var layout = {
+        xaxis: {
+            tickvals: ['A', 'B', 'C', 'D'],
+            ticktext: ['Apple', 'Banana', 'Cherry', 'Date']
+        }
+    };
+
+    Plotly.newPlot('myDiv', data, layout);
+</script>
 <script>
     fetch("http://127.0.0.1:8000/api")
         .then(res => res.json())

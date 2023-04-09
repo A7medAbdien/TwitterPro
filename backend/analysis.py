@@ -15,4 +15,4 @@ dfs = dict(itertools.islice(all_dfs.items(), 4))
 
 pre_dfs = {key: preprocess(df.text) for key, df in dfs.items()}
 
-fig = get_fig(pre_dfs['user_liked_df'])
+data = get_fig(pre_dfs['user_liked_df'])

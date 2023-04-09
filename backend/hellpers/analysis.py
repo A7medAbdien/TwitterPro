@@ -114,15 +114,15 @@ def get_fig(df, ngram=1):
     frequent_words = all_frequent_words(10)
 
     words = list(zip(*frequent_words))[0]
-    frequancy = list(zip(*frequent_words))[1]
+    frequency = list(zip(*frequent_words))[1]
 
-    ax = plt.figure(figsize=(15, 5)).gca()
-    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    # ax = plt.figure(figsize=(15, 5)).gca()
+    # ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     # creating the bar plot
-    plt.bar(words, frequancy, color='b', width=0.4)
-
-    plt.xlabel("Terms")
-    plt.ylabel("Frequency")
+    # plt.bar(words, frequency, color='b', width=0.4)
+    #
+    # plt.xlabel("Terms")
+    # plt.ylabel("Frequency")
     # plt.xticks(rotation=60)
-    return plt.gcf()
+    return words, frequency

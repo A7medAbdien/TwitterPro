@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 
 import numpy as np
 
-from analysis import fig
+from analysis import data
 from twitterAPI import get_user_info, USERNAME
 import mpld3 as mp
 
@@ -15,6 +15,15 @@ origins = [
     "http://localhost:63342",
     "http://localhost:3000"
 ]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 class RandomNumbers:
@@ -29,14 +38,6 @@ class RandomNumbers:
         self.data = np.append(self.data, np.random.randint(0, 100, n))
 
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
-
 # user_info = get_user_info(username=USERNAME)
 # test = fig
 
@@ -45,6 +46,12 @@ app.add_middleware(
 async def random_number(n: int):
     r = RandomNumbers(n)
     return r.get_data()
+
+
+@app.get("/tf")
+async def tf():
+    return data
+
 
 @app.get("/api")
 def get_user_info():
