@@ -5,16 +5,41 @@
     <title>test</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
 </head>
 <body>
-
+<div id="plotly-div"></div>
 <script>
     jQuery.ajax({
         url: "http://127.0.0.1:8000/random/10",
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            console.log(data)
+            let x = [...data]
+            // for (let i = 0; i < data.length ; i++) {
+            //     x.push(data[i])
+            // }
+            console.log("x:",x)
+            let trace = {
+                x: x,
+                type: 'histogram',
+                xbins: {
+                    start: 0,
+                    end: 100,
+                    size: 10
+                }
+            };
+            let layout = {
+                title: 'Histogram API',
+                xaxis: {
+                    title: 'Random Numbers'
+                },
+                yaxis: {
+                    title: 'Frequency'
+                },
+                bargap: 0.2
+            }
+            Plotly.newPlot('plotly-div', [trace], layout)
         }
     })
 </script>
