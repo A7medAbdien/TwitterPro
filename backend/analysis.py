@@ -11,7 +11,7 @@ all_dfs = {f"{key}": pd.read_csv(f"data/{key}.csv") for key, df in all_dfs.items
 dfs = dict(itertools.islice(all_dfs.items(), 4))
 
 term_freq_data = {key: preprocess(df.text) for key, df in dfs.items()}
-term_freq_uni_data = {key: get_most_frequent_terms(df.text) for key, df in dfs.items()}
-term_freq_bi_data = {key: get_most_frequent_terms(df.text, 2) for key, df in dfs.items()}
+term_freq_uni_data = {key: get_most_frequent_terms(df) for key, df in term_freq_data.items()}
+term_freq_bi_data = {key: get_most_frequent_terms(df, 2) for key, df in term_freq_data.items()}
 
 data = get_fig(term_freq_data['liked tweets'])

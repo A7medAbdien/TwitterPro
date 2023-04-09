@@ -2,7 +2,8 @@ import Plot from 'react-plotly.js';
 
 const BarChar = ({ data, title, xLabel, yLabel }) => {
 
-    const [x, y] = data
+    let x, y
+    if (data) [x, y] = data
 
     return (
         <Plot
