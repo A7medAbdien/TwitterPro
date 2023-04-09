@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
-  <script>
+
+<script>
+    jQuery.ajax({
+        url: "http://127.0.0.1:8000/random/10",
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data)
+        }
+    })
+</script>
+
+<script>
     fetch("http://127.0.0.1:8000/api")
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-      })
-  </script>
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+</script>
 </body>
 </html>
