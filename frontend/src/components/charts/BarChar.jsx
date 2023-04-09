@@ -1,12 +1,27 @@
+import { forwardRef, useEffect, createRef } from "react";
 import Plot from 'react-plotly.js';
 
-const BarChar = ({ data, title, xLabel, yLabel }) => {
+const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
 
-    let x, y
-    if (data) [x, y] = data
+    let x, y, yaxis = { title: yLabel }
 
-    return (
+    if (data) {
+        [x, y] = data
+        if (y)
+            Math.max(...y) < 10 ?
+                yaxis = {
+                    title: yLabel,
+                    tickmode: 'linear',
+                    dtick: 1,
+                    tickformat: 'd'
+                }
+                : { title: yLabel }
+    }
+
+
+    return <>
         <Plot
+            ref={ref}
             data={[
                 {
                     x: x,
@@ -28,18 +43,13 @@ const BarChar = ({ data, title, xLabel, yLabel }) => {
                         tickvals: x,
                         ticktext: x
                     },
-                    yaxis: {
-                        title: yLabel,
-                        tickmode: 'linear',
-                        dtick: 1,
-                        tickformat: 'd'
-                    },
+                    yaxis: yaxis,
                     bargap: 0.2
                 }
             }
         />
-    )
-}
+    </>
+})
 
 export default BarChar;
 

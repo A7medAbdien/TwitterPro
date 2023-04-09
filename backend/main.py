@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse
 import numpy as np
 
 from analysis import *
+from strings import tf_uni_titles, tf_bi_titles
 from twitterAPI import get_user_info, USERNAME
 import mpld3 as mp
 
@@ -56,7 +57,7 @@ async def tf():
 term_freq_uni_data = {
     key: {
         "data": data,
-        "title": f"Most frequent {key} terms (Uni-Term)",
+        "title": tf_uni_titles[key],
         "xLabel": "Term",
         "yLabel": "Frequency"
     } for key, data in term_freq_uni_data.items()
@@ -71,7 +72,7 @@ async def tf_uni():
 term_freq_bi_data = {
     key: {
         "data": data,
-        "title": f"Most frequent {key} terms (Bi-Term)",
+        "title": tf_bi_titles[key],
         "xLabel": "Term",
         "yLabel": "Frequency"
     } for key, data in term_freq_bi_data.items()

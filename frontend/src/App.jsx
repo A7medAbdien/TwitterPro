@@ -1,25 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import React from 'react';
 import $ from 'jquery'
-import BarChar from './components/BarChar';
+import BarChar from './components/charts/BarChar';
+import { TFAllUni, TFTweetsUni } from './components/data/TermsFreqUni';
+import { TFAllBi, TFTweetsBi } from './components/data/TermsFreqBi';
 
 const URL = "http://127.0.0.1:8000"
 
 function App() {
-  const [random, setRandom] = useState([]);
+  // const refs = useRef([])
   const [termFreqUni, setTermFreqUni] = useState([]);
   const [termFreqBi, setTermFreqBi] = useState([]);
-
-  const getRandom = () => {
-    $.ajax({
-      url: `${URL}/tf`,
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        setRandom(data)
-      }
-    })
-  }
 
   const getTermFreqUni = () => {
     $.ajax({
@@ -32,23 +23,25 @@ function App() {
     })
   }
 
+  const getTermFreqBi = () => {
+    $.ajax({
+      url: `${URL}/tf/bi`,
+      type: 'GET',
+      dataType: 'json',
+      success: (res) => {
+        setTermFreqBi(res)
+      }
+    })
+  }
+
   useEffect(() => {
     getTermFreqUni()
-    getRandom()
+    getTermFreqBi()
   }, [])
 
   return <>
-    <BarChar
-      data={random}
-      title={"title"}
-      xLabel={"xLabel"}
-      yLabel={"yLabel"}
-    />
-
-    <BarChar
-      {...termFreqUni.tweets}
-    />
-
+    <TFTweetsUni res={termFreqUni} />
+    <TFTweetsBi res={termFreqBi} />
   </>
 }
 
