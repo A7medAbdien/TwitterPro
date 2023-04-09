@@ -1,20 +1,16 @@
-from typing import List
-
 from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi.responses import HTMLResponse
+
+from analysis import fig
+from twitterAPI import get_user_info, USERNAME
+import mpld3 as mp
 
 app = FastAPI()
 
-class Person(BaseModel):
-    id: int
-    name: str
-    age: int
-    
-DB: List[Person] = [
-    Person(id=1,name="Ahmed", age=22),
-    Person(id=2,name="Hazim", age=23),
-]
+user_info = get_user_info(username=USERNAME)
+test = fig
+
 
 @app.get("/api")
-def read_root():
-    return DB
+def get_user_info():
+    return HTMLResponse(mp.fig_to_html(test))
