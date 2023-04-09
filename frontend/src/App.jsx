@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import React from 'react';
-import './App.css';
+// import './App.css';
 import $ from 'jquery'
 import Plot from 'react-plotly.js';
 
