@@ -21,9 +21,15 @@ user_liked = f"Most account {USER} liked its tweet"
 user_fliked = f"Most account {USER} following likes its tweet"
 user_titles = {'replies': user_replies, 'likedTweets': user_liked, 'followingLiked': user_fliked}
 
+
 topic_tweets = f"Most topic {USER} tweets about"
 topic_replies = f"Most topic {USER} replies about"
 topic_liked = f"Most topic {USER} liked tweets about"
 topic_fliked = f"Most topic {USER} following liked tweets about"
 topic_titles = {'tweets': topic_tweets, 'replies': topic_replies, 'likedTweets': topic_liked,
                 'followingLiked': topic_fliked}
+
+
+time_tweets = f"Times {USER} tweets at"
+time_replies = f"Times {USER} replies at"
+time_titles = {'tweets': time_tweets, 'replies': time_replies}

@@ -89,13 +89,12 @@ async def topic():
 time_freq_data = {
     key: {
         "data": data,
-        "title": topic_titles[key],
-        "xLabel": "Topics",
-        "yLabel": "Frequency"
+        "title": time_titles[key],
+        "xLabel": "Day",
+        "yLabel": "Hour"
     } for key, data in time_freq_data.items()
 }
 
-l = [0, 0, 0, 1.0, 0, 0]
 
 @app.get("/ch/time")
 async def time():
