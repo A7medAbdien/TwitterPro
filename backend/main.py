@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 import numpy as np
 
 from analysis import *
-from strings import tf_uni_titles, tf_bi_titles
+from strings import *
 from twitterAPI import get_user_info, USERNAME
 import mpld3 as mp
 
@@ -26,45 +26,17 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-
-class RandomNumbers:
-    def __init__(self, n):
-        self.n = n
-        self.data = np.random.randint(0, 100, n)
-
-    def get_data(self):
-        return self.data.tolist()
-
-    def add(self, n):
-        self.data = np.append(self.data, np.random.randint(0, 100, n))
-
-
-# user_info = get_user_info(username=USERNAME)
-# test = fig
-
-
-@app.get("/random/{n}")
-async def random_number(n: int):
-    r = RandomNumbers(n)
-    return r.get_data()
-
-
-@app.get("/tf")
-async def tf():
-    return data
-
-
 term_freq_uni_data = {
     key: {
         "data": data,
         "title": tf_uni_titles[key],
-        "xLabel": "Term",
+        "xLabel": "Uni-Term",
         "yLabel": "Frequency"
     } for key, data in term_freq_uni_data.items()
 }
 
 
-@app.get("/tf/uni")
+@app.get("/ch/tf/uni")
 async def tf_uni():
     return term_freq_uni_data
 
@@ -73,15 +45,30 @@ term_freq_bi_data = {
     key: {
         "data": data,
         "title": tf_bi_titles[key],
-        "xLabel": "Term",
+        "xLabel": "Bi-Term",
         "yLabel": "Frequency"
     } for key, data in term_freq_bi_data.items()
 }
 
 
-@app.get("/tf/bi")
+@app.get("/ch/tf/bi")
 async def tf_bi():
     return term_freq_bi_data
+
+
+user_freq_data = {
+    key: {
+        "data": data,
+        "title": user_titles[key],
+        "xLabel": "Account username",
+        "yLabel": "Frequency"
+    } for key, data in user_freq_data.items()
+}
+
+
+@app.get("/ch/users")
+async def users():
+    return user_freq_data
 
 
 @app.get("/api")

@@ -1,17 +1,25 @@
 import re
 
-import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
-
 from collections import Counter
 
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
-nltk.download('stopwords')
-nltk.download('wordnet')
-stopwordlist = stopwords.words("english")
+
+def initialize_nltk():
+    # Check if stopwords and wordnet are already downloaded
+    if not nltk.corpus.stopwords.words("english"):
+        nltk.download('stopwords')
+    if not nltk.corpus.wordnet.synsets('test'):
+        nltk.download('wordnet')
+
+    # Get the list of English stopwords
+    stopwordlist = nltk.corpus.stopwords.words("english")
+    return stopwordlist
+
+
+stopwordlist = initialize_nltk()
 
 
 def preprocess(textdata):
@@ -63,18 +71,18 @@ def preprocess(textdata):
     return processed_text
 
 
-def get_most_frequent_terms(df, ngram=1):
+def get_most_freq_terms(df, ngram=1):
     count_all = Counter()
     user_tweets_terms = []
     for tweet in df:
         user_tweets_terms = [term for term in generate_n_grams(tweet, ngram)]
         count_all.update(user_tweets_terms)
 
-    all_frequent_words = count_all.most_common
-    frequent_words = all_frequent_words(10)
+    all_freq_words = count_all.most_common
+    freq_words = all_freq_words(10)
 
-    words = list(zip(*frequent_words))[0]
-    frequency = list(zip(*frequent_words))[1]
+    words = list(zip(*freq_words))[0]
+    frequency = list(zip(*freq_words))[1]
 
     return words, frequency
 
@@ -84,28 +92,3 @@ def generate_n_grams(text, ngram=1):
     temp = zip(*[words[i:] for i in range(0, ngram)])
     ans = [' '.join(ngram) for ngram in temp]
     return ans
-
-
-def get_fig(df, ngram=1):
-    count_all = Counter()
-    user_tweets_terms = []
-    for tweet in df:
-        user_tweets_terms = [term for term in generate_n_grams(tweet, ngram)]
-        count_all.update(user_tweets_terms)
-
-    all_frequent_words = count_all.most_common
-    frequent_words = all_frequent_words(10)
-
-    words = list(zip(*frequent_words))[0]
-    frequency = list(zip(*frequent_words))[1]
-
-    # ax = plt.figure(figsize=(15, 5)).gca()
-    # ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-
-    # creating the bar plot
-    # plt.bar(words, frequency, color='b', width=0.4)
-    #
-    # plt.xlabel("Terms")
-    # plt.ylabel("Frequency")
-    # plt.xticks(rotation=60)
-    return words, frequency
