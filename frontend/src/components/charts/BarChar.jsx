@@ -75,7 +75,7 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
                         title: xLabel,
                         tickvals: x,
                         ticktext: x,
-                        tickangle: 90
+                        tickangle: -60
                     },
                     yaxis: yaxis,
                     bargap: 0.2
