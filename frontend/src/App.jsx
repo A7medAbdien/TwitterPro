@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import React from 'react';
 import { FAll, FTweets, FReplies } from './components/Freq';
 import { getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq } from './api';
+import { Heatmap } from './components/charts/Heatmap';
 
 
 function App() {
@@ -21,9 +22,11 @@ function App() {
 
   return <>
     <FTweets res={termFreqUni} />
-    <FTweets res={termFreqBi} />
+    {/* <FTweets res={termFreqBi} /> */}
     <FTweets res={topic} />
     {/* <FReplies res={userFreq} /> */}
+
+    <Heatmap />
   </>
 }
 
