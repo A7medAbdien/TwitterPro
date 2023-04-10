@@ -4,6 +4,7 @@ import { FAll, FTweets, FReplies } from './components/Freq';
 import { getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
 import { Heatmap } from './components/charts/Heatmap';
 import BarChar from './components/charts/BarChar';
+import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
 
 
 function App() {
@@ -28,8 +29,8 @@ function App() {
     {/* <FTweets res={termFreqBi} /> */}
     <FTweets res={topic} />
     {/* <FReplies res={userFreq} /> */}
-
-    <Heatmap {...timeFreq.tweets} />
+    <TimeTweets res={timeFreq} />
+    <TimeReplies res={timeFreq} />
   </>
 }
 

@@ -1,17 +1,18 @@
 import Plot from 'react-plotly.js';
 
-export const Heatmap = ({ data, title, xLabel, yLabel }) => {
+export const Heatmap = ({ x, data, title, xLabel, yLabel }) => {
 
-    const xv = [...Array(7).keys()]
-    const xt = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    let y, xv
 
-    let z
     if (data)
-        z = replaceZerosWithNaN(data);
+        y = replaceZerosWithNaN(data)
+
+    if (x)
+        xv = [...Array(x.length).keys()]
 
     const trace = {
-        z: z,
-        // text: z,
+        name: '',
+        z: y,
         hovertemplate: '%{z:.0f}',
         type: 'heatmap'
     };
@@ -28,7 +29,7 @@ export const Heatmap = ({ data, title, xLabel, yLabel }) => {
             showgrid: false,
             zeroline: false,
             tickvals: xv,
-            ticktext: xt
+            ticktext: x
         },
         yaxis: {
             title: yLabel,
@@ -64,3 +65,6 @@ const replaceZerosWithNaN = (arr) => {
         }
     })
 }
+
+
+export default Heatmap;
