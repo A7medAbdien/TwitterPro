@@ -86,6 +86,22 @@ async def topic():
     return topic_freq_data
 
 
+time_freq_data = {
+    key: {
+        "data": data,
+        "title": topic_titles[key],
+        "xLabel": "Topics",
+        "yLabel": "Frequency"
+    } for key, data in time_freq_data.items()
+}
+
+l = [0, 0, 0, 1.0, 0, 0]
+
+@app.get("/ch/time")
+async def time():
+    return time_freq_data
+
+
 @app.get("/api")
 def get_user_info():
     return {"massage": "hello"}

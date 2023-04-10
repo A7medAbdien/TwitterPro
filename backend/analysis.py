@@ -3,6 +3,7 @@ import itertools
 import pandas as pd
 
 from hellpers.term_freq import preprocess, get_most_freq_term
+from hellpers.time_freq import get_most_freq_time
 from hellpers.topic_freq import get_most_freq_topic
 from hellpers.user_freq import get_most_freq_user
 
@@ -25,3 +26,8 @@ user_freq_data = {key: get_most_freq_user(df) for key, df in user_freq_data.item
 
 # Topic frequency
 topic_freq_data = {key: get_most_freq_topic(df) for key, df in dfs.items()}
+
+# Time frequency
+time_freq_data = dict(itertools.islice(all_dfs.items(), 2))
+time_freq_data = {key: df['created_at'] for key, df in time_freq_data.items()}
+time_freq_data = {key: get_most_freq_time(df) for key, df in time_freq_data.items()}

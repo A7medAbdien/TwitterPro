@@ -46,3 +46,15 @@ export const getTopicFreq = (set) => {
     })
 }
 
+
+export const getTimeFreq = (set) => {
+    $.ajax({
+        url: `${URL}/ch/time`,
+        type: 'GET',
+        dataType: 'json',
+        success: (res) => {
+            set(res)
+        }
+    })
+}
+

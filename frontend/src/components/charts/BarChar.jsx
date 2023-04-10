@@ -33,54 +33,58 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
 
     }
 
+    const trace = [
+        {
+            x: x,
+            y: y,
+            type: 'bar',
+            text: y,
+            textfont: {
+                family: 'Arial',
+                size: 16,
+                color: '#fcfcfc'
+            }
+        }
+    ]
+
+    const layout = !allContainColon ?
+        {
+            title: title,
+            width: 700,
+            height: 450,
+            margin: {
+                b: 100
+            },
+            xaxis: {
+                title: xLabel,
+                tickvals: x,
+                ticktext: x
+            },
+            yaxis: yaxis,
+            bargap: 0.2
+        } :
+        {
+            title: title,
+            width: 800,
+            height: 600,
+            margin: {
+                b: 200
+            },
+            xaxis: {
+                title: xLabel,
+                tickvals: x,
+                ticktext: x,
+                tickangle: -60
+            },
+            yaxis: yaxis,
+            bargap: 0.2
+        }
 
     return <>
         <Plot
             ref={ref}
-            data={[
-                {
-                    x: x,
-                    y: y,
-                    type: 'bar',
-                    text: y,
-                    textfont: {
-                        family: 'Arial',
-                        size: 16,
-                        color: '#fcfcfc'
-                    }
-                }
-            ]}
-            layout={!allContainColon ?
-                {
-                    title: title,
-                    margin: {
-                        b: 100
-                    },
-                    xaxis: {
-                        title: xLabel,
-                        tickvals: x,
-                        ticktext: x
-                    },
-                    yaxis: yaxis,
-                    bargap: 0.2
-                } :
-                {
-                    title: title,
-                    width: 800,
-                    height: 600,
-                    margin: {
-                        b: 200
-                    },
-                    xaxis: {
-                        title: xLabel,
-                        tickvals: x,
-                        ticktext: x,
-                        tickangle: -60
-                    },
-                    yaxis: yaxis,
-                    bargap: 0.2
-                }
-            }
+            data={trace}
+            layout={layout}
         />
     </>
 })
