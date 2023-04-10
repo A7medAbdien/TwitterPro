@@ -24,5 +24,4 @@ user_freq_data = {key: df['author_id'] for key, df in user_freq_data.items()}
 user_freq_data = {key: get_most_freq_user(df) for key, df in user_freq_data.items()}
 
 # Topic frequency
-# topic_freq_data = {key: df['context_annotations'] for key, df in dfs.items()}  # convert to list
 topic_freq_data = {key: get_most_freq_topic(df) for key, df in dfs.items()}
