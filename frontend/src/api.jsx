@@ -24,7 +24,18 @@ export const getTermFreqBi = (set) => {
     })
 }
 
-export const getUsersFreq = (set) => {
+export const getUserFreq = (set) => {
+    $.ajax({
+        url: `${URL}/ch/user`,
+        type: 'GET',
+        dataType: 'json',
+        success: (res) => {
+            set(res)
+        }
+    })
+}
+
+export const getTopicFreq = (set) => {
     $.ajax({
         url: `${URL}/ch/user`,
         type: 'GET',
