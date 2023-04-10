@@ -71,7 +71,7 @@ def preprocess(textdata):
     return processed_text
 
 
-def get_most_freq_terms(df, ngram=1):
+def get_most_freq_term(df, ngram=1):
     count_all = Counter()
     user_tweets_terms = []
     for tweet in df:

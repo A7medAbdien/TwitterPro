@@ -20,3 +20,10 @@ user_replies = f"Most account {USER} replies to"
 user_liked = f"Most account {USER} liked its tweet"
 user_fliked = f"Most account {USER} following likes its tweet"
 user_titles = {'replies': user_replies, 'likedTweets': user_liked, 'followingLiked': user_fliked}
+
+topic_tweets = f"Most terms in {USER} tweets"
+topic_replies = f"Most terms in {USER} replies"
+topic_liked = f"Most terms in {USER} liked tweets"
+topic_fliked = f"Most terms in {USER} following liked tweets"
+topic_titles = {'tweets': topic_tweets, 'replies': topic_replies, 'likedTweets': topic_liked,
+                'followingLiked': topic_fliked}

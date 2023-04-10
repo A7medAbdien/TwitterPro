@@ -66,9 +66,24 @@ user_freq_data = {
 }
 
 
-@app.get("/ch/users")
+@app.get("/ch/user")
 async def users():
     return user_freq_data
+
+
+topic_freq_data = {
+    key: {
+        "data": data,
+        "title": user_titles[key],
+        "xLabel": "Account username",
+        "yLabel": "Frequency"
+    } for key, data in user_freq_data.items()
+}
+
+
+@app.get("/ch/topic")
+async def users():
+    return topic_freq_data
 
 
 @app.get("/api")
