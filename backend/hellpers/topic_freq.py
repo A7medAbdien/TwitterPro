@@ -14,5 +14,5 @@ def get_most_freq_topic(df):
 
     topics = list(zip(*frequent_topics))[0]
     freq = list(zip(*frequent_topics))[1]
-
+    print(topics)
     return topics, freq

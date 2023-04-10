@@ -3,19 +3,34 @@ import Plot from 'react-plotly.js';
 
 const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
 
-    let x, y, yaxis = { title: yLabel }
+    let x, y, yaxis = { title: yLabel }, allContainColon = true
 
     if (data) {
         [x, y] = data
-        if (y)
-            Math.max(...y) < 10 ?
-                yaxis = {
-                    title: yLabel,
-                    tickmode: 'linear',
-                    dtick: 1,
-                    tickformat: 'd'
-                }
-                : { title: yLabel }
+
+        Math.max(...y) < 10 ?
+            yaxis = {
+                title: yLabel,
+                tickmode: 'linear',
+                dtick: 1,
+                tickformat: 'd'
+            }
+            : { title: yLabel }
+
+        for (const i of x)
+            if (!i.includes(':')) {
+                allContainColon = false
+                break
+            }
+
+        x = x.map((label) => {
+            if (label.split(':').length > 1) {
+                return label.replace(':', ':<br>');
+            } else {
+                return label;
+            }
+        })
+
     }
 
 
@@ -35,13 +50,32 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
                     }
                 }
             ]}
-            layout={
+            layout={!allContainColon ?
                 {
                     title: title,
+                    margin: {
+                        b: 100
+                    },
                     xaxis: {
                         title: xLabel,
                         tickvals: x,
                         ticktext: x
+                    },
+                    yaxis: yaxis,
+                    bargap: 0.2
+                } :
+                {
+                    title: title,
+                    width: 800,
+                    height: 600,
+                    margin: {
+                        b: 200
+                    },
+                    xaxis: {
+                        title: xLabel,
+                        tickvals: x,
+                        ticktext: x,
+                        tickangle: 90
                     },
                     yaxis: yaxis,
                     bargap: 0.2

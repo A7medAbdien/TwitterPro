@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import React from 'react';
-import { TFAllUni, TFTweetsUni } from './components/data/TermsFreqUni';
-import { TFAllBi, TFTweetsBi } from './components/data/TermsFreqBi';
-import { UFAll, UFReplies } from './components/data/UsersFreq';
-import { getTermFreqUni, getTermFreqBi, getUserFreq } from './api';
+import { FAll, FTweets, FReplies } from './components/Freq';
+import { getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq } from './api';
 
 
 function App() {
@@ -11,18 +9,21 @@ function App() {
   const [termFreqUni, setTermFreqUni] = useState([]);
   const [termFreqBi, setTermFreqBi] = useState([]);
   const [userFreq, setUserFreq] = useState([]);
+  const [topic, setTopic] = useState([]);
 
 
   useEffect(() => {
     getTermFreqUni(setTermFreqUni)
     getTermFreqBi(setTermFreqBi)
-    // getUsersFreq(setUserFreq)
+    getTopicFreq(setTopic)
+    getUserFreq(setUserFreq)
   }, [])
 
   return <>
-    <TFTweetsUni res={termFreqUni} />
-    <TFTweetsBi res={termFreqBi} />
-    {/* <UFReplies res={userFreq} /> */}
+    <FTweets res={termFreqUni} />
+    <FTweets res={termFreqBi} />
+    <FTweets res={topic} />
+    {/* <FReplies res={userFreq} /> */}
   </>
 }
 

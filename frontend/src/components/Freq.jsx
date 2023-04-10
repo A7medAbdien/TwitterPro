@@ -1,9 +1,9 @@
 import { forwardRef } from 'react'
 import React from 'react'
-import BarChar from '../charts/BarChar'
+import BarChar from './charts/BarChar'
 
 
-export const TFAllUni = forwardRef(({ res }, refs) => {
+export const FAll = forwardRef(({ res }, refs) => {
     const dataList = Object.values(res).map(data => data);
 
     return <>
@@ -20,25 +20,25 @@ export const TFAllUni = forwardRef(({ res }, refs) => {
     </>
 })
 
-export const TFTweetsUni = ({ res }) => {
+export const FTweets = ({ res }) => {
     return <BarChar
         {...res.tweets}
     />
 }
 
-export const TFRepliesUni = ({ res }) => {
+export const FReplies = ({ res }) => {
     return <BarChar
         {...res.replies}
     />
 }
 
-export const TFLikedUni = ({ res }) => {
+export const FLiked = ({ res }) => {
     return <BarChar
         {...res.likedTweets}
     />
 }
 
-export const TFFLikedUni = ({ res }) => {
+export const FFLiked = ({ res }) => {
     return <BarChar
         {...res.followingLiked}
     />

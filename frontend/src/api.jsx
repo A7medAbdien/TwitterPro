@@ -37,7 +37,7 @@ export const getUserFreq = (set) => {
 
 export const getTopicFreq = (set) => {
     $.ajax({
-        url: `${URL}/ch/user`,
+        url: `${URL}/ch/topic`,
         type: 'GET',
         dataType: 'json',
         success: (res) => {
