@@ -101,6 +101,11 @@ async def time():
     return time_freq_data
 
 
+@app.get("/ch/comm")
+async def comm_uni():
+    return comm['uni_term']
+
+
 @app.get("/api")
 def get_user_info():
     return {"massage": "hello"}

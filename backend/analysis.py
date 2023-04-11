@@ -2,6 +2,7 @@ import itertools
 
 import pandas as pd
 
+from hellpers.common import get_comm
 from hellpers.term_freq import preprocess, get_most_freq_term, get_freq_term
 from hellpers.time_freq import get_most_freq_time
 from hellpers.topic_freq import get_most_freq_topic, get_freq_topic
@@ -50,6 +51,10 @@ time_freq_data = {key: get_most_freq_time(df) for key, df in time_freq_data.item
 """
 Common Terms (User and Following)
 """
+comm = {}
+pre_texts = [pre_text for pre_text in itertools.islice(term_freq_uni_count.values(), 2, 4)]
+comm['uni_term'] = get_comm(pre_texts)
+
 
 """
 Common Topics (User and Following)
