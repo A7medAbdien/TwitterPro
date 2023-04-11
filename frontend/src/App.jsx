@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import React from 'react';
 import { FAll, FTweets, FReplies } from './components/Freq';
 import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
-import VennDiagram from './components/charts/VennDiagram';
+import { VennDiagram } from './components/charts/VennDiagram';
 import BarChar from './components/charts/BarChar';
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
 
