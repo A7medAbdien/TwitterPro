@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import React from 'react';
 import { FAll, FTweets, FReplies } from './components/Freq';
 import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
-import { Heatmap } from './components/charts/Heatmap';
+import VennDiagram from './components/charts/VennDiagram';
 import BarChar from './components/charts/BarChar';
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
 
@@ -28,11 +28,13 @@ function App() {
   }, [])
 
   return <>
-    <FTweets res={termFreqUni} />
+    {/* <FTweets res={termFreqUni} /> */}
     {/* <FTweets res={termFreqBi} /> */}
-    <FTweets res={topic} />
+    {/* <FTweets res={topic} /> */}
     {/* <FReplies res={userFreq} /> */}
-    <TimeTweets res={timeFreq} />
+    {/* <TimeTweets res={timeFreq} /> */}
+
+    <VennDiagram />
   </>
 }
 
