@@ -4,6 +4,7 @@ import { FAll, FTweets, FReplies } from './components/Freq';
 import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
 import { VComm } from './components/VComm';
+import { TwoBar } from './components/charts/TwoBar';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 
 
   return <>
+    <TwoBar data={comm} />
     <FTweets res={termFreqUni} />
     <FTweets res={topic} />
     <TimeTweets res={timeFreq} />
