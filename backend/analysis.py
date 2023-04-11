@@ -28,7 +28,7 @@ term_freq_bi_data = {key: get_most_freq_term(df) for key, df in term_freq_bi_cou
 """
 User frequency
 """
-user_freq_data = dict(itertools.islice(all_dfs.items(), 1, 4))
+user_freq_data = dict(itertools.islice(all_dfs.items(), 1, 4))  # replies, likes, following likes
 user_freq_data['replies'].rename(columns={'in_reply_to_user_id': 'author_id'}, inplace=True)
 user_freq_data = {key: df['author_id'] for key, df in user_freq_data.items()}
 user_freq_count = {key: get_freq_user(df) for key, df in user_freq_data.items()}
@@ -51,13 +51,23 @@ time_freq_data = {key: get_most_freq_time(df) for key, df in time_freq_data.item
 Common Terms (User and Following)
 """
 comm = {'uni_term': 0, 'bi_term': 0}
-pre_texts = [pre_text for pre_text in itertools.islice(term_freq_uni_count.values(), 2, 4)]
-comm['uni_term'] = get_comm(pre_texts)
+term_freq_uni_comm = [count for count in itertools.islice(term_freq_uni_count.values(), 2, 4)]
+comm['uni_term'] = get_comm(term_freq_uni_comm)
+
+term_freq_bi_comm = [count for count in itertools.islice(term_freq_bi_count.values(), 2, 4)]
+comm['bi_term'] = get_comm(term_freq_bi_comm)
 
 """
 Common Topics (User and Following)
 """
+topic_freq_comm = [count for count in itertools.islice(topic_freq_count.values(), 2, 4)]
+comm['topic'] = get_comm(topic_freq_comm)
 
 """
 Common IDs (User and Following)
 """
+user_freq_comm = [count for count in itertools.islice(user_freq_count.values(), 1, 3)]  # likes, followings likes
+comm['user'] = get_comm(user_freq_comm)
+
+user_freq_comm_rl = [count for count in itertools.islice(user_freq_count.values(), 0, 2)]  # replies, likes
+comm['user_rl'] = get_comm(user_freq_comm_rl)

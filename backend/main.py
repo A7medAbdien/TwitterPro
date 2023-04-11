@@ -101,20 +101,20 @@ async def time():
     return time_freq_data
 
 
-comm['uni_term'] = {
-    "uni_term": {
-        "bar": comm['uni_term'][0],
-        "venn": comm['uni_term'][1],
+comm = {
+    key: {
+        "bar": comm[key][0],
+        "venn": comm[key][1],
         "title": "Common Terms between user and following",
         "xLabel": "Terms (Uni)",
         "yLabel": "Frequency"
-    }
+    }for key, data in comm.items()
 }
 
 
 @app.get("/ch/comm")
-async def comm_uni():
-    return comm['uni_term']
+async def comm():
+    return comm
 
 
 @app.get("/api")
