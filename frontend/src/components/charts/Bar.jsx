@@ -3,26 +3,27 @@ import Plot from 'react-plotly.js';
 
 const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
 
-    let x, y, yaxis = { title: yLabel }, allContainColon = true
+    if (!data || data.length < 1) return
 
-    if (data) {
-        [x, y] = data
+    let [x, y] = data
 
-        Math.max(...y) < 10 ?
-            yaxis = {
-                title: yLabel,
-                tickmode: 'linear',
-                dtick: 1,
-                tickformat: 'd'
-            }
-            : { title: yLabel }
+    let yaxis = { title: yLabel }
+    if (Math.max(...y) < 10)
+        yaxis = {
+            title: yLabel,
+            tickmode: 'linear',
+            dtick: 1,
+            tickformat: 'd'
+        }
 
-        for (const i of x)
-            if (!i.includes(':')) {
-                allContainColon = false
-                break
-            }
 
+    let allContainColon = true
+    for (const i of x)
+        if (!i.includes(':')) {
+            allContainColon = false
+            break
+        }
+    if (allContainColon)
         x = x.map((label) => {
             if (label.split(':').length > 1) {
                 return label.replace(':', ':<br>');
@@ -31,7 +32,6 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
             }
         })
 
-    }
 
     const trace = [
         {
@@ -47,22 +47,7 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
         }
     ]
 
-    const layout = !allContainColon ?
-        {
-            title: title,
-            width: 700,
-            height: 450,
-            margin: {
-                b: 100
-            },
-            xaxis: {
-                title: xLabel,
-                tickvals: x,
-                ticktext: x
-            },
-            yaxis: yaxis,
-            bargap: 0.2
-        } :
+    const layout = allContainColon ?
         {
             title: title,
             width: 800,
@@ -78,7 +63,22 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
             },
             yaxis: yaxis,
             bargap: 0.2
+        } : {
+            title: title,
+            width: 700,
+            height: 450,
+            margin: {
+                b: 100
+            },
+            xaxis: {
+                title: xLabel,
+                tickvals: x,
+                ticktext: x
+            },
+            yaxis: yaxis,
+            bargap: 0.2
         }
+
 
     return <>
         <Plot
