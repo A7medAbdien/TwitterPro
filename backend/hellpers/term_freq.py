@@ -71,15 +71,18 @@ def preprocess(textdata):
     return processed_text
 
 
-def get_most_freq_term(df, ngram=1):
+def get_freq_term(df, ngram=1):
     count_all = Counter()
-    user_tweets_terms = []
     for tweet in df:
         user_tweets_terms = [term for term in generate_n_grams(tweet, ngram)]
         count_all.update(user_tweets_terms)
 
     all_freq_words = count_all.most_common
-    freq_words = all_freq_words(10)
+    return all_freq_words
+
+
+def get_most_freq_term(all_freq_words, n=10):
+    freq_words = all_freq_words(n)
 
     words = list(zip(*freq_words))[0]
     frequency = list(zip(*freq_words))[1]
