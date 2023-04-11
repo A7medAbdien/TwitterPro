@@ -46,7 +46,6 @@ export const getTopicFreq = (set) => {
     })
 }
 
-
 export const getTimeFreq = (set) => {
     $.ajax({
         url: `${URL}/ch/time`,
@@ -57,8 +56,6 @@ export const getTimeFreq = (set) => {
         }
     })
 }
-
-
 
 export const getComm = (set) => {
     $.ajax({

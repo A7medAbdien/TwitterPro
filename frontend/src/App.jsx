@@ -2,9 +2,10 @@ import { useState, useEffect, useRef } from 'react'
 import React from 'react';
 import { FAll, FTweets, FReplies } from './components/Freq';
 import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
-import { VennDiagram } from './components/charts/VennDiagram';
+import { Venn } from './components/charts/Venn';
 import BarChar from './components/charts/BarChar';
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
+import { VComm } from './components/VComm';
 
 
 function App() {
@@ -14,18 +15,19 @@ function App() {
   const [userFreq, setUserFreq] = useState([]);
   const [topic, setTopic] = useState([]);
   const [timeFreq, setTimeFreq] = useState([]);
-  const [Comm, setComm] = useState([]);
+  const [comm, setComm] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
-    getTermFreqUni(setTermFreqUni)
-    // getTermFreqBi(setTermFreqBi)
+    Promise.all([
+      getTermFreqUni(setTermFreqUni),
+      getComm(setComm)
+    ]).then(() => { setIsLoading(false) })
     getTopicFreq(setTopic)
-    // getUserFreq(setUserFreq)
     getTimeFreq(setTimeFreq)
-    getComm(setComm)
-    console.log(Comm);
   }, [])
+
 
   return <>
     {/* <FTweets res={termFreqUni} /> */}
@@ -34,7 +36,7 @@ function App() {
     {/* <FReplies res={userFreq} /> */}
     {/* <TimeTweets res={timeFreq} /> */}
 
-    <VennDiagram />
+    <VComm res={comm} />
   </>
 }
 
