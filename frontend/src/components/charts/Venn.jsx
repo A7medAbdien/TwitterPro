@@ -5,18 +5,18 @@ VennModule(Highcharts);
 import HighchartsReact from 'highcharts-react-official'
 
 
-export const Venn = ({ user, following, comm, title = 'title' }) => {
+export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following' }) => {
 
     const [data, setData] = useState([]);
 
     const apiResponse = [{
-        sets: ['USER'],
+        sets: [a],
         value: user
     }, {
-        sets: ['Followings'],
+        sets: [b],
         value: following
     }, {
-        sets: ['USER', 'Followings'],
+        sets: [a, b],
         value: comm,
         name: 'Common'
     }]
