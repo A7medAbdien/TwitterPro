@@ -8,6 +8,12 @@ export const TwoBar = ({ data, title, xLabel, yLabel }) => {
 
     const [x, user, following] = data[0]
 
+    const textFont = {
+        family: 'Arial',
+        size: 16,
+        color: '#000'
+    }
+
     const userTrace =
     {
         name: "USER",
@@ -15,11 +21,7 @@ export const TwoBar = ({ data, title, xLabel, yLabel }) => {
         y: user,
         type: 'bar',
         text: user,
-        textfont: {
-            family: 'Arial',
-            size: 16,
-            color: '#000'
-        }
+        textfont: textFont
     }
 
     const followingTrace =
@@ -29,11 +31,7 @@ export const TwoBar = ({ data, title, xLabel, yLabel }) => {
         y: following,
         type: 'bar',
         text: following,
-        textfont: {
-            family: 'Arial',
-            size: 16,
-            color: '#000'
-        }
+        textfont: textFont
     }
 
     const trace = [userTrace, followingTrace];
