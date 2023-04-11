@@ -58,3 +58,16 @@ export const getTimeFreq = (set) => {
     })
 }
 
+
+
+export const getComm = (set) => {
+    $.ajax({
+        url: `${URL}/ch/comm`,
+        type: 'GET',
+        dataType: 'json',
+        success: (res) => {
+            set(res)
+        }
+    })
+}
+

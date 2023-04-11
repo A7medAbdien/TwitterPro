@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import React from 'react';
 import { FAll, FTweets, FReplies } from './components/Freq';
-import { getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
+import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
 import { Heatmap } from './components/charts/Heatmap';
 import BarChar from './components/charts/BarChar';
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
@@ -14,6 +14,7 @@ function App() {
   const [userFreq, setUserFreq] = useState([]);
   const [topic, setTopic] = useState([]);
   const [timeFreq, setTimeFreq] = useState([]);
+  const [Comm, setComm] = useState([]);
 
 
   useEffect(() => {
@@ -22,6 +23,8 @@ function App() {
     getTopicFreq(setTopic)
     // getUserFreq(setUserFreq)
     getTimeFreq(setTimeFreq)
+    getComm(setComm)
+    console.log(Comm);
   }, [])
 
   return <>
@@ -30,7 +33,6 @@ function App() {
     <FTweets res={topic} />
     {/* <FReplies res={userFreq} /> */}
     <TimeTweets res={timeFreq} />
-    <TimeReplies res={timeFreq} />
   </>
 }
 
