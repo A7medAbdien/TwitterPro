@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import React from 'react'
-import BarChar from './charts/BarChar'
+import BarChar from './charts/Bar'
 
 
 export const FAll = forwardRef(({ res }, refs) => {
