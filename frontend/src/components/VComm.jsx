@@ -6,9 +6,9 @@ import { Venn } from './charts/Venn';
 export const VComm = ({ res, title }) => {
     let user = 10, following = 10, comm = 2
 
-    if (res.length < 1) return
+    if (!res || res.venn.length < 1) return
 
-    [user, following, comm] = res[1]
+    [user, following, comm] = res.venn
     return <>
         <Venn
             title={title}

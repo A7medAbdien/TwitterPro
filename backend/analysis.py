@@ -47,14 +47,12 @@ time_freq_data = dict(itertools.islice(all_dfs.items(), 2))
 time_freq_data = {key: df['created_at'] for key, df in time_freq_data.items()}
 time_freq_data = {key: get_most_freq_time(df) for key, df in time_freq_data.items()}
 
-
 """
 Common Terms (User and Following)
 """
-comm = {}
+comm = {'uni_term': 0, 'bi_term': 0}
 pre_texts = [pre_text for pre_text in itertools.islice(term_freq_uni_count.values(), 2, 4)]
 comm['uni_term'] = get_comm(pre_texts)
-
 
 """
 Common Topics (User and Following)

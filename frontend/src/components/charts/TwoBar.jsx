@@ -1,12 +1,12 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-export const TwoBar = ({ data, title, xLabel, yLabel }) => {
+export const TwoBar = ({ bar, title, xLabel, yLabel }) => {
 
 
-    if (data.length < 1) return
+    if (!bar || bar.length < 1) return
 
-    const [x, user, following] = data[0]
+    const [x, user, following] = bar
 
     const textFont = {
         family: 'Arial',

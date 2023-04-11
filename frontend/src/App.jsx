@@ -5,7 +5,9 @@ import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getT
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
 import { VComm } from './components/VComm';
 import { TwoBar } from './components/charts/TwoBar';
+import $ from 'jquery'
 
+const URL = "http://127.0.0.1:8000"
 
 function App() {
   // const refs = useRef([])
@@ -22,16 +24,19 @@ function App() {
       getTopicFreq(setTopic),
       getTimeFreq(setTimeFreq),
       getComm(setComm),
-    ]).then(() => { setIsLoading(false) })
+    ]).then(() => {
+      setIsLoading(false)
+      console.log(comm);
+    })
   }, [])
 
 
   return <>
-    <TwoBar data={comm} />
+    <TwoBar {...comm.uni_term} />
+    <VComm res={comm.uni_term} title={"Common Terms"} />
     <FTweets res={termFreqUni} />
     <FTweets res={topic} />
     <TimeTweets res={timeFreq} />
-    <VComm res={comm} title={"Common Terms"} />
   </>
 }
 
