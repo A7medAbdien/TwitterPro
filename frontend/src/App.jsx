@@ -33,8 +33,7 @@ function App() {
 
   return <>
     <TwoBar {...comm.uni_term} />
-    <VComm res={comm.uni_term} title={"Common Terms"} />
-    <VComm res={comm.bi_term} title={"Common Terms"} />
+    <VComm {...comm.user_rl} />
     <FTweets res={termFreqUni} />
     <FTweets res={topic} />
     <TimeTweets res={timeFreq} />
