@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useCursor, MeshReflectorMaterial, Image, Text, Environment } from '@react-three/drei'
+import { useCursor, MeshReflectorMaterial, Image, Text, Environment, Html } from '@react-three/drei'
 import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
 import getUuid from 'uuid-by-string'
+import { VComm } from './VComm'
 
 const GOLDENRATIO = 1.3
 
@@ -64,6 +65,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
 }
 
 function Frame({ url, c = new THREE.Color(), ...props }) {
+    const d = props.d
     const image = useRef()
     const frame = useRef()
     const [, params] = useRoute('/item/:id')
@@ -98,8 +100,11 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
 
                 {/* Image */}
                 <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
-            </mesh>
 
+            </mesh>
+            <Html position={[0.5, GOLDENRATIO, 0]}>
+                <VComm {...d} />
+            </Html>
             {/* Title */}
             <Text maxWidth={1} anchorX="left" anchorY="top" position={[-0.45, 0.1 + GOLDENRATIO, 0]} fontSize={0.05}>
                 {name.split('-').join(' ')}
