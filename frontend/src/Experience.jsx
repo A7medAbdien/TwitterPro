@@ -26,7 +26,6 @@ export default function Experience() {
             getComm(setComm),
         ]).then(() => {
             setIsLoading(false)
-            console.log(comm);
         })
     }, [])
 

@@ -7,7 +7,7 @@ export const VComm = ({ venn, title, a, b }) => {
     let user = 10, following = 10, comm = 2
 
     if (!venn || venn.length < 1) return
-    console.log({ venn, title, a, b });
+
     [user, following, comm] = venn
     return <>
         <Venn
