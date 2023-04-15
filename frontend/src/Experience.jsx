@@ -31,23 +31,20 @@ export default function Experience() {
 
 
     return <>
-        {/* <TwoBar {...comm.uni_term} />
-        <VComm {...comm.user_rl} />
-        <FTweets res={termFreqUni} />
-        <FTweets res={topic} />
-        <TimeTweets res={timeFreq} /> */}
+
+
 
         <Perf position="top-left" />
 
         <OrbitControls makeDefault />
 
-        <Html>
+        {/* <Html>
+            <TwoBar {...comm.uni_term} />
             <VComm {...comm.user_rl} />
-        </Html>
-        <mesh scale={1.5}>
-            <boxGeometry />
-            <meshNormalMaterial />
-        </mesh>
+            <FTweets res={termFreqUni} />
+            <FTweets res={topic} />
+            <TimeTweets res={timeFreq} />
+        </Html> */}
 
     </>
 }

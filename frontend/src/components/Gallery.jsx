@@ -100,11 +100,11 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
 
                 {/* Image */}
                 <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
-
+                <Html position={[0.5, GOLDENRATIO, 0]}>
+                    <VComm {...d} />
+                </Html>
             </mesh>
-            <Html position={[0.5, GOLDENRATIO, 0]}>
-                <VComm {...d} />
-            </Html>
+
             {/* Title */}
             <Text maxWidth={1} anchorX="left" anchorY="top" position={[-0.45, 0.1 + GOLDENRATIO, 0]} fontSize={0.05}>
                 {name.split('-').join(' ')}

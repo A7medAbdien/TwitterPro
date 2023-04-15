@@ -46,10 +46,8 @@ function App() {
       <color attach="background" args={['#191920']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
+      <Experience />
       <Gallery images={images} />
-      {/* <Html>
-        <VComm {...comm.user_rl} />
-      </Html> */}
       <Environment preset="city" />
     </Canvas>
   </>
