@@ -2,6 +2,7 @@ import Experience from './Experience';
 import { Canvas } from '@react-three/fiber';
 import { Gallery } from './components/Gallery';
 import { Html, Environment } from '@react-three/drei'
+import { Leva } from 'leva'
 
 import { useState, useEffect, useRef } from 'react'
 
@@ -36,14 +37,16 @@ function App() {
 
   const images = [
     // Front
-    { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: comm.user_rl },
+    // { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: comm.user_rl },
+    { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: "hi" },
 
   ]
 
 
   return <>
+    <Leva hidden />
     <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
-      <color attach="background" args={['#191920']} />
+      <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
       <Experience />
