@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useCursor, MeshReflectorMaterial, Image, Text, Environment, Html } from '@react-three/drei'
+import { useCursor, MeshReflectorMaterial, Image, Text, Environment, Html, BBAnchor } from '@react-three/drei'
 import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
 import getUuid from 'uuid-by-string'
@@ -92,12 +92,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             }}
             name='test'
             position={[-2, 2.7, 0.05]}
-        // position={[topRightX, 2.7, 0.05]}
         >
-
             <VComm {...images[0].d} />
-
-
         </Html>
 
         <group
@@ -110,6 +106,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
 }
 
 function Frame({ url, c = new THREE.Color(), ...props }) {
+    const bb = useRef()
     const d = props.d
     const image = useRef()
     const frame = useRef()
@@ -125,10 +122,37 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
     })
 
+
+    const camera = useThree((state) => state.camera)
+    const getFrameRadius = (ref) => {
+        const boundingBox = new THREE.Box3();
+        boundingBox.setFromObject(ref.current);
+
+        const max = boundingBox.max
+        const min = boundingBox.min
+        console.log(max);
+        max.project(camera);
+        min.project(camera);
+
+        // This converts from [-1, 1] to [0, windowWidth]
+        const left = (1 + max.x) / 2 * window.innerWidth;
+        const right = (1 + min.x) / 2 * window.innerWidth;
+        const top = (1 + max.y) / 2 * window.innerHeight;
+        const bottom = (1 + min.y) / 2 * window.innerHeight;
+
+        const width = right - left
+        const hight = top - bottom
+        return [width, hight]
+    }
+
+    useEffect(() => {
+        console.log(getFrameRadius(bb));
+    }, [])
     return (
         <group {...props}>
             {/* Outer Frame */}
             <mesh
+                ref={bb}
                 name={name}
                 onPointerOver={(e) => (e.stopPropagation(), hover(true))}
                 onPointerOut={() => hover(false)}
@@ -142,6 +166,12 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                     <boxGeometry />
                     <meshBasicMaterial toneMapped={false} fog={false} />
                 </mesh>
+
+                <BBAnchor anchor={[-1, 1, 0]}>
+                    <Html center>
+                        <span>Hello world!</span>
+                    </Html>
+                </BBAnchor>
 
                 {/* Image */}
                 <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />

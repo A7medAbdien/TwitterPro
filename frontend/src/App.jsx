@@ -44,7 +44,7 @@ function App() {
 
 
   return <>
-    <Leva />
+    <Leva hidden />
     <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
       <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
