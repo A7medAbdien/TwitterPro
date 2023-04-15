@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 
@@ -105,8 +105,8 @@ comm_data = {
     key: {
         "bar": comm_data[key][0],
         "venn": comm_data[key][1],
-        **{meta_key: meta for meta_key,meta in comm_meta[key].items()}
-    }for key, data in comm_data.items()
+        **{meta_key: meta for meta_key, meta in comm_meta[key].items()}
+    } for key, data in comm_data.items()
 }
 
 
