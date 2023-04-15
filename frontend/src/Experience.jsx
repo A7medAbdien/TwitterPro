@@ -36,7 +36,7 @@ export default function Experience() {
 
         <Perf position="top-left" />
 
-        <OrbitControls makeDefault />
+        {/* <OrbitControls makeDefault /> */}
 
         {/* <Html>
             <TwoBar {...comm.uni_term} />
