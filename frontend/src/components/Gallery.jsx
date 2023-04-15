@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useCursor, MeshReflectorMaterial, Image, Text, Environment, Html } from '@react-three/drei'
 import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
@@ -8,16 +8,27 @@ import getUuid from 'uuid-by-string'
 import { VComm } from './VComm'
 import { useControls } from 'leva'
 
-const focusedDistance = 1.5
+const focusedDistance = 1.7
 
-const Hight = 1.3
-
-const OuterFrameWidth = 1
+const Hight = 2
+const OuterFrameWidth = 2.5
 const OuterFrameZ = 0.05
 
-export const Gallery = ({ images }) => (
+export const Gallery = ({ images }) => {
 
-    <group position={[0, -0.5, 0]}>
+
+    const { position, color, visible } = useControls('sphere', {
+        position:
+        {
+            value: { x: - 2, y: 2.7 },
+            step: 0.01,
+            joystick: 'invertY'
+        }
+    })
+
+    return < group position={[0, -0.5, 0]} >
+
+
 
         <Frames images={images} />
 
@@ -36,19 +47,19 @@ export const Gallery = ({ images }) => (
                 metalness={0.5}
             />
         </mesh>
-    </group>
+    </group >
 
-)
+}
 
 function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
     const ref = useRef()
+    const [hidden, set] = useState(false)
     const clicked = useRef()
     const [, params] = useRoute('/item/:id')
     const [, setLocation] = useLocation()
     const z = (ref, n) => {
         if (ref.current) {
-            const chart = ref.current.getObjectByName('test')
-            chart.position.z = n
+            n == 1 ? set(true) : set(false)
         }
     }
     useEffect(() => {
@@ -68,18 +79,37 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         easing.damp3(state.camera.position, p, 0.4, dt)
         easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
-    return (
+    return <>
+        <Html
+            occlude
+            onOcclude={set}
+            style={{
+                visibility: hidden ? 'visible' : 'hidden',
+                transition: hidden ? 'all  1.5s' : 'all  0s',
+                transitionDelay: hidden ? '1.5s' : '0s',
+                opacity: hidden ? 1 : 0,
+                transform: `opacity(${hidden ? 1 : 0})`
+            }}
+            name='test'
+            position={[-2, 2.7, 0.05]}
+        // position={[topRightX, 2.7, 0.05]}
+        >
+
+            <VComm {...images[0].d} />
+
+
+        </Html>
+
         <group
             ref={ref}
             onClick={(e) => (e.stopPropagation(), setLocation(!clicked.current === e.object ? '/' : '/item/' + e.object.name))}
             onPointerMissed={() => (setLocation('/'), z(clicked, -1))}>
             {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
         </group>
-    )
+    </>
 }
 
 function Frame({ url, c = new THREE.Color(), ...props }) {
-    const [hidden, set] = useState()
     const d = props.d
     const image = useRef()
     const frame = useRef()
@@ -115,20 +145,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
 
                 {/* Image */}
                 <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
-                <Html
-                    visible={false}
-                    occlude
-                    onOcclude={set}
-                    style={{
-                        transition: 'all  1s',
-                        opacity: hidden ? 0 : 1,
-                        transform: `scale(${hidden ? 0.5 : 1})`
-                    }}
-                    name='test'
-                    position={[0, 0, 0]}>
-                    {/* <VComm {...d} /> */}
-                    {d}
-                </Html>
+
             </mesh>
 
             {/* Title */}
