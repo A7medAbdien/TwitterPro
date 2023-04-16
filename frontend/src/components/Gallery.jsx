@@ -53,22 +53,27 @@ export const Gallery = ({ images }) => {
 
 function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
     const ref = useRef()
+    // let imagesHidden = []
+    // let allF = []
+    // images.map((props) => imagesHidden[getUuid(props.url)] = false)
+    // images.map((props) => allF[getUuid(props.url)] = false)
     const [hidden, set] = useState(false)
     const clicked = useRef()
     const [, params] = useRoute('/item/:id')
     const [, setLocation] = useLocation()
-    const z = (ref, n) => {
-        if (ref.current) {
-            n == 1 ? set(true) : set(false)
-        }
-    }
+
     useEffect(() => {
         clicked.current = ref.current.getObjectByName(params?.id)
         if (clicked.current) {
             clicked.current.parent.updateWorldMatrix(true, true)
             clicked.current.parent.localToWorld(p.set(0, Hight / 2, focusedDistance))
             clicked.current.parent.getWorldQuaternion(q)
-            z(clicked, 1)
+            // z(clicked, 1)
+            set(true)
+            // const name = clicked.current.name
+            // imagesHidden[name] = true
+            // set(imagesHidden)
+            // console.log(clicked.current.uuid);
         }
         else {
             p.set(0, 0, 5.5)
@@ -80,7 +85,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
     return <>
-        <Html
+        {/* <Html
             occlude
             onOcclude={set}
             style={{
@@ -94,26 +99,30 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             position={[-2, 2.7, 0.05]}
         >
             <VComm {...images[0].d} />
-        </Html>
+        </Html> */}
 
         <group
             ref={ref}
             onClick={(e) => (e.stopPropagation(), setLocation(!clicked.current === e.object ? '/' : '/item/' + e.object.name))}
-            onPointerMissed={() => (setLocation('/'), z(clicked, -1))}>
+            onPointerMissed={() => (setLocation('/'), set(false))}>
             {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
         </group>
     </>
 }
 
 function Frame({ url, c = new THREE.Color(), ...props }) {
-    const bb = useRef()
+    const h = props.hidden
+    const set = props.set
     const d = props.d
+    const bb = useRef()
+
     const image = useRef()
     const frame = useRef()
     const [, params] = useRoute('/item/:id')
     const [hovered, hover] = useState(false)
     const [rnd] = useState(() => Math.random())
     const name = getUuid(url)
+
     const isActive = params?.id === name
     useCursor(hovered)
     useFrame((state, dt) => {
@@ -146,7 +155,10 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
     }
 
     useEffect(() => {
-        console.log(getFrameRadius(bb));
+        // console.log(hidden);
+
+        // console.log(d);
+        // console.log(getFrameRadius(bb));
     }, [])
     return (
         <group {...props}>
@@ -167,10 +179,22 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                     <meshBasicMaterial toneMapped={false} fog={false} />
                 </mesh>
 
-                <BBAnchor anchor={[-1, 1, 0]}>
-                    <Html center>
-                        <span>Hello world!</span>
-                    </Html>
+                <BBAnchor anchor={[-1, 1, -0.05]}>
+                    {/* <Html
+                        occlude
+                        // onOcclude={set}
+                        style={{
+                            visibility: h ? 'visible' : 'hidden',
+                            transition: h ? 'all  1.5s' : 'all  0s',
+                            transitionDelay: h ? '1.5s' : '0s',
+                            opacity: h ? 1 : 0,
+                            transform: `opacity(${h ? 1 : 0})`
+                        }}
+                        name='test'
+                        position={[0, 0, -0.05]}
+                    >
+                        <VComm {...d} />
+                    </Html> */}
                 </BBAnchor>
 
                 {/* Image */}

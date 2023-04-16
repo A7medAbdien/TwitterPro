@@ -30,8 +30,8 @@ export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following'
             text: title
         },
         chart: {
-            width: 0.9 * 700,
-            height: 0.9 * 562
+            width: 0.9 * 450,
+            height: 0.9 * 362
         },
         series: [{
             type: 'venn',
