@@ -105,13 +105,14 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             ref={ref}
             onClick={(e) => (e.stopPropagation(), setLocation(!clicked.current === e.object ? '/' : '/item/' + e.object.name))}
             onPointerMissed={() => (setLocation('/'), set(false))}>
-            {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
+            {images.map((props) => <Frame key={props.url} {...props} hidden={hidden} set={set} /> /* prettier-ignore */)}
         </group>
     </>
 }
 
 function Frame({ url, c = new THREE.Color(), ...props }) {
     const h = props.hidden
+    console.log(h);
     const set = props.set
     const d = props.d
     const bb = useRef()
@@ -179,10 +180,10 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                     <meshBasicMaterial toneMapped={false} fog={false} />
                 </mesh>
 
-                <BBAnchor anchor={[-1, 1, -0.05]}>
-                    {/* <Html
+                <BBAnchor anchor={[-1, 1, 0.05]}>
+                    <Html
                         occlude
-                        // onOcclude={set}
+                        onOcclude={set}
                         style={{
                             visibility: h ? 'visible' : 'hidden',
                             transition: h ? 'all  1.5s' : 'all  0s',
@@ -194,7 +195,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                         position={[0, 0, -0.05]}
                     >
                         <VComm {...d} />
-                    </Html> */}
+                    </Html>
                 </BBAnchor>
 
                 {/* Image */}
