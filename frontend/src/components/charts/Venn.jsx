@@ -6,7 +6,7 @@ import HighchartsReact from 'highcharts-react-official'
 
 
 export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following', height, width }) => {
-    console.log(height, width);
+    // console.log(height, width);
     const [data, setData] = useState([]);
 
     const apiResponse = [{

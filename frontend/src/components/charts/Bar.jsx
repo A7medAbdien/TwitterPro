@@ -1,9 +1,12 @@
 import { forwardRef, useEffect, createRef } from "react";
 import Plot from 'react-plotly.js';
 
-const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
+const BarChar = forwardRef(({ data, title, xLabel, yLabel, dimensions }, ref) => {
 
     if (!data || data.length < 1) return
+    if (!dimensions || dimensions.length < 1) return
+    const [height, width] = dimensions
+    // console.log(height, width);
 
     let [x, y] = data
 
@@ -50,8 +53,8 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
     const layout = allContainColon ?
         {
             title: title,
-            width: 800,
-            height: 600,
+            width: width,
+            height: height,
             margin: {
                 b: 200
             },
@@ -65,8 +68,8 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel }, ref) => {
             bargap: 0.2
         } : {
             title: title,
-            width: 700,
-            height: 450,
+            width: width,
+            height: height,
             margin: {
                 b: 100
             },
