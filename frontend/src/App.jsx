@@ -37,8 +37,19 @@ function App() {
 
   const images = [
     // Front
-    { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: comm.user_rl },
-    // { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: "hi" },
+    { position: [-2, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: comm.user_rl },
+    // Back
+    { position: [2, 0, 1.5], rotation: [0, 0, 0], url: pexel(416430), d: termFreqUni.tweets },
+    // { position: [0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(310452) },
+
+    // // Left
+    // { position: [-1.75, 0, 0.25], rotation: [0, Math.PI / 2.5, 0], url: pexel(327482) },
+    // { position: [-2.15, 0, 1.5], rotation: [0, Math.PI / 2.5, 0], url: pexel(325185) },
+    // { position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
+    // // Right
+    // { position: [1.75, 0, 0.25], rotation: [0, -Math.PI / 2.5, 0], url: pexel(227675) },
+    // { position: [2.15, 0, 1.5], rotation: [0, -Math.PI / 2.5, 0], url: pexel(911738) },
+    // { position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
 
   ]
 

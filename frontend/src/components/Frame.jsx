@@ -37,7 +37,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
         easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
     })
 
-
+    const [showComponent, setShowComponent] = useState(false);
     const camera = useThree((state) => state.camera)
     const getFrameDimensions = (ref) => {
         const boundingBox = new THREE.Box3();
@@ -45,7 +45,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
 
         const max = boundingBox.max
         const min = boundingBox.min
-        console.log(max);
+        // console.log(max);
         max.project(camera);
         min.project(camera);
 
@@ -55,17 +55,20 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
         const top = (1 + max.y) / 2 * window.innerHeight;
         const bottom = (1 + min.y) / 2 * window.innerHeight;
 
-        const width = right - left
-        const hight = top - bottom
-        return [width, hight]
+        const width = Math.abs(right - left) * 0.9
+        const height = Math.abs(top - bottom) * 0.9
+        return [height, width]
     }
 
     useEffect(() => {
-        // console.log(hidden);
-
-        // console.log(d);
         console.log(getFrameDimensions(bb));
+
+        setTimeout(() => {
+            setShowComponent(true);
+        }, 2000);
     }, [])
+
+
     return (
         <group {...props}>
             {/* Outer Frame */}
@@ -84,25 +87,23 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                     <boxGeometry />
                     <meshBasicMaterial toneMapped={false} fog={false} />
                 </mesh>
-
-                <BBAnchor anchor={[-1, 1, 0.05]}>
-                    <Html
-                        occlude
-                        onOcclude={set}
-                        style={{
-                            visibility: h ? 'visible' : 'hidden',
-                            transition: h ? 'all  1.5s' : 'all  0s',
-                            transitionDelay: h ? '1.5s' : '0s',
-                            opacity: h ? 1 : 0,
-                            transform: `opacity(${h ? 1 : 0})`
-                        }}
-                        name='test'
-                        position={[0, 0, -0.05]}
-                    >
-                        <VComm {...d} />
-                        {/* <BarChar {...d} /> */}
-                    </Html>
-                </BBAnchor>
+                {showComponent && (
+                    <BBAnchor anchor={[-0.9, 0.9, 0.05]}>
+                        <Html
+                            occlude
+                            onOcclude={set}
+                            style={{
+                                visibility: h ? 'visible' : 'hidden',
+                                transition: h ? 'all  1.5s' : 'all  0s',
+                                transitionDelay: h ? '3s' : '0s',
+                                opacity: h ? 1 : 0,
+                                transform: `opacity(${h ? 1 : 0})`
+                            }}
+                            name='test'
+                        >
+                            <VComm {...d} dimensions={getFrameDimensions(bb)} />
+                        </Html>
+                    </BBAnchor>)}
 
                 {/* Image */}
                 <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
@@ -116,3 +117,4 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
         </group >
     )
 }
+

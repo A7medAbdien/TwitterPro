@@ -5,8 +5,8 @@ VennModule(Highcharts);
 import HighchartsReact from 'highcharts-react-official'
 
 
-export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following' }) => {
-
+export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following', height, width }) => {
+    console.log(height, width);
     const [data, setData] = useState([]);
 
     const apiResponse = [{
@@ -30,8 +30,8 @@ export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following'
             text: title
         },
         chart: {
-            width: 0.9 * 450,
-            height: 0.9 * 362
+            width: width,
+            height: height
         },
         series: [{
             type: 'venn',
