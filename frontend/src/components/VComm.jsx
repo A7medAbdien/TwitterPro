@@ -4,14 +4,13 @@ import { Venn } from './charts/Venn';
 
 
 export const VComm = ({ venn, title, a, b, dimensions }) => {
-    let user = 10, following = 10, comm = 2, height = 500, width = 500
+    // let user = 10, following = 10, comm = 2
 
     if (!venn || venn.length < 1) return
+    if (!dimensions || dimensions.length < 1) return
 
-    [user, following, comm] = venn
-
-    if (!dimensions) return
-    [height, width] = dimensions
+    const [user, following, comm] = venn
+    const [height, width] = dimensions
     return <>
         <Venn
             title={title}
