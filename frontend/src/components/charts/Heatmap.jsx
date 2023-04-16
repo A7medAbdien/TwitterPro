@@ -1,8 +1,11 @@
 import Plot from 'react-plotly.js';
 
-export const Heatmap = ({ x, data, title, xLabel, yLabel }) => {
+export const Heatmap = ({ x, data, title, xLabel, yLabel, dimensions }) => {
 
     let y, xv
+
+    if (!dimensions || dimensions.length < 1) return
+    const [height, width] = dimensions
 
     if (data)
         y = replaceZerosWithNaN(data)
@@ -19,8 +22,8 @@ export const Heatmap = ({ x, data, title, xLabel, yLabel }) => {
 
     const layout = {
         title: title,
-        width: 700,
-        height: 700,
+        width: width,
+        height: height,
         margin: {
             b: 100
         },

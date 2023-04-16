@@ -1,10 +1,12 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-export const TwoBar = ({ bar, title, xLabel, yLabel }) => {
+export const TwoBar = ({ bar, title, xLabel, yLabel, dimensions }) => {
 
 
     if (!bar || bar.length < 1) return
+    if (!dimensions || dimensions.length < 1) return
+    const [height, width] = dimensions
 
     const [x, user, following] = bar
 
@@ -38,8 +40,8 @@ export const TwoBar = ({ bar, title, xLabel, yLabel }) => {
 
     const layout = {
         title: title,
-        width: 1000,
-        height: 500,
+        width: width,
+        height: height,
         margin: {
             b: 100
         },
