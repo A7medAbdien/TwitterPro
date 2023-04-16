@@ -63,9 +63,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     useEffect(() => {
         // console.log(getFrameDimensions(bb));
 
-        setTimeout(() => {
-            setShowComponent(true);
-        }, 2000);
+        setShowComponent(true);
     }, [])
 
 
@@ -101,9 +99,9 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                             }}
                             name='test'
                         >
-                            {/* <VComm {...d} dimensions={getFrameDimensions(bb)} /> */}
+                            <VComm {...d} dimensions={getFrameDimensions(bb)} />
 
-                            <BarChar {...d} dimensions={getFrameDimensions(bb)} />
+                            {/* <BarChar {...d} dimensions={getFrameDimensions(bb)} /> */}
                         </Html>
                     </BBAnchor>)}
 

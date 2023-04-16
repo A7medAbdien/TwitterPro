@@ -66,7 +66,10 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             clicked.current.parent.updateWorldMatrix(true, true)
             clicked.current.parent.localToWorld(p.set(0, Hight / 2, focusedDistance))
             clicked.current.parent.getWorldQuaternion(q)
-            set(true)
+
+            setTimeout(() => {
+                set(true)
+            }, 1500);
         }
         else {
             p.set(0, 0, 5.5)
