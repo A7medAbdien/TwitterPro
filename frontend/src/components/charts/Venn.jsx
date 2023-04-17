@@ -37,7 +37,14 @@ export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following'
             type: 'venn',
             name: title,
             data: data
-        }]
+        }],
+        plotOptions: {
+            series: {
+                animation: {
+                    duration: 0 // disable starting animation
+                }
+            }
+        }
     }
 
     return (
@@ -46,6 +53,6 @@ export const Venn = ({ user, following, comm, title, a = 'USER', b = 'Following'
                 highcharts={Highcharts}
                 options={vennOptions}
             />
-        </div>
+        </div >
     );
 }
