@@ -31,6 +31,7 @@ function App() {
       getTimeFreq(setTimeFreq),
       getComm(setComm),
     ]).then(() => {
+      // console.log(termFreqUni);
       setIsLoading(false)
     })
   }, [])
@@ -53,6 +54,23 @@ function App() {
 
   ]
 
+  const termFreqUniRoom = [
+    // Front
+    // { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), data: comm.user_rl, type: "venn" },
+    // Back
+    { position: [-1.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(416430), data: termFreqUni.tweets, type: "bar" },
+    { position: [1.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(310452), data: termFreqUni.tweets, type: "bar" },
+
+    // // Left
+    // { position: [-1.75, 0, 0.25], rotation: [0, Math.PI / 2.5, 0], url: pexel(327482) },
+    // { position: [-2.15, 0, 1.5], rotation: [0, Math.PI / 2.5, 0], url: pexel(325185) },
+    // { position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
+    // // Right
+    // { position: [1.75, 0, 0.25], rotation: [0, -Math.PI / 2.5, 0], url: pexel(227675) },
+    // { position: [2.15, 0, 1.5], rotation: [0, -Math.PI / 2.5, 0], url: pexel(911738) },
+    // { position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
+
+  ]
 
   return <>
     <Leva hidden />
@@ -61,7 +79,7 @@ function App() {
       <fog attach="fog" args={['#191920', 0, 15]} />
 
       <Experience />
-      <Gallery images={images} />
+      <Gallery images={termFreqUniRoom} />
       <Environment preset="city" />
     </Canvas>
   </>
