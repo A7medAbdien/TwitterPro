@@ -17,6 +17,7 @@ const OuterFrameWidth = 2.5
 const OuterFrameZ = 0.05
 
 export function Frame({ url, c = new THREE.Color(), ...props }) {
+    const type = props.type
     const h = props.hidden
     const set = props.set
     const d = props.d
@@ -61,10 +62,9 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     }
 
     useEffect(() => {
-        // console.log(getFrameDimensions(bb));
-
         setShowComponent(true);
     }, [])
+
 
 
     return (
@@ -85,7 +85,9 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                     <boxGeometry />
                     <meshBasicMaterial toneMapped={false} fog={false} />
                 </mesh>
-                {showComponent && (
+
+                {/* Chart */}
+                {showComponent && h && (
                     <BBAnchor anchor={[-0.9, 0.9, 0.05]}>
                         <Html
                             occlude
@@ -99,9 +101,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                             }}
                             name='test'
                         >
-                            <VComm {...d} dimensions={getFrameDimensions(bb)} />
-
-                            {/* <BarChar {...d} dimensions={getFrameDimensions(bb)} /> */}
+                            <Chart data={d} dimensions={getFrameDimensions(bb)} type={type} />
                         </Html>
                     </BBAnchor>)}
 
@@ -118,3 +118,17 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     )
 }
 
+
+const Chart = ({ data, dimensions, type }) => {
+    // console.log(type);
+    switch (type) {
+        case "bar":
+            return <BarChar {...data} dimensions={dimensions} />
+
+        case "venn":
+            return <VComm {...data} dimensions={dimensions} />
+
+        default:
+            break;
+    }
+}
