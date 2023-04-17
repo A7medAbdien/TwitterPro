@@ -82,6 +82,11 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel, dimensions }, ref) =>
             bargap: 0.2
         }
 
+    // Plotly.plot('graph', trace, layout).then((gd) => {
+    //     return Plotly.toImage(gd);
+    // }).then((dataURI) => {
+    //     console.log(dataURI);
+    // });
 
     return <>
         <Plot
@@ -89,6 +94,7 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel, dimensions }, ref) =>
             data={trace}
             layout={layout}
         />
+        <div id="graph" style={{ display: "none" }}></div>
     </>
 })
 
