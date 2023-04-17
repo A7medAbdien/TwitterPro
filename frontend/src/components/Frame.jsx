@@ -69,6 +69,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
 
     useEffect(() => {
         setShowComponent(true);
+
     }, [])
 
 
@@ -98,27 +99,27 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                     <meshBasicMaterial color="#fff" toneMapped={false} fog={false} />
                 </mesh>
 
-                {/* Chart */}
-                {showComponent && selected && (
-                    <BBAnchor anchor={[-0.9, 0.9, 0.05]}>
-                        <Html
-                            occlude
-                            onOcclude={select}
-                            style={{
-                                visibility: selected ? 'visible' : 'hidden',
-                            }}
-                            name='test'
-                        >
-                            <animated.div style={fadeInAnimation}>
-                                <Chart data={data} dimensions={getFrameDimensions(outerFrame)} type={type} />
-                            </animated.div>
-                        </Html>
-                    </BBAnchor>
-                )}
-
                 {/* Image */}
                 <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
             </mesh>
+
+            {/* Chart */}
+            {showComponent && selected && (
+                <Html
+                    position={[-0.56, 1.45, 1]}
+                    // calculatePosition={overrideCalculatePosition}
+                    occlude
+                    onOcclude={select}
+                    style={{
+                        visibility: selected ? 'visible' : 'hidden',
+                    }}
+                    name='test'
+                >
+                    <animated.div style={fadeInAnimation}>
+                        <Chart data={data} dimensions={getFrameDimensions(outerFrame)} type={type} />
+                    </animated.div>
+                </Html>
+            )}
 
             {/* Title */}
             <Text maxWidth={1} anchorX="left" anchorY="top" position={[-0.45, 0.1 + Hight, 0]} fontSize={0.05}>

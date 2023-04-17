@@ -10,13 +10,13 @@ import { useControls } from 'leva'
 import BarChar from './charts/Bar'
 import { Frame } from './Frame'
 
-const focusedDistance = 1.7
+const focusedDistance = 2
 
 const Hight = 2
 const OuterFrameWidth = 2.5
 const OuterFrameZ = 0.05
 
-export const Gallery = ({ images }) => {
+export const Room = ({ images }) => {
 
 
     // const { position, r, visible } = useControls('sphere', {
@@ -35,13 +35,14 @@ export const Gallery = ({ images }) => {
     //     }
     // })
 
-    return < group position={[0, -0.5, 0]} >
-
+    return <>
         {/* <OrbitControls /> */}
-
-        <Frames images={images} />
-
-        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        < group position={[0, -0.5, 0]} >
+            <Frames images={images} />
+        </group >
+        <mesh
+            position={[-1, -0.5, 0]}
+            rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[50, 50]} />
             <MeshReflectorMaterial
                 blur={[300, 100]}
@@ -56,11 +57,10 @@ export const Gallery = ({ images }) => {
                 metalness={0.5}
             />
         </mesh>
-    </group >
-
+    </>
 }
 
-function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
+function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3([0, 4, 0]) }) {
     const ref = useRef()
     const [hidden, set] = useState(false)
     const clicked = useRef()
@@ -80,7 +80,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         }
         else {
             set(false) // to make sure it will be false, cuz setTimeout has a weird effect
-            p.set(0, 0, 5.5)
+            p.set(0, 1, 6)
             q.identity()
         }
     })

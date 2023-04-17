@@ -1,6 +1,6 @@
 import Experience from './Experience';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Gallery } from './components/Gallery';
+import { Room } from './components/Gallery';
 import { Html, Environment, } from '@react-three/drei'
 import { Leva } from 'leva'
 
@@ -60,26 +60,21 @@ function App() {
   ]
 
   const termFreqUniRoom = [
-    // Front
-    // { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), data: comm.user_rl, type: "venn" },
-
-
-
     // // Left
     // Back
-    { position: [-5, 0, -0.6], rotation: [0, 0, 0], url: pexel(416430), data: termFreqUni.tweets, type: "bar" },
-    { position: [-2, 0, -0.6], rotation: [0, 0, 0], url: pexel(16207048), data: termFreqUni.replies, type: "bar" },
+    { position: [-3.7, 0, -3], rotation: [0, 0, 0], url: pexel(16207048), data: termFreqUni.tweets, type: "bar" },
+    { position: [-4, 0, -1], rotation: [0, 0, 0], url: pexel(416430), data: termFreqUni.replies, type: "bar" },
 
-    { position: [-6.5, 0, 1], rotation: [0, Math.PI / 2, 0], url: pexel(2603464), data: termFreqUni.likedTweets, type: "bar" },
-    { position: [-6.5, 0, 4], rotation: [0, Math.PI / 2, 0], url: pexel(325185), data: termFreqUni.followingLiked, type: "bar" },
+    { position: [-4, 0, 1], rotation: [0, -0, 0], url: pexel(2603464), data: termFreqUni.likedTweets, type: "bar" },
+    { position: [-4.3, 0, 3], rotation: [0, -0, 0], url: pexel(325185), data: termFreqUni.followingLiked, type: "bar" },
 
     // // Right
     // Back
-    { position: [2, 0, -0.6], rotation: [0, 0, 0], url: pexel(227675), data: termFreqBi.tweets, type: "bar" },
-    { position: [5, 0, -0.6], rotation: [0, 0, 0], url: pexel(16350045), data: termFreqBi.replies, type: "bar" },
+    { position: [3.7, 0, -3], rotation: [0, 0, 0], url: pexel(227675), data: termFreqBi.tweets, type: "bar" },
+    { position: [4, 0, -1], rotation: [0, 0, 0], url: pexel(16350045), data: termFreqBi.replies, type: "bar" },
 
-    { position: [6.5, 0, 1], rotation: [0, -Math.PI / 2, 0], url: pexel(1738986), data: termFreqBi.likedTweets, type: "bar" },
-    { position: [6.5, 0, 4], rotation: [0, -Math.PI / 2, 0], url: pexel(10401968), data: termFreqBi.followingLiked, type: "bar" },
+    { position: [4, 0, 1], rotation: [0, -0, 0], url: pexel(1738986), data: termFreqBi.likedTweets, type: "bar" },
+    { position: [4.3, 0, 3], rotation: [0, -0, 0], url: pexel(10401968), data: termFreqBi.followingLiked, type: "bar" },
   ]
 
   return <>
@@ -89,7 +84,7 @@ function App() {
       <fog attach="fog" args={['#191920', 0, 15]} />
 
       <Experience />
-      <Gallery images={termFreqUniRoom} />
+      <Room images={termFreqUniRoom} />
       <Environment preset="city" />
     </Canvas>
   </>
