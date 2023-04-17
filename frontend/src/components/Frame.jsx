@@ -95,7 +95,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                 {/* Inner Frame */}
                 <mesh ref={frame} raycast={() => null} scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
                     <boxGeometry />
-                    <meshBasicMaterial color={"wight"} toneMapped={false} fog={false} />
+                    <meshBasicMaterial color="#fff" toneMapped={false} fog={false} />
                 </mesh>
 
                 {/* Chart */}
