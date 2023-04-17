@@ -37,9 +37,9 @@ function App() {
 
   const images = [
     // Front
-    { position: [-2, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: comm.user_rl, type: "venn" },
+    { position: [-1.5, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970), d: comm.user_rl, type: "venn" },
     // Back
-    { position: [2, 0, 1.5], rotation: [0, 0, 0], url: pexel(416430), d: termFreqUni.tweets, type: "bar" },
+    { position: [1.5, 0, 1.5], rotation: [0, 0, 0], url: pexel(416430), d: termFreqUni.tweets, type: "bar" },
     // { position: [0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(310452) },
 
     // // Left
