@@ -35,8 +35,8 @@ function App() {
       getTimeFreq(setTimeFreq),
       getComm(setComm),
     ]).then(() => {
-      console.log(termFreqUni);
-      console.log(termFreqBi);
+      // console.log(termFreqUni);
+      // console.log(termFreqBi);
       setIsLoading(false)
     })
   }, [])

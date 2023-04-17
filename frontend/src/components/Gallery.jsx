@@ -19,18 +19,25 @@ const OuterFrameZ = 0.05
 export const Gallery = ({ images }) => {
 
 
-    const { position, color, visible } = useControls('sphere', {
-        position:
-        {
-            value: { x: - 2, y: 2.7 },
-            step: 0.01,
-            joystick: 'invertY'
-        }
-    })
+    // const { position, r, visible } = useControls('sphere', {
+    //     position:
+    //     {
+    //         value: { x: - 14, z: -6 },
+    //         step: 1,
+    //         joystick: 'invertY'
+    //     },
+    //     r:
+    //     {
+    //         min: 0.1,
+    //         max: 1,
+    //         step: 0.01,
+    //         value: 0.23,
+    //     }
+    // })
 
     return < group position={[0, -0.5, 0]} >
 
-        <OrbitControls />
+        {/* <OrbitControls /> */}
 
         <Frames images={images} />
 
@@ -78,8 +85,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         }
     })
     useFrame((state, dt) => {
-        // easing.damp3(state.camera.position, p, 0.4, dt)
-        // easing.dampQ(state.camera.quaternion, q, 0.4, dt)
+        easing.damp3(state.camera.position, p, 0.4, dt)
+        easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
     return <>
         <group
