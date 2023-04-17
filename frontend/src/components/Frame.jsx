@@ -17,10 +17,10 @@ const OuterFrameZ = 0.05
 
 export function Frame({ url, c = new THREE.Color(), ...props }) {
     const type = props.type
-    const h = props.hidden
-    const set = props.set
-    const d = props.d
-    const bb = useRef()
+    const selected = props.hidden
+    const select = props.set
+    const data = props.d
+    const outerFrame = useRef()
 
     const image = useRef()
     const frame = useRef()
@@ -33,10 +33,13 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     useCursor(hovered)
     useFrame((state, dt) => {
         image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
-        easing.damp3(image.current.scale, [0.85 * (h ? 0.01 : 1), 0.9 * (h ? 0.01 : 1), 1], 0.2, dt)
-        if (!h) {
+        if (!selected) {
             easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
             easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
+        } else {
+            if (frame.current.material.color != "white")
+                easing.dampC(frame.current.material.color, 'white', 0.7, dt)
+            easing.damp3(image.current.scale, [0.85 * (selected ? 0.01 : 1), 0.9 * (selected ? 0.01 : 1), 1], 0.2, dt)
         }
     })
 
@@ -69,7 +72,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
 
 
     const fadeInAnimation = useSpring({
-        opacity: h ? 1 : 0,
+        opacity: selected ? 1 : 0,
         from: { opacity: 0 },
         config: { duration: 2000 }
     });
@@ -79,7 +82,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
         <group {...props}>
             {/* Outer Frame */}
             <mesh
-                ref={bb}
+                ref={outerFrame}
                 name={name}
                 onPointerOver={(e) => (e.stopPropagation(), hover(true))}
                 onPointerOut={() => hover(false)}
@@ -91,22 +94,22 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                 {/* Inner Frame */}
                 <mesh ref={frame} raycast={() => null} scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
                     <boxGeometry />
-                    <meshBasicMaterial toneMapped={false} fog={false} />
+                    <meshBasicMaterial color={"wight"} toneMapped={false} fog={false} />
                 </mesh>
 
                 {/* Chart */}
-                {showComponent && h && (
+                {showComponent && selected && (
                     <BBAnchor anchor={[-0.9, 0.9, 0.05]}>
                         <Html
                             occlude
-                            onOcclude={set}
+                            onOcclude={select}
                             style={{
-                                visibility: h ? 'visible' : 'hidden',
+                                visibility: selected ? 'visible' : 'hidden',
                             }}
                             name='test'
                         >
                             <animated.div style={fadeInAnimation}>
-                                <Chart data={d} dimensions={getFrameDimensions(bb)} type={type} />
+                                <Chart data={data} dimensions={getFrameDimensions(outerFrame)} type={type} />
                             </animated.div>
                         </Html>
                     </BBAnchor>
