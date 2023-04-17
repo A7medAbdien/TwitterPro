@@ -72,6 +72,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             }, 1500);
         }
         else {
+            set(false) // to make sure it will be false, cuz setTimeout has a weird effect
             p.set(0, 0, 5.5)
             q.identity()
         }
