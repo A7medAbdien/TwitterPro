@@ -9,6 +9,7 @@ import { VComm } from './VComm'
 import { useControls } from 'leva'
 import BarChar from './charts/Bar'
 import '../style.css'
+import { useSpring, animated } from 'react-spring';
 
 const focusedDistance = 1.7
 
@@ -67,6 +68,12 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     }, [])
 
 
+    const fadeInAnimation = useSpring({
+        opacity: h ? 1 : 0,
+        from: { opacity: 0 },
+        config: { duration: 2000 }
+    });
+
 
     return (
         <group {...props}>
@@ -97,12 +104,14 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                                 visibility: h ? 'visible' : 'hidden',
                                 // transition: h ? 'all  1.5s' : 'all  0s',
                                 // transitionDelay: h ? '3s' : '0s',
-                                opacity: h ? 1 : 0,
+                                // opacity: h ? 1 : 0,
                                 // transform: `opacity(${h ? 1 : 0})`
                             }}
                             name='test'
                         >
-                            <Chart data={d} dimensions={getFrameDimensions(bb)} type={type} />
+                            <animated.div style={fadeInAnimation}>
+                                <Chart data={d} dimensions={getFrameDimensions(bb)} type={type} />
+                            </animated.div>
                         </Html>
                     </BBAnchor>
                 )}
