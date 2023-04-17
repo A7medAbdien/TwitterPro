@@ -33,13 +33,13 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     useCursor(hovered)
     useFrame((state, dt) => {
         image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
-        if (!selected) {
+        if (!selected && isActive) {
             easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
             easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
         } else {
             if (frame.current.material.color != "white")
                 easing.dampC(frame.current.material.color, 'white', 0.7, dt)
-            easing.damp3(image.current.scale, [0.85 * (selected ? 0.01 : 1), 0.9 * (selected ? 0.01 : 1), 1], 0.2, dt)
+            easing.damp3(image.current.scale, [0.85 * (selected && isActive ? 0.01 : 1), 0.9 * (selected && isActive ? 0.01 : 1), 1], 0.2, dt)
         }
     })
 
@@ -72,7 +72,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
 
 
     const fadeInAnimation = useSpring({
-        opacity: selected ? 1 : 0,
+        opacity: selected && isActive ? 1 : 0,
         from: { opacity: 0 },
         config: { duration: 2000 }
     });
@@ -98,13 +98,13 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                 </mesh>
 
                 {/* Chart */}
-                {showComponent && selected && (
+                {showComponent && selected && isActive && (
                     <BBAnchor anchor={[-0.9, 0.9, 0.05]}>
                         <Html
                             occlude
                             onOcclude={select}
                             style={{
-                                visibility: selected ? 'visible' : 'hidden',
+                                visibility: selected && isActive ? 'visible' : 'hidden',
                             }}
                             name='test'
                         >
