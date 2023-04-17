@@ -8,7 +8,7 @@ import getUuid from 'uuid-by-string'
 import { VComm } from './VComm'
 import { useControls } from 'leva'
 import BarChar from './charts/Bar'
-
+import '../style.css'
 
 const focusedDistance = 1.7
 
@@ -33,11 +33,10 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     const isActive = params?.id === name
     useCursor(hovered)
     useFrame((state, dt) => {
-        if (!h) {
-            image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
-            easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
-        }
-        easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
+        image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
+        easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
+        easing.damp3(image.current.scale, [0.85 * (h ? 0.85 : 1), 0.9 * (h ? 0.905 : 1), 1], 0.1, dt)
+        easing.dampC(frame.current.material.color, hovered && !h ? 'orange' : 'white', 0.1, dt)
     })
 
     const [showComponent, setShowComponent] = useState(false);
@@ -96,22 +95,20 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                             onOcclude={set}
                             style={{
                                 visibility: h ? 'visible' : 'hidden',
-                                transition: h ? 'all  1.5s' : 'all  0s',
-                                transitionDelay: h ? '3s' : '0s',
+                                // transition: h ? 'all  1.5s' : 'all  0s',
+                                // transitionDelay: h ? '3s' : '0s',
                                 opacity: h ? 1 : 0,
-                                transform: `opacity(${h ? 1 : 0})`
+                                // transform: `opacity(${h ? 1 : 0})`
                             }}
                             name='test'
                         >
                             <Chart data={d} dimensions={getFrameDimensions(bb)} type={type} />
                         </Html>
-                    </BBAnchor>)}
+                    </BBAnchor>
+                )}
 
                 {/* Image */}
-
-                {!h && (
-                    <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
-                )}
+                <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
             </mesh>
 
             {/* Title */}
