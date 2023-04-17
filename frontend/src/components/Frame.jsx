@@ -18,7 +18,7 @@ const OuterFrameZ = 0.05
 export function Frame({ url, c = new THREE.Color(), ...props }) {
     const type = props.type
     const select = props.set
-    const data = props.d
+    const data = props.data
     const outerFrame = useRef()
 
     const image = useRef()
