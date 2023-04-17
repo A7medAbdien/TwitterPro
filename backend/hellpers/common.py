@@ -52,8 +52,6 @@ def comm_bar(comm_dfs):
     comm = comm.sort_values(by=['user'], ascending=False)[:20]
     # if (comm.index.dtype == 'int64'): comm = comm.set_axis([get_user_info(id).data.username for id in comm.index])
 
-    comm.plot(kind='bar', figsize=(25, 6))
-
     return tolist(comm.index), tolist(comm['user']), tolist(comm['following'])
 
 
