@@ -11,14 +11,14 @@ const getChartUrl = (data, layout) => {
 
   const chartDiv = document.createElement('div');
   chartDiv.setAttribute('id', 'chart');
-  chartDiv.style.display = 'none';
+  // chartDiv.style.display = 'none';
   document.body.appendChild(chartDiv);
 
   // Create the chart in the 'chart' div
   Plotly.newPlot('chart', data, layout);
 
   // save the chart as a byte array
-  return Plotly.toImage('chart', { format: 'svg', width: 800, height: 600 })
+  return Plotly.toImage('chart', { format: 'png', width: 500, height: 600 })
     .then(function (url) {
       return url
     })
@@ -27,14 +27,29 @@ const getChartUrl = (data, layout) => {
 var data = [{
   x: [1, 2, 3, 4, 5],
   y: [1, 4, 9, 16, 25],
-  type: 'scatter'
+  type: 'scatter',
+  marker: {
+    color: 'blue',
+    size: 8
+  },
+  line: {
+    color: 'blue',
+    width: 2,
+  },
+
 }];
 
 // Define the layout for the chart
 var layout = {
   title: 'My First Plotly Chart',
   xaxis: { title: 'X Axis' },
-  yaxis: { title: 'Y Axis' }
+  yaxis: { title: 'Y Axis' },
+  font: {
+    family: 'Arial',
+    size: 20,
+    color: 'black',
+    // fontWeight: 'bold',
+  },
 };
 
 // const url = ;
