@@ -17,6 +17,51 @@ import BarChar from './components/charts/Bar';
 const pexel = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`
 const pexel2 = (id) => `http://127.0.0.1:8000/ch/tf/uni/${id}`
 
+const getChartUrl = (data, layout) => {
+
+  const chartDiv = document.createElement('div');
+  chartDiv.setAttribute('id', 'chart');
+  // chartDiv.style.display = 'none';
+  document.body.appendChild(chartDiv);
+
+  // Create the chart in the 'chart' div
+  Plotly.newPlot('chart', data, layout);
+
+  // save the chart as a byte array
+  return Plotly.toImage('chart', { format: 'png', width: 500, height: 600 })
+    .then(function (url) {
+      return url
+    })
+}
+// Define the data for the chart
+var data = [{
+  x: [1, 2, 3, 4, 5],
+  y: [1, 4, 9, 16, 25],
+  type: 'scatter',
+  marker: {
+    color: 'blue',
+    size: 8
+  },
+  line: {
+    color: 'blue',
+    width: 2,
+  },
+
+}];
+
+// Define the layout for the chart
+var layout = {
+  title: 'My First Plotly Chart',
+  xaxis: { title: 'X Axis' },
+  yaxis: { title: 'Y Axis' },
+  font: {
+    family: 'Arial',
+    size: 20,
+    color: 'black',
+    // fontWeight: 'bold',
+  },
+};
+
 
 function App() {
 
@@ -27,6 +72,7 @@ function App() {
   const [timeFreq, setTimeFreq] = useState([]);
   const [comm, setComm] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [u, setU] = useState();
 
 
   useEffect(() => {
@@ -42,7 +88,10 @@ function App() {
       // console.log(termFreqBi);
       setIsLoading(false)
     })
-
+    getChartUrl(data, layout).then((url) => {
+      console.log(url);
+      setU(url)
+    })
   }, [])
 
   const images = [
