@@ -17,12 +17,12 @@ import { assignUrlToImage, getBarUrl, getUrlFromData } from './components/Helper
 
 const images = [
   // Back
-  { img: 0, no: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'tweets' },
-  { img: 0, no: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'replies' },
+  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'tweets' },
+  { img: 0, meta: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'replies' },
   // Left
-  { img: 0, no: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
+  { img: 0, meta: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
   // // Right
-  { img: 0, no: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' }
+  { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' }
 ]
 
 function App() {

@@ -51,7 +51,7 @@ export const assignUrlToImage = async (res, images) => {
             resolvedData[key] = responses[index]
         })
 
-        images.map((image) => image.img = resolvedData[image.no])
+        images.map((image) => image.img = resolvedData[image.meta])
     } catch (error) {
         console.error(error)
     }
