@@ -8,7 +8,7 @@ from hellpers.time_freq import get_most_freq_time
 from hellpers.topic_freq import get_most_freq_topic, get_freq_topic
 from hellpers.user_freq import get_most_freq_user, get_freq_user
 
-all_dfs = {'tweets': 0, 'replies': 0, 'likedTweets': 0, 'followingLiked': 0,
+all_dfs = {'tweets': 0, 'replies': 0, 'likes': 0, 'fLikes': 0,
            'following': 0}
 all_dfs = {f"{key}": pd.read_csv(f"data/{key}.csv") for key, df in all_dfs.items()}
 
