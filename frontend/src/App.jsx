@@ -17,6 +17,16 @@ import BarChar from './components/charts/Bar'
 const pexel = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`
 const pexel2 = (id) => `http://127.0.0.1:8000/ch/tf/uni/${id}`
 
+const images = [
+  // Back
+  { img: 0, no: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: pexel(416430) },
+  { img: 0, no: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: pexel(310452) },
+  // Left
+  { img: 0, no: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
+  // // Right
+  { img: 0, no: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
+]
+
 const getChartUrl = async (data, layout) => {
 
   const chartDiv = document.createElement('div')
@@ -45,6 +55,35 @@ const getBarUrl = async (res) => {
 
 }
 
+const getUrlFromData = async (data, chartType) => {
+
+  const res = await data
+
+  const url = {}
+
+  for (const key of Object.keys(res)) {
+    url[key] = chartType(res[key])
+  }
+  return url
+}
+
+const assignUrlToImage = async (res, images) => {
+  const promises = Object.values(res)
+
+  try {
+    const responses = await Promise.all(promises)
+    const resolvedData = {}
+
+    Object.keys(res).forEach((key, index) => {
+      resolvedData[key] = responses[index]
+    })
+
+    images.map((image) => image.img = resolvedData[image.no])
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 function App() {
 
   const [termFreqUni, setTermFreqUni] = useState([])
@@ -56,57 +95,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
 
-  const getTweets = async () => {
 
-    const res = await getTermFreqUni
-
-    const TFUni = {}
-
-    for (const key of Object.keys(res)) {
-      TFUni[key] = getBarUrl(res[key])
-    }
-    return TFUni
-
-  }
-  const images = [
-    // Back
-    { img: 0, no: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: pexel(416430) },
-    { img: 0, no: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: pexel(310452) },
-    // Left
-    { img: 0, no: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
-    // // Right
-    { img: 0, no: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
-  ]
-
-  const assignUrlToImage = async (res, images) => {
-    const promises = Object.values(res)
-    try {
-      const responses = await Promise.all(promises)
-      const resolvedData = {}
-      Object.keys(res).forEach((key, index) => {
-        resolvedData[key] = responses[index]
-      })
-      images.map((image) => image.img = resolvedData[image.no])
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
   useEffect(() => {
 
-    getTweets().then(async (res) => {
-      const promises = Object.values(res)
-      try {
-        const responses = await Promise.all(promises)
-        const resolvedData = {}
-        Object.keys(res).forEach((key, index) => {
-          resolvedData[key] = responses[index]
-        })
-        images.map((image) => image.img = resolvedData[image.no])
-      } catch (error) {
-        console.error(error)
-      }
-    }).then(() => setIsLoading(false))
+    getUrlFromData(getTermFreqUni, getBarUrl)
+      .then((res) => assignUrlToImage(res, images))
+      .then(() => setIsLoading(false))
 
   }, [images])
 
