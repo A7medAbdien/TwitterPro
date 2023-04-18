@@ -18,7 +18,7 @@ const getChartUrl = (data, layout) => {
   Plotly.newPlot('chart', data, layout);
 
   // save the chart as a byte array
-  return Plotly.toImage('chart', { format: 'png', width: 800, height: 600 })
+  return Plotly.toImage('chart', { format: 'svg', width: 800, height: 600 })
     .then(function (url) {
       return url
     })
@@ -59,7 +59,10 @@ function App() {
     ]).then(() => { setIsLoading(false) })
     getTopicFreq(setTopic)
     getTimeFreq(setTimeFreq)
-    getChartUrl(data, layout).then((url) => { setU(url) })
+    getChartUrl(data, layout).then((url) => {
+      console.log(url);
+      setU(url)
+    })
   }, [])
 
 
