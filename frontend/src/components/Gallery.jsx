@@ -6,18 +6,16 @@ import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
 import getUuid from 'uuid-by-string'
 import { VComm } from './VComm'
-import { imgUrl } from '../test'
 
-const img = imgUrl
+
 const GOLDENRATIO = 1.5
 
 function MImage(props) {
-    console.log(img)
-
+    const img = props.img
     const texture = useLoader(THREE.TextureLoader, img)
     return (
         <mesh {...props}>
-            <planeBufferGeometry attach="geometry" args={[2, 2]} />
+            <planeGeometry attach="geometry" args={[2, 2]} />
             <meshBasicMaterial
                 attach="material"
                 map={texture}
@@ -83,6 +81,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
 
 function Frame({ url, c = new THREE.Color(), ...props }) {
     const d = props.d
+    const img = props.img
     const image = useRef()
     const frame = useRef()
     const [, params] = useRoute('/item/:id')
@@ -116,7 +115,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                 </mesh>
 
                 {/* Image */}
-                <MImage raycast={() => null} scale={0.4} position={[0, 0, 0.8]} />
+                <MImage img={img} raycast={() => null} scale={0.4} position={[0, 0, 0.8]} />
 
             </mesh>
 
