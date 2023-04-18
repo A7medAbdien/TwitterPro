@@ -37,21 +37,7 @@ var layout = {
   yaxis: { title: 'Y Axis' }
 };
 
-const chartDiv = document.createElement('div');
-chartDiv.setAttribute('id', 'chart');
-chartDiv.style.display = 'none';
-document.body.appendChild(chartDiv);
-
-// Create the chart in the 'chart' div
-Plotly.newPlot('chart', data, layout);
-
-// save the chart as a byte array
-// const url = Plotly.toImage('chart', { format: 'png', width: 800, height: 600 })
-//   .then(function (url) {
-//     return url
-//   })
-// save the chart as a byte array
-const url = getChartUrl(data, layout);
+// const url = ;
 
 function App() {
   // const refs = useRef([])
@@ -64,7 +50,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [u, setU] = useState();
 
-  console.log(url);
+  // console.log(url);
 
   useEffect(() => {
     Promise.all([
@@ -73,7 +59,7 @@ function App() {
     ]).then(() => { setIsLoading(false) })
     getTopicFreq(setTopic)
     getTimeFreq(setTimeFreq)
-    url.then((url) => { setU(url) })
+    getChartUrl(data, layout).then((url) => { setU(url) })
   }, [])
 
 
