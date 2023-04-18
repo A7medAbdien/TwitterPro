@@ -1,11 +1,11 @@
 import { forwardRef, useEffect, createRef } from "react";
 import Plot from 'react-plotly.js';
 
-const BarChar = forwardRef(({ data, title, xLabel, yLabel, dimensions }, ref) => {
-
+const BarChar = ({ data, title, xLabel, yLabel, dimension }) => {
+    // console.log({ data, title, xLabel, yLabel, dimension })
     if (!data || data.length < 1) return
-    if (!dimensions || dimensions.length < 1) return
-    const [height, width] = dimensions
+    if (!dimension || dimension.length < 1) return
+    const [height, width] = dimension
     // console.log(height, width);
 
     let [x, y] = data
@@ -82,21 +82,9 @@ const BarChar = forwardRef(({ data, title, xLabel, yLabel, dimensions }, ref) =>
             bargap: 0.2
         }
 
-    // Plotly.plot('graph', trace, layout).then((gd) => {
-    //     return Plotly.toImage(gd);
-    // }).then((dataURI) => {
-    //     console.log(dataURI);
-    // });
-
-    return <>
-        <Plot
-            ref={ref}
-            data={trace}
-            layout={layout}
-        />
-        <div id="graph" style={{ display: "none" }}></div>
-    </>
-})
+    // console.log(trace, layout);
+    return [trace, layout]
+}
 
 export default BarChar;
 

@@ -55,7 +55,6 @@ var layout = {
     family: 'Arial',
     size: 20,
     color: 'black',
-    // fontWeight: 'bold',
   },
 };
 
@@ -74,19 +73,32 @@ function App() {
 
   useEffect(() => {
     Promise.all([
-      getTermFreqUni(setTermFreqUni),
-      getTermFreqBi(setTermFreqBi),
-      getTopicFreq(setTopic),
-      getUserFreq(setUser),
-      getTimeFreq(setTimeFreq),
-      getComm(setComm),
-    ]).then(() => {
-      console.log(termFreqUni);
-      // console.log(termFreqBi);
-      setIsLoading(false)
+      getTermFreqUni,
+      // getTermFreqBi(setTermFreqBi),
+      // getTopicFreq(setTopic),
+      // getUserFreq(setUser),
+      // getTimeFreq(setTimeFreq),
+      // getComm(setComm),
+    ]).then(([TFuni,]) => {
+      const all = TFuni
+      const tweets = TFuni.tweets
+      console.log(tweets);
+      const [trace, layout] = BarChar({ data: tweets.data, title: tweets.title, xLabel: tweets.xLabel, yLabel: tweets.yLabel, dimension: [500, 500] })
+      layout['font'] = {
+        family: 'Arial',
+        size: 20,
+        color: 'black',
+      }
+      getChartUrl(trace, layout).then((url) => {
+        // console.log(url);
+        setU(url)
+      })
     })
+
+
+    // BarChar()
     getChartUrl(data, layout).then((url) => {
-      console.log(url);
+      // console.log(url);
       setU(url)
     })
   }, [])

@@ -18,16 +18,16 @@ export default function Experience() {
     const [isLoading, setIsLoading] = useState(true);
 
 
-    useEffect(() => {
-        Promise.all([
-            getTermFreqUni(setTermFreqUni),
-            getTopicFreq(setTopic),
-            getTimeFreq(setTimeFreq),
-            getComm(setComm),
-        ]).then(() => {
-            setIsLoading(false)
-        })
-    }, [])
+    // useEffect(() => {
+    //     Promise.all([
+    //         getTermFreqUni(setTermFreqUni),
+    //         getTopicFreq(setTopic),
+    //         getTimeFreq(setTimeFreq),
+    //         getComm(setComm),
+    //     ]).then(() => {
+    //         setIsLoading(false)
+    //     })
+    // }, [])
 
 
     return <>

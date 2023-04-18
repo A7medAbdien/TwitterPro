@@ -63,6 +63,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
 const Image = forwardRef((props, ref) => {
     // console.log(props);
     const img = props.img
+    if (!img) return
     const texture = useLoader(THREE.TextureLoader, img)
     return (
         <mesh
