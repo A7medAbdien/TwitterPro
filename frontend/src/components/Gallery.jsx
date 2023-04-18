@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { useCursor, MeshReflectorMaterial, Image, Text, Environment, Html } from '@react-three/drei'
 import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
@@ -9,7 +9,22 @@ import { VComm } from './VComm'
 import { imgUrl } from '../test'
 
 const img = imgUrl
-const GOLDENRATIO = 1.3
+const GOLDENRATIO = 1.5
+
+function MImage(props) {
+    console.log(img)
+
+    const texture = useLoader(THREE.TextureLoader, img)
+    return (
+        <mesh {...props}>
+            <planeBufferGeometry attach="geometry" args={[2, 2]} />
+            <meshBasicMaterial
+                attach="material"
+                map={texture}
+                toneMapped={false} />
+        </mesh>
+    )
+}
 
 export const Gallery = ({ images }) => (
 
@@ -78,7 +93,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
     useCursor(hovered)
     useFrame((state, dt) => {
         // image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
-        easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
+        // easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
         easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
     })
 
@@ -89,7 +104,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                 name={name}
                 onPointerOver={(e) => (e.stopPropagation(), hover(true))}
                 onPointerOut={() => hover(false)}
-                scale={[1, GOLDENRATIO, 0.05]}
+                scale={[2, GOLDENRATIO, 0.05]}
                 position={[0, GOLDENRATIO / 2, 0]}>
                 <boxGeometry />
                 <meshStandardMaterial color="#151515" metalness={0.5} roughness={0.5} envMapIntensity={2} />
@@ -101,7 +116,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                 </mesh>
 
                 {/* Image */}
-                <Image toneMapped={false} raycast={() => null} ref={image} position={[0, 0, 0.7]} url={img} />
+                <MImage raycast={() => null} scale={0.4} position={[0, 0, 0.8]} />
 
             </mesh>
 

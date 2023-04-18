@@ -1,7 +1,7 @@
 import Experience from './Experience';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Gallery } from './components/Gallery';
-import { Html, Environment, } from '@react-three/drei'
+import { Html, Environment, OrbitControls } from '@react-three/drei'
 import { Leva } from 'leva'
 
 import { useState, useEffect, useRef } from 'react'
@@ -86,6 +86,7 @@ function App() {
     {/* <VComm res={comm} /> */}
     {/* <Leva hidden /> */}
     <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
+      {/* <OrbitControls makeDefault /> */}
       <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
