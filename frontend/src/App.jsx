@@ -13,6 +13,7 @@ import { VComm } from './components/VComm';
 import { TwoBar } from './components/charts/TwoBar';
 import BarChar from './components/charts/Bar';
 
+
 const pexel = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`
 const pexel2 = (id) => `http://127.0.0.1:8000/ch/tf/uni/${id}`
 
@@ -82,16 +83,16 @@ function App() {
 
   return <>
 
-    <VComm res={comm} />
+    {/* <VComm res={comm} /> */}
     {/* <Leva hidden /> */}
-    {/* <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
+    <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
       <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
       <Experience />
       <Gallery images={images} />
       <Environment preset="city" />
-    </Canvas> */}
+    </Canvas>
   </>
 }
 

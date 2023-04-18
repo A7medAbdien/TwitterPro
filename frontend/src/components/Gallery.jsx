@@ -6,7 +6,9 @@ import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
 import getUuid from 'uuid-by-string'
 import { VComm } from './VComm'
+import { imgUrl } from '../test'
 
+const img = imgUrl
 const GOLDENRATIO = 1.3
 
 export const Gallery = ({ images }) => (
@@ -99,7 +101,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                 </mesh>
 
                 {/* Image */}
-                <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
+                <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={img} />
                 <Html position={[0.5, GOLDENRATIO, 0]}>
                     <VComm {...d} />
                 </Html>
