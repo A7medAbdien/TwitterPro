@@ -82,6 +82,12 @@ const BarChar = ({ data, title, xLabel, yLabel, dimension }) => {
             bargap: 0.2
         }
 
+    layout['font'] = {
+        family: 'Arial',
+        size: 20,
+        color: 'black',
+    };
+
     // console.log(trace, layout);
     return [trace, layout]
 }
