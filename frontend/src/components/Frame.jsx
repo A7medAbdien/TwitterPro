@@ -20,7 +20,8 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     const [, params] = useRoute('/item/:id')
     const [hovered, hover] = useState(false)
     const [rnd] = useState(() => Math.random())
-    const name = getUuid(url)
+    // const name = getUuid(url)
+    const name = url
     const isActive = params?.id === name
     useCursor(hovered)
     useFrame((state, dt) => {

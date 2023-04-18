@@ -15,17 +15,14 @@ import BarChar from './components/charts/Bar'
 import { assignUrlToImage, getBarUrl, getUrlFromData } from './components/Helpers/UrlChart'
 
 
-const pexel = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`
-const pexel2 = (id) => `http://127.0.0.1:8000/ch/tf/uni/${id}`
-
 const images = [
   // Back
-  { img: 0, no: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: pexel(416430) },
-  { img: 0, no: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: pexel(310452) },
+  { img: 0, no: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'tweets' },
+  { img: 0, no: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'replies' },
   // Left
-  { img: 0, no: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
+  { img: 0, no: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
   // // Right
-  { img: 0, no: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
+  { img: 0, no: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' }
 ]
 
 function App() {
@@ -49,24 +46,6 @@ function App() {
 
   }, [images])
 
-
-  const termFreqUniRoom = [
-    // // Left
-    // Back
-    { position: [-3.7, 0, -3], rotation: [0, 0, 0], url: pexel(16207048) },
-    { position: [-4, 0, -1], rotation: [0, 0, 0], url: pexel(416430) },
-
-    { position: [-4, 0, 1], rotation: [0, -0, 0], url: pexel(2603464) },
-    { position: [-4.3, 0, 3], rotation: [0, -0, 0], url: pexel(325185) },
-
-    // // Right
-    // Back
-    { position: [3.7, 0, -3], rotation: [0, 0, 0], url: pexel(227675) },
-    { position: [4, 0, -1], rotation: [0, 0, 0], url: pexel(16350045) },
-
-    { position: [4, 0, 1], rotation: [0, -0, 0], url: pexel(1738986) },
-    { position: [4.3, 0, 3], rotation: [0, -0, 0], url: pexel(10401968) },
-  ]
 
   return <>
 
