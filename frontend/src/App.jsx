@@ -31,20 +31,7 @@ const getChartUrl = async (data, layout) => {
   return await Plotly.toImage('chart', { format: 'png', width: 500, height: 600 });
 }
 
-const getBarUrl = async (setter, res) => {
-  const [trace, layout] = BarChar(
-    {
-      data: res.data,
-      title: res.title,
-      xLabel: res.xLabel,
-      yLabel: res.yLabel,
-      dimension: [500, 500]
-    }
-  )
-  const url = await getChartUrl(trace, layout);
-  setter(url);
-}
-const getBarUrl2 = async (res) => {
+const getBarUrl = async (res) => {
   const [trace, layout] = BarChar(
     {
       data: res.data,
@@ -85,15 +72,13 @@ function App() {
     //   getBarUrl(value, res[key])
     // }
 
-    const TFUni2 = {
-      tweets: 0, replies: 0, likes: 0, fLikes: 0
-    }
+    const TFUni = {}
 
-    for (const key of Object.keys(TFUni2)) {
-      TFUni2[key] = getBarUrl2(res[key])
+    for (const key of Object.keys(res)) {
+      TFUni[key] = getBarUrl(res[key])
     }
     // console.log(TFUni2);
-    return TFUni2
+    return TFUni
 
   }
   const images = [
