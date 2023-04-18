@@ -63,16 +63,16 @@ function App() {
 
 
   const getTweets = async () => {
-    const TFUni = await getTermFreqUni
-    // console.log(TFUni);
-    const tweets = TFUni.tweets
-    const replies = TFUni.replies
-    const likes = TFUni.likes
-    const fLikes = TFUni.fLikes
-    getBarUrl(setTweetsTFU, tweets)
-    getBarUrl(setRepliesTFU, replies)
-    getBarUrl(setLikesTFU, likes)
-    getBarUrl(setFLikesTFU, fLikes)
+
+    const TFUni = {
+      tweets: setTweetsTFU, replies: setRepliesTFU, likes: setLikesTFU, fLikes: setFLikesTFU
+    }
+
+    const res = await getTermFreqUni
+    for (const [key, value] of Object.entries(TFUni)) {
+      getBarUrl(value, res[key])
+    }
+
   }
 
   useMemo(() => {
