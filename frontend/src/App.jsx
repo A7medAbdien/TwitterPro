@@ -1,17 +1,17 @@
-import Experience from './Experience';
-import { Canvas, useThree } from '@react-three/fiber';
-import { Gallery } from './components/Gallery';
+import Experience from './Experience'
+import { Canvas, useThree } from '@react-three/fiber'
+import { Gallery } from './components/Gallery'
 import { Html, Environment, OrbitControls } from '@react-three/drei'
 import { Leva } from 'leva'
 
 import { useState, useEffect, useRef, useMemo } from 'react'
 
-import { FAll, FTweets, FReplies } from './components/Freq';
-import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
-import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
-import { VComm } from './components/VComm';
-import { TwoBar } from './components/charts/TwoBar';
-import BarChar from './components/charts/Bar';
+import { FAll, FTweets, FReplies } from './components/Freq'
+import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api'
+import { TimeReplies, TimeTweets } from './components/TimeHeatmap'
+import { VComm } from './components/VComm'
+import { TwoBar } from './components/charts/TwoBar'
+import BarChar from './components/charts/Bar'
 
 
 const pexel = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`
@@ -19,16 +19,16 @@ const pexel2 = (id) => `http://127.0.0.1:8000/ch/tf/uni/${id}`
 
 const getChartUrl = async (data, layout) => {
 
-  const chartDiv = document.createElement('div');
-  chartDiv.setAttribute('id', 'chart');
-  chartDiv.style.display = 'none';
-  document.body.appendChild(chartDiv);
+  const chartDiv = document.createElement('div')
+  chartDiv.setAttribute('id', 'chart')
+  chartDiv.style.display = 'none'
+  document.body.appendChild(chartDiv)
 
   // Create the chart in the 'chart' div
-  Plotly.newPlot('chart', data, layout);
+  Plotly.newPlot('chart', data, layout)
 
   // save the chart as a byte array
-  return await Plotly.toImage('chart', { format: 'png', width: 500, height: 600 });
+  return await Plotly.toImage('chart', { format: 'png', width: 500, height: 600 })
 }
 
 const getBarUrl = async (res) => {
@@ -41,19 +41,19 @@ const getBarUrl = async (res) => {
       dimension: [500, 500]
     }
   )
-  return await getChartUrl(trace, layout);
+  return await getChartUrl(trace, layout)
 
 }
 
 function App() {
 
-  const [termFreqUni, setTermFreqUni] = useState([]);
-  const [termFreqBi, setTermFreqBi] = useState([]);
-  const [user, setUser] = useState([]);
-  const [topic, setTopic] = useState([]);
-  const [timeFreq, setTimeFreq] = useState([]);
-  const [comm, setComm] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [termFreqUni, setTermFreqUni] = useState([])
+  const [termFreqBi, setTermFreqBi] = useState([])
+  const [user, setUser] = useState([])
+  const [topic, setTopic] = useState([])
+  const [timeFreq, setTimeFreq] = useState([])
+  const [comm, setComm] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
 
   const getTweets = async () => {
@@ -78,24 +78,36 @@ function App() {
     { img: 0, no: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
   ]
 
+  const assignUrlToImage = async (res, images) => {
+    const promises = Object.values(res)
+    try {
+      const responses = await Promise.all(promises)
+      const resolvedData = {}
+      Object.keys(res).forEach((key, index) => {
+        resolvedData[key] = responses[index]
+      })
+      images.map((image) => image.img = resolvedData[image.no])
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   useEffect(() => {
 
-    getTweets().then((res) => {
-      const promises = Object.values(res);
-
-      Promise.all(promises)
-        .then(responses => {
-          const resolvedData = {};
-          Object.keys(res).forEach((key, index) => {
-            resolvedData[key] = responses[index]
-          })
-          images.map((image) => image.img = resolvedData[image.no])
+    getTweets().then(async (res) => {
+      const promises = Object.values(res)
+      try {
+        const responses = await Promise.all(promises)
+        const resolvedData = {}
+        Object.keys(res).forEach((key, index) => {
+          resolvedData[key] = responses[index]
         })
-        .catch(error => {
-          console.error(error);
-        }).then(() => setIsLoading(false))
-    }
-    )
+        images.map((image) => image.img = resolvedData[image.no])
+      } catch (error) {
+        console.error(error)
+      }
+    }).then(() => setIsLoading(false))
+
   }, [images])
 
 
@@ -134,5 +146,5 @@ function App() {
   </>
 }
 
-export default App;
+export default App
 
