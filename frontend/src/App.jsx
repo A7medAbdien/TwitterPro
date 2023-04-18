@@ -55,29 +55,16 @@ function App() {
   const [comm, setComm] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // const [tweetsTFU, setTweetsTFU] = useState();
-  // const [repliesTFU, setRepliesTFU] = useState();
-  // const [likesTFU, setLikesTFU] = useState();
-  // const [fLikesTFU, setFLikesTFU] = useState();
-
 
   const getTweets = async () => {
 
-    // const TFUni = {
-    //   tweets: setTweetsTFU, replies: setRepliesTFU, likes: setLikesTFU, fLikes: setFLikesTFU
-    // }
-
     const res = await getTermFreqUni
-    // for (const [key, value] of Object.entries(TFUni)) {
-    //   getBarUrl(value, res[key])
-    // }
 
     const TFUni = {}
 
     for (const key of Object.keys(res)) {
       TFUni[key] = getBarUrl(res[key])
     }
-    // console.log(TFUni2);
     return TFUni
 
   }
