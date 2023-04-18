@@ -40,7 +40,7 @@ export const Gallery = ({ images }) => (
 function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
     const ref = useRef()
     const clicked = useRef()
-    const [, params] = useRoute('/item/:id')
+    const [, params] = useRoute('/termFreqUni/:id')
     const [, setLocation] = useLocation()
     useEffect(() => {
         clicked.current = ref.current.getObjectByName(params?.id)
@@ -60,7 +60,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
     return (
         <group
             ref={ref}
-            onClick={(e) => (e.stopPropagation(), setLocation(clicked.current === e.object ? '/' : '/item/' + e.object.name))}
+            onClick={(e) => (e.stopPropagation(), setLocation(clicked.current === e.object ? '/' : '/termFreqUni/' + e.object.name))}
             onPointerMissed={() => setLocation('/')}>
             {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
         </group>

@@ -17,7 +17,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     const img = props.img
     const image = useRef()
     const frame = useRef()
-    const [, params] = useRoute('/item/:id')
+    const [, params] = useRoute('/termFreqUni/:id')
     const [hovered, hover] = useState(false)
     const [rnd] = useState(() => Math.random())
     // const name = getUuid(url)
