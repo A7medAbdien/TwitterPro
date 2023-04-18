@@ -7,6 +7,51 @@ import BarChar from './components/charts/BarChar';
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
 import { VComm } from './components/VComm';
 
+const getChartUrl = (data, layout) => {
+
+  const chartDiv = document.createElement('div');
+  chartDiv.setAttribute('id', 'chart');
+  chartDiv.style.display = 'none';
+  document.body.appendChild(chartDiv);
+
+  // Create the chart in the 'chart' div
+  Plotly.newPlot('chart', data, layout);
+
+  // save the chart as a byte array
+  return Plotly.toImage('chart', { format: 'png', width: 800, height: 600 })
+    .then(function (url) {
+      return url
+    })
+}
+// Define the data for the chart
+var data = [{
+  x: [1, 2, 3, 4, 5],
+  y: [1, 4, 9, 16, 25],
+  type: 'scatter'
+}];
+
+// Define the layout for the chart
+var layout = {
+  title: 'My First Plotly Chart',
+  xaxis: { title: 'X Axis' },
+  yaxis: { title: 'Y Axis' }
+};
+
+const chartDiv = document.createElement('div');
+chartDiv.setAttribute('id', 'chart');
+chartDiv.style.display = 'none';
+document.body.appendChild(chartDiv);
+
+// Create the chart in the 'chart' div
+Plotly.newPlot('chart', data, layout);
+
+// save the chart as a byte array
+// const url = Plotly.toImage('chart', { format: 'png', width: 800, height: 600 })
+//   .then(function (url) {
+//     return url
+//   })
+// save the chart as a byte array
+const url = getChartUrl(data, layout);
 
 function App() {
   // const refs = useRef([])
@@ -17,26 +62,29 @@ function App() {
   const [timeFreq, setTimeFreq] = useState([]);
   const [comm, setComm] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [u, setU] = useState();
 
+  console.log(url);
 
   useEffect(() => {
     Promise.all([
       getTermFreqUni(setTermFreqUni),
-      getComm(setComm)
+      getComm(setComm),
     ]).then(() => { setIsLoading(false) })
     getTopicFreq(setTopic)
     getTimeFreq(setTimeFreq)
+    url.then((url) => { setU(url) })
   }, [])
 
 
   return <>
-    {/* <FTweets res={termFreqUni} /> */}
+    <FTweets res={termFreqUni} />
     {/* <FTweets res={termFreqBi} /> */}
     {/* <FTweets res={topic} /> */}
     {/* <FReplies res={userFreq} /> */}
     {/* <TimeTweets res={timeFreq} /> */}
 
-    <VComm res={comm} />
+    {/* <VComm res={comm} /> */}
   </>
 }
 
