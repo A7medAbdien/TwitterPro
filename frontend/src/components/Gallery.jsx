@@ -101,10 +101,8 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
                 </mesh>
 
                 {/* Image */}
-                <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={img} />
-                <Html position={[0.5, GOLDENRATIO, 0]}>
-                    <VComm {...d} />
-                </Html>
+                <Image toneMapped={false} raycast={() => null} ref={image} position={[0, 0, 0.7]} url={img} />
+
             </mesh>
 
             {/* Title */}
