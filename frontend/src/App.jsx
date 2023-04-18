@@ -44,7 +44,19 @@ const getBarUrl = async (setter, res) => {
   const url = await getChartUrl(trace, layout);
   setter(url);
 }
+const getBarUrl2 = async (res) => {
+  const [trace, layout] = BarChar(
+    {
+      data: res.data,
+      title: res.title,
+      xLabel: res.xLabel,
+      yLabel: res.yLabel,
+      dimension: [500, 500]
+    }
+  )
+  return await getChartUrl(trace, layout);
 
+}
 
 function App() {
 
@@ -56,39 +68,64 @@ function App() {
   const [comm, setComm] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [tweetsTFU, setTweetsTFU] = useState();
-  const [repliesTFU, setRepliesTFU] = useState();
-  const [likesTFU, setLikesTFU] = useState();
-  const [fLikesTFU, setFLikesTFU] = useState();
+  // const [tweetsTFU, setTweetsTFU] = useState();
+  // const [repliesTFU, setRepliesTFU] = useState();
+  // const [likesTFU, setLikesTFU] = useState();
+  // const [fLikesTFU, setFLikesTFU] = useState();
 
 
   const getTweets = async () => {
 
-    const TFUni = {
-      tweets: setTweetsTFU, replies: setRepliesTFU, likes: setLikesTFU, fLikes: setFLikesTFU
-    }
+    // const TFUni = {
+    //   tweets: setTweetsTFU, replies: setRepliesTFU, likes: setLikesTFU, fLikes: setFLikesTFU
+    // }
 
     const res = await getTermFreqUni
-    for (const [key, value] of Object.entries(TFUni)) {
-      getBarUrl(value, res[key])
+    // for (const [key, value] of Object.entries(TFUni)) {
+    //   getBarUrl(value, res[key])
+    // }
+
+    const TFUni2 = {
+      tweets: 0, replies: 0, likes: 0, fLikes: 0
     }
 
+    for (const key of Object.keys(TFUni2)) {
+      TFUni2[key] = getBarUrl2(res[key])
+    }
+    // console.log(TFUni2);
+    return TFUni2
+
   }
-
-  useMemo(() => {
-
-    getTweets()
-  }, [])
-
   const images = [
     // Back
-    { img: tweetsTFU, position: [-1.2, 0, 1], rotation: [0, 0, 0], url: pexel(416430) },
-    { img: repliesTFU, position: [1.2, 0, 1], rotation: [0, 0, 0], url: pexel(310452) },
+    { img: 0, no: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: pexel(416430) },
+    { img: 0, no: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: pexel(310452) },
     // Left
-    { img: likesTFU, position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
+    { img: 0, no: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
     // // Right
-    { img: fLikesTFU, position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
+    { img: 0, no: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
   ]
+
+  useEffect(() => {
+
+    getTweets().then((res) => {
+      const promises = Object.values(res);
+
+      Promise.all(promises)
+        .then(responses => {
+          const resolvedData = {};
+          Object.keys(res).forEach((key, index) => {
+            resolvedData[key] = responses[index]
+          })
+          images.map((image) => image.img = resolvedData[image.no])
+        })
+        .catch(error => {
+          console.error(error);
+        }).then(() => setIsLoading(false))
+    }
+    )
+  }, [images])
+
 
   const termFreqUniRoom = [
     // // Left
@@ -117,7 +154,9 @@ function App() {
       <fog attach="fog" args={['#191920', 0, 15]} />
 
       <Experience />
-      <Gallery images={images} />
+      {!isLoading && (
+        <Gallery images={images} />
+      )}
       <Environment preset="city" />
     </Canvas>
   </>
