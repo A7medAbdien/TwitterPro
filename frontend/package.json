@@ -12,8 +12,10 @@
     "vite": "^4.0.4"
   },
   "dependencies": {
+    "@react-three/cannon": "^6.5.2",
     "@react-three/drei": "^9.50.3",
     "@react-three/fiber": "^8.9.2",
+    "@types/three": "^0.150.2",
     "highcharts": "^10.3.3",
     "highcharts-react-official": "^3.2.0",
     "jquery": "^3.6.4",
