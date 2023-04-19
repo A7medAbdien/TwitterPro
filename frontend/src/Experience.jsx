@@ -4,7 +4,7 @@ import { Perf } from 'r3f-perf'
 import { useState, useEffect, useRef } from 'react'
 
 import { FAll, FTweets, FReplies } from './components/Freq';
-import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
+// import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api';
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap';
 import { VComm } from './components/VComm';
 import { TwoBar } from './components/charts/TwoBar';

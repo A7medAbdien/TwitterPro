@@ -7,7 +7,7 @@ import { Leva } from 'leva'
 import { useState, useEffect, useRef, useMemo } from 'react'
 
 import { FAll, FTweets, FReplies } from './components/Freq'
-import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api'
+// import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api'
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap'
 import { VComm } from './components/VComm'
 import { TwoBar } from './components/charts/TwoBar'
@@ -33,16 +33,16 @@ function App() {
   const [topic, setTopic] = useState([])
   const [timeFreq, setTimeFreq] = useState([])
   const [comm, setComm] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
 
 
 
   useEffect(() => {
 
-    getUrlFromData(getTermFreqUni, getBarUrl)
-      .then((res) => assignUrlToImage(res, images))
-      .then(() => setIsLoading(false))
+    // getUrlFromData(getTermFreqUni, getBarUrl)
+    //   .then((res) => assignUrlToImage(res, images))
+    //   .then(() => setIsLoading(false))
 
   }, [images])
 
