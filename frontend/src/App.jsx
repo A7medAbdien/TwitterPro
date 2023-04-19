@@ -14,15 +14,18 @@ import { TwoBar } from './components/charts/TwoBar'
 import BarChar from './components/charts/Bar'
 import { assignUrlToImage, getBarUrl, getUrlFromData } from './components/Helpers/UrlChart'
 
-
+const x = 0
+const z = -4
 const images = [
   // Back
-  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'tweets' },
-  { img: 0, meta: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'replies' },
+  { img: 0, meta: 'tweets', position: [x + -1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'tweets' },
+  { img: 0, meta: 'replies', position: [x + 1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'replies' },
   // Left
-  { img: 0, meta: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
+  { img: 0, meta: 'likes', position: [x + -2, 0, 2.75 + z], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
   // // Right
-  { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' }
+  { img: 0, meta: 'fLikes', position: [x + 2, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' },
+  { img: 0, meta: 'door', position: [0, 0, 1], rotation: [0, 0, 0], url: 'door' },
+  { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
 ]
 
 function App() {

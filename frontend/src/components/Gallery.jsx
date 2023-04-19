@@ -36,20 +36,43 @@ export const Gallery = ({ images }) => (
     </group>
 
 )
+const DOOR = "door"
+const HOME = "home"
+const isDoor = (ref) => (ref.current.name).includes(DOOR)
+const isOut = (ref) => (ref.current.name).includes(HOME)
 
 function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
     const ref = useRef()
     const clicked = useRef()
+    const door = useRef()
+    const [doorClicked, setDoorClicked] = useState(false)
     const [, params] = useRoute('/termFreqUni/:id')
     const [, setLocation] = useLocation()
     useEffect(() => {
         clicked.current = ref.current.getObjectByName(params?.id)
         if (clicked.current) {
             clicked.current.parent.updateWorldMatrix(true, true)
-            clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25))
-            clicked.current.parent.getWorldQuaternion(q)
+
+            if (isDoor(clicked)) {
+                setDoorClicked(true)
+                clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 0))
+                clicked.current.parent.getWorldQuaternion(q)
+            } else if (isOut(clicked)) {
+                setDoorClicked(false)
+                p.set(0, 0, 5.5)
+                q.identity()
+            } else {
+                clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25))
+                clicked.current.parent.getWorldQuaternion(q)
+            }
         } else {
-            p.set(0, 0, 5.5)
+            if (doorClicked) {
+                door.current = ref.current.getObjectByName("door")
+                const doorPosition = door.current.position
+                p.set(doorPosition.x, 0, doorPosition.z)
+            }
+            else
+                p.set(0, 0, 5.5)
             q.identity()
         }
     })
@@ -60,7 +83,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
     return (
         <group
             ref={ref}
-            onClick={(e) => (e.stopPropagation(), setLocation(clicked.current === e.object ? '/' : '/termFreqUni/' + e.object.name))}
+            onClick={(e) => (console.log(e.object.name), e.stopPropagation(), setLocation(clicked.current === e.object ? '/' : '/termFreqUni/' + e.object.name))}
             onPointerMissed={() => setLocation('/')}>
             {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
         </group>
