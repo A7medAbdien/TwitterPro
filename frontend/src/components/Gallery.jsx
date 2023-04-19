@@ -46,14 +46,18 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
     const clicked = useRef()
     const door = useRef()
     const [doorClicked, setDoorClicked] = useState(false)
+    const [DOOR, setDoor] = useState()
     const [, params] = useRoute('/:id')
     const [, setLocation] = useLocation()
+    console.log(doorClicked);
+    console.log(DOOR);
     useEffect(() => {
         clicked.current = ref.current.getObjectByName(params?.id)
         if (clicked.current) {
             clicked.current.parent.updateWorldMatrix(true, true)
 
             if (isDoor(clicked)) {
+                setDoor(clicked.current.name)
                 setDoorClicked(true)
                 clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 0))
                 clicked.current.parent.getWorldQuaternion(q)
@@ -67,7 +71,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             }
         } else {
             if (doorClicked) {
-                door.current = ref.current.getObjectByName("door")
+                console.log(DOOR)
+                door.current = ref.current.getObjectByName(DOOR)
                 door.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 0))
             }
             else
@@ -82,8 +87,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
     return (
         <group
             ref={ref}
-            onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? '/' : '/' + e.object.name))}
-            onPointerMissed={() => setLocation('/')}>
+            onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + DOOR : '/' : '/' + e.object.name))}
+            onPointerMissed={() => setLocation((doorClicked) ? '/' + DOOR : '/')}>
             {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
         </group>
     )

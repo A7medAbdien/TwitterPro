@@ -24,8 +24,13 @@ const images = [
   { img: 0, meta: 'likes', position: [x + -2, 0, 2.75 + z], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
   // // Right
   { img: 0, meta: 'fLikes', position: [x + 2, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' },
-  { img: 0, meta: 'door', position: [0, 0, 1], rotation: [0, 0, 0], url: 'door' },
-  { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+  { img: 0, meta: 'fLikes', position: [x + 2 + 4, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'ffLikes' },
+  { img: 0, meta: 'door', position: [0, 0, 1], rotation: [0, 0, 0], url: 'door-sam' },
+  { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'homey' },
+
+
+  { img: 0, meta: 'door', position: [4, 0, 1], rotation: [0, 0, 0], url: 'door-chan' },
+  { img: 0, meta: 'home', position: [4, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
 ]
 
 function App() {
