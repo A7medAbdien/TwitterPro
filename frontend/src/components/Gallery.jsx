@@ -68,8 +68,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         } else {
             if (doorClicked) {
                 door.current = ref.current.getObjectByName("door")
-                const doorPosition = door.current.position
-                p.set(doorPosition.x, 0, doorPosition.z)
+                door.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 0))
             }
             else
                 p.set(0, 0, 5.5)
