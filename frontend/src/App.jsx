@@ -19,27 +19,28 @@ import { assignUrlToImage, getBarUrl, getUrlFromData } from './components/Helper
 import { Clump, Pointer, Plane } from './components/Clump'
 import { Floor } from './components/Floor'
 
-const x = 0
-const z = -4
 
 const termFreqUni = [
   // Back
-  { img: 0, meta: 'tweets', position: [-1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'tweets' },
-  { img: 0, meta: 'replies', position: [1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'replies' },
+  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'tweets' },
+  { img: 0, meta: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'replies' },
   // Left
-  { img: 0, meta: 'likes', position: [-2, 0, 2.75 + z], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
+  { img: 0, meta: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
   // // Right
-  { img: 0, meta: 'fLikes', position: [2, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' },
-  { img: 0, meta: 'fLikes', position: [2 + 4, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'ffLikes' },
+  { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'TFUfLikes' },
 ]
 const images = [
-  ...termFreqUni,
-  { img: 0, meta: 'door', position: [0, 0, 1], rotation: [0, 0, 0], url: 'door-sam' },
-  { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+  {
+    position: [-1, 0, -4],
+    image: [...termFreqUni,
+    { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
+    { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+    ]
+  },
 
-
-  { img: 0, meta: 'door', position: [4, 0, 1], rotation: [0, 0, 0], url: 'door-chan' },
-  { img: 0, meta: 'home', position: [4, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+  // { img: 0, meta: 'fLikes', position: [2 + 4, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'ffLikes' },
+  // { img: 0, meta: 'door', position: [4, 0, 1], rotation: [0, 0, 0], url: 'door-chan' },
+  // { img: 0, meta: 'home', position: [4, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
 ]
 
 function App() {
@@ -79,11 +80,11 @@ function App() {
         <Gallery images={images} />
       )}
 
-      <Physics gravity={[0, 2, 0]} iterations={10}>
+      {/* <Physics gravity={[0, 2, 0]} iterations={10}>
         <Pointer />
         <Clump />
         <Plane />
-      </Physics>
+      </Physics> */}
       <Floor />
 
 
