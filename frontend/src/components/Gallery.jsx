@@ -68,7 +68,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             ref={ref}
             onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + DOOR : '/' : '/' + e.object.name))}
             onPointerMissed={() => setLocation((doorClicked) ? '/' + DOOR : '/')}>
-            {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
+            {images.map((props, i) => <Frame key={i} {...props} /> /* prettier-ignore */)}
         </group>
     )
 }

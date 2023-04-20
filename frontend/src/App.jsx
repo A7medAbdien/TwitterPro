@@ -1,6 +1,6 @@
 import Experience from './Experience'
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
-import { Physics, useSphere } from "@react-three/cannon"
+import { Debug, Physics, useSphere, usePlane } from "@react-three/cannon"
 import * as THREE from "three"
 
 import { Gallery } from './components/Gallery'
@@ -16,7 +16,7 @@ import { VComm } from './components/VComm'
 import { TwoBar } from './components/charts/TwoBar'
 import BarChar from './components/charts/Bar'
 import { assignUrlToImage, getBarUrl, getUrlFromData } from './components/Helpers/UrlChart'
-import { Clump, Pointer } from './components/Clump'
+import { Clump, Pointer, Plane } from './components/Clump'
 import { Floor } from './components/Floor'
 
 const x = 0
@@ -31,7 +31,7 @@ const images = [
   { img: 0, meta: 'fLikes', position: [x + 2, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' },
   { img: 0, meta: 'fLikes', position: [x + 2 + 4, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'ffLikes' },
   { img: 0, meta: 'door', position: [0, 0, 1], rotation: [0, 0, 0], url: 'door-sam' },
-  { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'homey' },
+  // { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'homey' },
 
 
   { img: 0, meta: 'door', position: [4, 0, 1], rotation: [0, 0, 0], url: 'door-chan' },
@@ -60,6 +60,7 @@ function App() {
   }, [images])
 
 
+
   return <>
 
     {/* <Leva hidden /> */}
@@ -75,6 +76,7 @@ function App() {
       <Physics gravity={[0, 2, 0]} iterations={10}>
         <Pointer />
         <Clump />
+        <Plane />
       </Physics>
 
       <Floor />

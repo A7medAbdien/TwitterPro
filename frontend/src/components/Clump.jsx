@@ -1,5 +1,5 @@
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
-import { Physics, useSphere } from "@react-three/cannon"
+import { Physics, useSphere, usePlane } from "@react-three/cannon"
 import * as THREE from "three"
 
 const rfs = THREE.MathUtils.randFloatSpread
@@ -25,4 +25,13 @@ export function Pointer() {
     const viewport = useThree((state) => state.viewport)
     const [, api] = useSphere(() => ({ type: "Kinematic", args: [1], position: [0, 0, 0] }))
     return useFrame((state) => api.position.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 0))
+}
+
+export function Plane(props) {
+    const [ref] = usePlane(() => ({ position: [0, -2, 0], rotation: [-Math.PI / 2, 0, 0], ...props }))
+    return (
+        <mesh ref={ref}>
+            <planeGeometry args={[1, 1]} />
+        </mesh>
+    )
 }
