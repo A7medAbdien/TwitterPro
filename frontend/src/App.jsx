@@ -22,25 +22,41 @@ import { Floor } from './components/Floor'
 
 const termFreqUni = [
   // Back
-  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'tweets' },
-  { img: 0, meta: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'replies' },
+  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'TFUtweets' },
+  { img: 0, meta: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'TFUreplies' },
   // Left
-  { img: 0, meta: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
+  { img: 0, meta: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'TFUlikes' },
   // // Right
   { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'TFUfLikes' },
 ]
+
+const termFreqBi = [
+  // Back
+  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'BItweets' },
+  { img: 0, meta: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'BIreplies' },
+  // Left
+  { img: 0, meta: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'BIlikes' },
+  // // Right
+  { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'BIfLikes' },
+]
+
 const images = [
   {
     position: [-1, 0, -4],
+    rotation: [0, 0, 0],
     image: [...termFreqUni,
     { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
     { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
     ]
   },
-
-  // { img: 0, meta: 'fLikes', position: [2 + 4, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'ffLikes' },
-  // { img: 0, meta: 'door', position: [4, 0, 1], rotation: [0, 0, 0], url: 'door-chan' },
-  // { img: 0, meta: 'home', position: [4, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+  {
+    position: [4, 0, -4],
+    rotation: [0, 0, 0],
+    image: [...termFreqBi,
+    { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqBi' },
+    { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+    ]
+  },
 ]
 
 function App() {
