@@ -47,7 +47,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
                 clicked.current.parent.getWorldQuaternion(q)
             } else if (isOut(clicked)) {
                 setDoorClicked(false)
-                p.set(0, 0, 8)
+                p.set(0, 0, 7.5)
                 q.identity()
             } else {
                 clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25))
@@ -55,7 +55,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             }
         } else {
 
-            p.set(0, 0, 8)
+            p.set(0, 0, 7.5)
             q.identity()
         }
     })

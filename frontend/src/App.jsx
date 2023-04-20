@@ -38,42 +38,92 @@ const termFreqBi = [
   // // Right
   { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'BIfLikes' },
 ]
+const a = [
+  // Back
+  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'BItweets' },
+]
+const b = [
+  // Back
+  { img: 0, meta: 'tweets', position: [-1.2, 0, 1], rotation: [0, 0, 0], url: 'BItweets' },
+  { img: 0, meta: 'replies', position: [1.2, 0, 1], rotation: [0, 0, 0], url: 'BIreplies' },
+  // Left
+  { img: 0, meta: 'likes', position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: 'BIlikes' },
+  // // Right
+  { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'BIfLikes' },
+]
 
 
 
 function App() {
 
-  const { position, r } = useControls({
+  const { position: posA, r: rA } = useControls('Outer Doors', {
     position:
     {
-      value: { x: - 9, y: 2.5 },
+      value: { x: -8, y: 1.25 },
       step: 0.01,
-      // joystick: 'invertY'
     },
     r:
     {
       min: 0,
       max: 2 * Math.PI,
       step: 0.05,
-      value: 1.15,
+      value: 0.95,
+    },
+  })
+  const { position: posB, r: rB } = useControls('Inner Doors', {
+    position:
+    {
+      value: { x: -2.5, y: -2 },
+      step: 0.01,
+    },
+    r:
+    {
+      min: 0,
+      max: 2 * Math.PI,
+      step: 0.05,
+      value: 0.15,
     },
   })
 
   const images = [
     {
-      position: [-9, 0, 2.5],
-      rotation: [0, 1.15, 0],
-      image: [...termFreqUni,
-      { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
-      { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      position: [posA.x, 0, posA.y],
+      rotation: [0, rA, 0],
+      image: [
+        { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
+        { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
       ]
     },
     {
-      position: [9, 0, 2.5],
-      rotation: [0, -1.15, 0],
-      image: [...termFreqBi,
-      { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqBi' },
-      { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      position: [-posA.x, 0, posA.y],
+      rotation: [0, -rA, 0],
+      image: [
+        { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqBi' },
+        { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      ]
+    },
+    // {
+    //   position: [position.x, 0, position.y],
+    //   rotation: [0, r, 0],
+    //   image: [
+    //     { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-a' },
+    //     { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+    //   ]
+    // },
+    {
+      position: [posB.x, 0, posB.y],
+      rotation: [0, rB, 0],
+      image: [
+        { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-b' },
+        { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      ]
+    },
+    {
+      position: [-posB.x, 0, posB.y],
+      rotation: [0, -rB, 0],
+      image: [
+        { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-b' },
+        { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
       ]
     },
   ]
@@ -102,7 +152,7 @@ function App() {
   return <>
 
     {/* <Leva hidden /> */}
-    <Canvas dpr={[1, 1.5]} camera={{ fov: 90, position: [0, 2, 10] }}>
+    <Canvas dpr={[1, 1.5]} camera={{ fov: 90, position: [0, 2, 8] }}>
 
       <Perf position="top-left" />
       {/* <OrbitControls makeDefault /> */}
