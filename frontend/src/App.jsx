@@ -89,9 +89,9 @@ function App() {
     {
       position: [posA.x, 0, posA.y],
       rotation: [0, rA, 0],
-      image: [
-        { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
-        { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      image: [...termFreqUni,
+      { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
+      { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
       ]
     },
     {
@@ -155,7 +155,7 @@ function App() {
     <Canvas dpr={[1, 1.5]} camera={{ fov: 90, position: [0, 2, 8] }}>
 
       <Perf position="top-left" />
-      {/* <OrbitControls makeDefault /> */}
+      <OrbitControls makeDefault />
       <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
       <Experience />

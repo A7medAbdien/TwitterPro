@@ -43,7 +43,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             if (isDoor(clicked)) {
                 setDoor(clicked.current.name)
                 setDoorClicked(true)
-                clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 0))
+                clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, -3))
                 clicked.current.parent.getWorldQuaternion(q)
             } else if (isOut(clicked)) {
                 setDoorClicked(false)
@@ -60,8 +60,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         }
     })
     useFrame((state, dt) => {
-        easing.damp3(state.camera.position, p, 0.4, dt)
-        easing.dampQ(state.camera.quaternion, q, 0.4, dt)
+        // easing.damp3(state.camera.position, p, 0.4, dt)
+        // easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
     return (
         <group
