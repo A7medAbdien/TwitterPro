@@ -2,7 +2,7 @@ import Experience from './Experience'
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
 import { Debug, Physics, useSphere, usePlane } from "@react-three/cannon"
 import * as THREE from "three"
-
+import { Perf } from 'r3f-perf'
 import { Gallery } from './components/Gallery'
 import { Html, Environment, OrbitControls, MeshReflectorMaterial } from '@react-three/drei'
 import { Leva } from 'leva'
@@ -21,17 +21,21 @@ import { Floor } from './components/Floor'
 
 const x = 0
 const z = -4
-const images = [
+
+const termFreqUni = [
   // Back
-  { img: 0, meta: 'tweets', position: [x + -1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'tweets' },
-  { img: 0, meta: 'replies', position: [x + 1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'replies' },
+  { img: 0, meta: 'tweets', position: [-1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'tweets' },
+  { img: 0, meta: 'replies', position: [1.2, 0, 1 + z], rotation: [0, 0, 0], url: 'replies' },
   // Left
-  { img: 0, meta: 'likes', position: [x + -2, 0, 2.75 + z], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
+  { img: 0, meta: 'likes', position: [-2, 0, 2.75 + z], rotation: [0, Math.PI / 2.5, 0], url: 'likes' },
   // // Right
-  { img: 0, meta: 'fLikes', position: [x + 2, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' },
-  { img: 0, meta: 'fLikes', position: [x + 2 + 4, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'ffLikes' },
+  { img: 0, meta: 'fLikes', position: [2, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'fLikes' },
+  { img: 0, meta: 'fLikes', position: [2 + 4, 0, 2.75 + z], rotation: [0, -Math.PI / 2.5, 0], url: 'ffLikes' },
+]
+const images = [
+  ...termFreqUni,
   { img: 0, meta: 'door', position: [0, 0, 1], rotation: [0, 0, 0], url: 'door-sam' },
-  // { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'homey' },
+  { img: 0, meta: 'home', position: [0, 0, -1], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
 
 
   { img: 0, meta: 'door', position: [4, 0, 1], rotation: [0, 0, 0], url: 'door-chan' },
@@ -65,6 +69,8 @@ function App() {
 
     {/* <Leva hidden /> */}
     <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 10] }}>
+
+      {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
       <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
@@ -78,8 +84,8 @@ function App() {
         <Clump />
         <Plane />
       </Physics>
-
       <Floor />
+
 
       <Environment preset="city" />
     </Canvas>

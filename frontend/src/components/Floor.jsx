@@ -1,7 +1,7 @@
 import { MeshReflectorMaterial } from '@react-three/drei'
 
 export const Floor = () => (
-    <mesh position={[0, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+    <mesh position={[0, -0.5, -10]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
         <MeshReflectorMaterial
             blur={[300, 100]}
