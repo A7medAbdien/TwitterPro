@@ -5,8 +5,7 @@ import * as THREE from "three"
 import { Perf } from 'r3f-perf'
 import { Gallery } from './components/Gallery'
 import { Html, Environment, OrbitControls, MeshReflectorMaterial } from '@react-three/drei'
-import { Leva } from 'leva'
-
+import { Leva, useControls } from 'leva'
 import { useState, useEffect, useRef, useMemo } from 'react'
 
 import { FAll, FTweets, FReplies } from './components/Freq'
@@ -40,33 +39,51 @@ const termFreqBi = [
   { img: 0, meta: 'fLikes', position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: 'BIfLikes' },
 ]
 
-const images = [
-  {
-    position: [-1, 0, -4],
-    rotation: [0, 0, 0],
-    image: [...termFreqUni,
-    { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
-    { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
-    ]
-  },
-  {
-    position: [4, 0, -4],
-    rotation: [0, 0, 0],
-    image: [...termFreqBi,
-    { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqBi' },
-    { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
-    ]
-  },
-]
+
 
 function App() {
 
-  const [termFreqUni, setTermFreqUni] = useState([])
-  const [termFreqBi, setTermFreqBi] = useState([])
-  const [user, setUser] = useState([])
-  const [topic, setTopic] = useState([])
-  const [timeFreq, setTimeFreq] = useState([])
-  const [comm, setComm] = useState([])
+  const { position, r } = useControls({
+    position:
+    {
+      value: { x: - 9, y: 2.5 },
+      step: 0.01,
+      // joystick: 'invertY'
+    },
+    r:
+    {
+      min: 0,
+      max: 2 * Math.PI,
+      step: 0.05,
+      value: 1.15,
+    },
+  })
+
+  const images = [
+    {
+      position: [-9, 0, 2.5],
+      rotation: [0, 1.15, 0],
+      image: [...termFreqUni,
+      { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
+      { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      ]
+    },
+    {
+      position: [9, 0, 2.5],
+      rotation: [0, -1.15, 0],
+      image: [...termFreqBi,
+      { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqBi' },
+      { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      ]
+    },
+  ]
+
+  // const [termFreqUni, setTermFreqUni] = useState([])
+  // const [termFreqBi, setTermFreqBi] = useState([])
+  // const [user, setUser] = useState([])
+  // const [topic, setTopic] = useState([])
+  // const [timeFreq, setTimeFreq] = useState([])
+  // const [comm, setComm] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
 
@@ -85,9 +102,9 @@ function App() {
   return <>
 
     {/* <Leva hidden /> */}
-    <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 10] }}>
+    <Canvas dpr={[1, 1.5]} camera={{ fov: 90, position: [0, 2, 10] }}>
 
-      {/* <Perf position="top-left" /> */}
+      <Perf position="top-left" />
       {/* <OrbitControls makeDefault /> */}
       <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
