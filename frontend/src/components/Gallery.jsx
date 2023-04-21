@@ -49,10 +49,10 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
 
     const doorZ = (door) => {
         switch (door) {
-            case "door-termFreqUni":
+            case "door-TF":
                 console.log(door);
                 return [0, GOLDENRATIO / 2, -2.5]
-            case "door-b":
+            case "door-TT":
                 return [doorCamera.x, GOLDENRATIO / 2, doorCamera.y]
             default:
                 return [0, GOLDENRATIO / 2, , -3]

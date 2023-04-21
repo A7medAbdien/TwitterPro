@@ -169,7 +169,7 @@ export const imagess = () => {
             position: [posOuterDoor.x, 0, posOuterDoor.y],
             rotation: [0, rOuterDoor, 0],
             image: [...termFreq(),
-            { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
+            { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-TF' },
             { img: 0, meta: 'home', position: [0, 0, posOuterDoor.y], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
             ]
         },
@@ -185,17 +185,17 @@ export const imagess = () => {
             position: [posInnerDoor.x, 0, posInnerDoor.y],
             rotation: [0, rInnerDoor, 0],
             image: [...topicsTime(),
-            { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-b' },
+            { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-TT' },
             { img: 0, meta: 'home', position: [0, 0, -5], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
             ]
         },
-        // {
-        //   position: [-posInnerDoor.x, 0, posInnerDoor.y],
-        //   rotation: [0, -rInnerDoor, 0],
-        //   image: [
-        //     { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-b' },
-        //     { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
-        //   ]
-        // },
+        {
+            position: [-posInnerDoor.x, 0, posInnerDoor.y],
+            rotation: [0, -rInnerDoor, 0],
+            image: [
+                { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-b' },
+                { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+            ]
+        },
     ]
 }
