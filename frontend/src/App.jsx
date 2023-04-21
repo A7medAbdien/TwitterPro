@@ -153,7 +153,7 @@ function App() {
       rotation: [0, rOuterDoor, 0],
       image: [...termFreqUni,
       { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-termFreqUni' },
-      { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+      { img: 0, meta: 'home', position: [0, 0, posOuterDoor.y], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
       ]
     },
     // {
@@ -200,9 +200,9 @@ function App() {
   return <>
 
     {/* <Leva hidden /> */}
-    <Canvas dpr={[1, 1.5]} camera={{ fov: 90, position: [0, 2, 8] }}>
+    <Canvas dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
 
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
       <color attach="background" args={['#fff']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
