@@ -39,7 +39,7 @@ function App() {
 
   return <>
 
-    <Leva hidden />
+    <Leva />
     <Canvas dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
 
       {/* <Perf position="top-left" /> */}

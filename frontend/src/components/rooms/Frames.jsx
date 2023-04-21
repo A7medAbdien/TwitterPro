@@ -39,7 +39,7 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
             case "door-TT":
                 return [0, GOLDENRATIO / 2, -8.5]
             case "door-U":
-                return [0, GOLDENRATIO / 2, 0]
+                return [0, GOLDENRATIO / 2, -3]
             default:
                 return [doorCamera.x, GOLDENRATIO / 2, doorCamera.y]
         }
@@ -56,7 +56,8 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
                 clicked.current.parent.getWorldQuaternion(q)
             } else if (isOut(clicked)) {
                 setDoorClicked(false)
-                setDoor(null)
+                // setDoor(null)
+                setTimeout(setDoor, 500, null);
                 p.set(0, 0, 7.5)
                 q.identity()
             } else {
@@ -81,7 +82,6 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
 
             {images.map(({ image, position, rotation, door }, i) => (
                 <group key={i} position={position} rotation={rotation}>
-                    {console.log(door.url == DOOR)}
                     <Frame key={"i"} {...door} />
                     {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} /> /* prettier-ignore */)}
                 </group>
