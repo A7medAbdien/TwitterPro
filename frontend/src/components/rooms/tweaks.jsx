@@ -131,64 +131,6 @@ const topicsTime = () => {
         { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'TFBFLikes2' },
     ]
 }
-const commonTopics = () => {
-    const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('Common Topics', {
-        position:
-        {
-            value: { x: 0, y: -6.5 },
-            step: 0.1,
-        },
-        positionA:
-        {
-            value: { x: 1.1, y: 0.2 },
-            step: 0.1,
-        },
-        rA:
-        {
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-            value: 0,
-        },
-        positionC:
-        {
-            value: { x: 2.7, y: 1.3 },
-            step: 0.1,
-        },
-        rC:
-        {
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-            value: 1.05,
-        },
-        positionD:
-        {
-            value: { x: 3.4, y: 3.5 },
-            step: 0.1,
-        },
-        rD:
-        {
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-            value: 1.25,
-        },
-    })
-
-    return [
-        // Back
-        { img: 0, meta: 'tweets', position: [-positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, rA, 0], url: 'CTTweets' },
-        { img: 0, meta: 'replies', position: [positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, -rA, 0], url: 'CTReplies' },
-
-        // Left
-        { img: 0, meta: 'likes', position: [-positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, rC, 0], url: 'CTLikes' },
-        { img: 0, meta: 'fLikes', position: [positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, -rC, 0], url: 'CTFLikes' },
-        // // Right
-        { img: 0, meta: 'likes', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'CTLikes2' },
-        { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'CTFLikes2' },
-    ]
-}
 const users = () => {
     const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('U', {
         position:
@@ -247,8 +189,66 @@ const users = () => {
         { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'UFLikes2' },
     ]
 }
+const commonTopics = () => {
+    const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('Common Topics', {
+        position:
+        {
+            value: { x: 0, y: -6.5 },
+            step: 0.1,
+        },
+        positionA:
+        {
+            value: { x: 1.1, y: 0.2 },
+            step: 0.1,
+        },
+        rA:
+        {
+            min: -Math.PI,
+            max: Math.PI,
+            step: 0.05,
+            value: 0,
+        },
+        positionC:
+        {
+            value: { x: 2.7, y: 1.3 },
+            step: 0.1,
+        },
+        rC:
+        {
+            min: -Math.PI,
+            max: Math.PI,
+            step: 0.05,
+            value: 1.05,
+        },
+        positionD:
+        {
+            value: { x: 3.4, y: 3.5 },
+            step: 0.1,
+        },
+        rD:
+        {
+            min: -Math.PI,
+            max: Math.PI,
+            step: 0.05,
+            value: 1.25,
+        },
+    })
 
-export const imagess = () => {
+    return [
+        // Back
+        { img: 0, meta: 'tweets', position: [-positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, rA, 0], url: 'CTTweets' },
+        { img: 0, meta: 'replies', position: [positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, -rA, 0], url: 'CTReplies' },
+
+        // Left
+        { img: 0, meta: 'likes', position: [-positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, rC, 0], url: 'CTLikes' },
+        { img: 0, meta: 'fLikes', position: [positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, -rC, 0], url: 'CTFLikes' },
+        // // Right
+        { img: 0, meta: 'likes', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'CTLikes2' },
+        { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'CTFLikes2' },
+    ]
+}
+
+export const frames = () => {
     const { position: posOuterDoor, r: rOuterDoor } = useControls('Outer Doors', {
         position:
         {

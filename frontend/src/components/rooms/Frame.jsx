@@ -5,8 +5,8 @@ import { useCursor, MeshReflectorMaterial, Text, Environment, Html, BBAnchor } f
 import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
 import getUuid from 'uuid-by-string'
-import { VComm } from './VComm'
-import BarChar from './charts/Bar'
+import { VComm } from '../VComm'
+import BarChar from '../charts/Bar'
 import { useSpring, animated } from 'react-spring';
 
 

@@ -5,7 +5,7 @@ import { useCursor, MeshReflectorMaterial, Image, Text, Environment, Html } from
 import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
 import getUuid from 'uuid-by-string'
-import { VComm } from './VComm'
+import { VComm } from '../VComm'
 import { Frame } from './Frame'
 import { useControls } from 'leva'
 
@@ -13,12 +13,12 @@ import { useControls } from 'leva'
 const GOLDENRATIO = 1.5
 
 
-export const Gallery = ({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) => {
+export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) => {
     const ref = useRef()
     const clicked = useRef()
-    const door = useRef()
+    // const door = useRef()
     const [doorClicked, setDoorClicked] = useState(false)
-    const [DOOR, setDoor] = useState()
+    const [door, setDoor] = useState()
     const [, params] = useRoute('/:id')
     const [, setLocation] = useLocation()
 
@@ -76,8 +76,8 @@ export const Gallery = ({ images, q = new THREE.Quaternion(), p = new THREE.Vect
 
         <group
             ref={ref}
-            onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + DOOR : '/' : '/' + e.object.name))}
-            onPointerMissed={() => setLocation((doorClicked) ? '/' + DOOR : '/')}>
+            onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + door : '/' : '/' + e.object.name))}
+            onPointerMissed={() => setLocation((doorClicked) ? '/' + door : '/')}>
 
             {images.map(({ image, position, rotation }, i) => (
                 <group key={i} position={position} rotation={rotation}>
