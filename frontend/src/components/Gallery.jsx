@@ -24,8 +24,8 @@ export const Gallery = ({ images }) => (
 )
 const DOOR = "door"
 const HOME = "home"
-const isDoor = (ref) => (ref.current.name).includes(DOOR)
-const isOut = (ref) => (ref.current.name).includes(HOME)
+const isDoor = (ref) => ref.current && (ref.current.name).includes(DOOR)
+const isOut = (ref) => ref.current && (ref.current.name).includes(HOME)
 
 function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
     const ref = useRef()
