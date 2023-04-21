@@ -75,11 +75,12 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
             onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + DOOR : '/' : '/' + e.object.name))}
             onPointerMissed={() => setLocation((doorClicked) ? '/' + DOOR : '/')}>
 
-            {images.map(({ image, position, rotation, door }, i) => (
+            {images.map(({ image, position, rotation, door, home }, i) => (
 
                 <group key={i} position={position} rotation={rotation}>
                     <Frame key={"i"} {...door} />
-                    {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} /> /* prettier-ignore */)}
+                    {(home.meta == DOOR) && <Frame key={i} {...home} />}
+                    {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} />)}
                 </group>
             ))}
 

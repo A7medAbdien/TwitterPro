@@ -283,36 +283,32 @@ export const frames = () => {
         {
             position: [posOuterDoor.x, 0, posOuterDoor.y],
             rotation: [0, rOuterDoor, 0],
-            image: [...termFreq(),
-            // { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-TF' },
-            { img: 0, meta: 'home', position: [0, 0, posOuterDoor.y], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
-            ],
+            image: [...termFreq()],
+            home: { img: 0, meta: 'door-TF', position: [0, 0, 1.25], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
             door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-TF' }
-        },
-        {
-            position: [-posOuterDoor.x, 0, posOuterDoor.y],
-            rotation: [0, -rOuterDoor, 0],
-            image: [...commonTopics(),
-            { img: 0, meta: 'home', position: [0, 0, -2.5], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
-            ],
-            door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-CT' },
-        },
-        {
-            position: [-posInnerDoor.x, 0, posInnerDoor.y],
-            rotation: [0, -rInnerDoor, 0],
-            image: [...users(),
-            { img: 0, meta: 'home', position: [0, 0, 0], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
-            ],
-            door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-U' },
         },
         {
             position: [posInnerDoor.x, 0, posInnerDoor.y],
             rotation: [0, rInnerDoor, 0],
-            image: [...topicsTime(),
-            { img: 0, meta: 'home', position: [0, 0, -5], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
-            ],
+            image: [...topicsTime()],
+            home: { img: 0, meta: 'door-TT', position: [0, 0, -5], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
             door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-TT' },
         },
+        {
+            position: [-posInnerDoor.x, 0, posInnerDoor.y],
+            rotation: [0, -rInnerDoor, 0],
+            image: [...users()],
+            home: { img: 0, meta: 'door-U', position: [0, 0, 0], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+            door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-U' },
+        },
+        {
+            position: [-posOuterDoor.x, 0, posOuterDoor.y],
+            rotation: [0, -rOuterDoor, 0],
+            image: [...commonTopics()],
+            home: { img: 0, meta: 'door-CT', position: [0, 0, -2.5], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+            door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-CT' },
+        },
+
     ]
 }
 
