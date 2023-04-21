@@ -35,6 +35,19 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
     const [DOOR, setDoor] = useState()
     const [, params] = useRoute('/:id')
     const [, setLocation] = useLocation()
+
+    const doorZ = (door) => {
+        switch (door) {
+            case "door-termFreqUni":
+                console.log(door);
+                return [0, GOLDENRATIO / 2, , -3]
+            case "door-b":
+                console.log(door);
+                return [2, GOLDENRATIO / 2, -7]
+            default:
+                return -3
+        }
+    }
     useEffect(() => {
         clicked.current = ref.current.getObjectByName(params?.id)
         if (clicked.current) {
@@ -43,7 +56,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             if (isDoor(clicked)) {
                 setDoor(clicked.current.name)
                 setDoorClicked(true)
-                clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, -3))
+                clicked.current.parent.localToWorld(p.set(...doorZ(clicked.current.name)))
                 clicked.current.parent.getWorldQuaternion(q)
             } else if (isOut(clicked)) {
                 setDoorClicked(false)
@@ -54,7 +67,6 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
                 clicked.current.parent.getWorldQuaternion(q)
             }
         } else {
-
             p.set(0, 0, 7.5)
             q.identity()
         }

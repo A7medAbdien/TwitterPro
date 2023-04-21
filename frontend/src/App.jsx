@@ -56,10 +56,10 @@ function App() {
         <Clump />
         <Plane />
       </Physics> */}
-      <Floor />
-      {/* <mesh position={[0, -0.5, -10]} rotation={[-Math.PI / 2, 0, 0]}>
+      {/* <Floor /> */}
+      <mesh position={[0, -0.5, -10]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
-      </mesh> */}
+      </mesh>
 
 
       <Environment preset="city" />
