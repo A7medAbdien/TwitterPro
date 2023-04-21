@@ -41,7 +41,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         {
             position:
             {
-                value: { x: 0, y: -8 },
+                value: { x: 0, y: -8.5 },
                 step: 0.1,
             },
         }

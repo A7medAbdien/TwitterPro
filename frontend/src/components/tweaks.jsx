@@ -83,7 +83,7 @@ export const topicsTime = () => {
         },
         positionA:
         {
-            value: { x: 1.5, y: 1 },
+            value: { x: 1.1, y: 0.2 },
             step: 0.1,
         },
         rA:
@@ -95,7 +95,7 @@ export const topicsTime = () => {
         },
         positionC:
         {
-            value: { x: 3.8, y: 1.6 },
+            value: { x: 2.7, y: 1.3 },
             step: 0.1,
         },
         rC:
@@ -103,11 +103,11 @@ export const topicsTime = () => {
             min: -Math.PI,
             max: Math.PI,
             step: 0.05,
-            value: 1,
+            value: 1.05,
         },
         positionD:
         {
-            value: { x: 4.5, y: 3.7 },
+            value: { x: 3.4, y: 3.5 },
             step: 0.1,
         },
         rD:
