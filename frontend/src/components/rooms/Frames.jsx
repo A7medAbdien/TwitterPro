@@ -8,6 +8,7 @@ import getUuid from 'uuid-by-string'
 import { VComm } from '../VComm'
 import { Frame } from './Frame'
 import { useControls } from 'leva'
+import { doorCameraPosition } from './tweaks'
 
 
 const GOLDENRATIO = 1.5
@@ -22,27 +23,20 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
     const [, params] = useRoute('/:id')
     const [, setLocation] = useLocation()
 
-    const { position: doorCamera } = useControls('Door Camera',
-        {
-            position:
-            {
-                value: { x: 0, y: -5 },
-                step: 0.1,
-            },
-        }
-    )
+    // const { position: doorCamera } = useControls('Door Camera',
+    //     {
+    //         position:
+    //         {
+    //             value: { x: 0, y: -5 },
+    //             step: 0.1,
+    //         },
+    //     }
+    // )
 
-    const doorZ = (door) => {
-        switch (door) {
-            case "door-TF":
-                return [0, GOLDENRATIO / 2, -2.5]
-            case "door-TT":
-                return [0, GOLDENRATIO / 2, -8.5]
-            case "door-U":
-                return [0, GOLDENRATIO / 2, -3]
-            default:
-                return [doorCamera.x, GOLDENRATIO / 2, doorCamera.y]
-        }
+    const doorCameraPos = (door) => {
+        if (Object.keys(doorCameraPosition).includes(door))
+            return (doorCameraPosition[door])
+        else console.log("this door has no camera position")
     }
     useEffect(() => {
         clicked.current = ref.current.getObjectByName(params?.id)
@@ -52,7 +46,8 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
             if (isDoor(clicked)) {
                 setDoor(clicked.current.name)
                 setDoorClicked(true)
-                clicked.current.parent.localToWorld(p.set(...doorZ(clicked.current.name)))
+                doorCameraPos(clicked.current.name)
+                clicked.current.parent.localToWorld(p.set(...doorCameraPos(clicked.current.name)))
                 clicked.current.parent.getWorldQuaternion(q)
             } else if (isOut(clicked)) {
                 setDoorClicked(false)
@@ -81,6 +76,7 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
             onPointerMissed={() => setLocation((doorClicked) ? '/' + DOOR : '/')}>
 
             {images.map(({ image, position, rotation, door }, i) => (
+
                 <group key={i} position={position} rotation={rotation}>
                     <Frame key={"i"} {...door} />
                     {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} /> /* prettier-ignore */)}

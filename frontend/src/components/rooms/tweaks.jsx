@@ -315,3 +315,11 @@ export const frames = () => {
         },
     ]
 }
+
+const GOLDENRATIO = 1.5
+export const doorCameraPosition = {
+    "door-TF": [0, GOLDENRATIO / 2, -2.5],
+    "door-TT": [0, GOLDENRATIO / 2, -8.5],
+    "door-U": [0, GOLDENRATIO / 2, -3],
+    "door-CT": [0, GOLDENRATIO / 2, -5],
+}
