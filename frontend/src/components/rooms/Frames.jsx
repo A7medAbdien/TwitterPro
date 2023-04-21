@@ -18,7 +18,7 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
     const clicked = useRef()
     // const door = useRef()
     const [doorClicked, setDoorClicked] = useState(false)
-    const [door, setDoor] = useState()
+    const [DOOR, setDoor] = useState()
     const [, params] = useRoute('/:id')
     const [, setLocation] = useLocation()
 
@@ -35,7 +35,6 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
     const doorZ = (door) => {
         switch (door) {
             case "door-TF":
-                console.log(door);
                 return [0, GOLDENRATIO / 2, -2.5]
             case "door-TT":
                 return [0, GOLDENRATIO / 2, -8.5]
@@ -57,6 +56,7 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
                 clicked.current.parent.getWorldQuaternion(q)
             } else if (isOut(clicked)) {
                 setDoorClicked(false)
+                setDoor(null)
                 p.set(0, 0, 7.5)
                 q.identity()
             } else {
@@ -76,12 +76,14 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
 
         <group
             ref={ref}
-            onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + door : '/' : '/' + e.object.name))}
-            onPointerMissed={() => setLocation((doorClicked) ? '/' + door : '/')}>
+            onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + DOOR : '/' : '/' + e.object.name))}
+            onPointerMissed={() => setLocation((doorClicked) ? '/' + DOOR : '/')}>
 
-            {images.map(({ image, position, rotation }, i) => (
+            {images.map(({ image, position, rotation, door }, i) => (
                 <group key={i} position={position} rotation={rotation}>
-                    {image.map((props, i) => <Frame key={i} {...props} /> /* prettier-ignore */)}
+                    {console.log(door.url == DOOR)}
+                    <Frame key={"i"} {...door} />
+                    {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} /> /* prettier-ignore */)}
                 </group>
             ))}
 
