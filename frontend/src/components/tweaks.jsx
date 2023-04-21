@@ -1,61 +1,62 @@
 import { useControls } from 'leva'
 
 export const termFreq = () => {
-    const { position: posTF, positionA, rA, positionB, rB, positionC, rC, positionD, rD } = useControls('TF', {
-        position:
+    const { position: posTF, positionA, rA, positionB, rB, positionC, rC, positionD, rD } = useControls('TF',
         {
-            value: { x: 0, y: -6 },
-            step: 0.01,
-        },
-        positionA:
-        {
-            value: { x: 1.5, y: 1 },
-            step: 0.1,
-        },
-        rA:
-        {
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-            value: -0.2,
-        },
-        positionB:
-        {
-            value: { x: 4, y: 0.5 },
-            step: 0.1,
-        },
-        rB:
-        {
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-            value: -0.2,
-        },
-        positionC:
-        {
-            value: { x: 5.7, y: 1.5 },
-            step: 0.1,
-        },
-        rC:
-        {
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-            value: 1.24,
-        },
-        positionD:
-        {
-            value: { x: 6.5, y: 3.7 },
-            step: 0.1,
-        },
-        rD:
-        {
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-            value: 1.25,
-        },
-    })
+            position:
+            {
+                value: { x: 0, y: -6 },
+                step: 0.01,
+            },
+            positionA:
+            {
+                value: { x: 1.5, y: 1 },
+                step: 0.1,
+            },
+            rA:
+            {
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.05,
+                value: -0.2,
+            },
+            positionB:
+            {
+                value: { x: 4, y: 0.5 },
+                step: 0.1,
+            },
+            rB:
+            {
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.05,
+                value: -0.2,
+            },
+            positionC:
+            {
+                value: { x: 5.7, y: 1.5 },
+                step: 0.1,
+            },
+            rC:
+            {
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.05,
+                value: 1.24,
+            },
+            positionD:
+            {
+                value: { x: 6.5, y: 3.7 },
+                step: 0.1,
+            },
+            rD:
+            {
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.05,
+                value: 1.25,
+            },
+        })
 
     return [
         // Back
@@ -74,10 +75,10 @@ export const termFreq = () => {
 }
 
 export const topicsTime = () => {
-    const { position: posTF, positionA, rA, positionB, rB, positionC, rC, positionD, rD } = useControls('TT', {
+    const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('TT', {
         position:
         {
-            value: { x: 0, y: -6 },
+            value: { x: 0, y: -10 },
             step: 0.1,
         },
         positionA:
@@ -185,7 +186,7 @@ export const imagess = () => {
             rotation: [0, rInnerDoor, 0],
             image: [...topicsTime(),
             { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-b' },
-            { img: 0, meta: 'home', position: [0, 0, posInnerDoor.y], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+            { img: 0, meta: 'home', position: [0, 0, -5], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
             ]
         },
         // {

@@ -7,6 +7,7 @@ import { easing } from 'maath'
 import getUuid from 'uuid-by-string'
 import { VComm } from './VComm'
 import { Frame } from './Frame'
+import { useControls } from 'leva'
 
 
 const GOLDENRATIO = 1.5
@@ -36,16 +37,25 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
     const [, params] = useRoute('/:id')
     const [, setLocation] = useLocation()
 
+    const { position: doorCamera } = useControls('Door Camera',
+        {
+            position:
+            {
+                value: { x: 0, y: -8 },
+                step: 0.1,
+            },
+        }
+    )
+
     const doorZ = (door) => {
         switch (door) {
             case "door-termFreqUni":
                 console.log(door);
-                return [0, GOLDENRATIO / 2, , -3]
+                return [0, GOLDENRATIO / 2, -2.5]
             case "door-b":
-                console.log(door);
-                return [2, GOLDENRATIO / 2, -7]
+                return [doorCamera.x, GOLDENRATIO / 2, doorCamera.y]
             default:
-                return -3
+                return [0, GOLDENRATIO / 2, , -3]
         }
     }
     useEffect(() => {
