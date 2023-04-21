@@ -53,9 +53,11 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
                 console.log(door);
                 return [0, GOLDENRATIO / 2, -2.5]
             case "door-TT":
-                return [doorCamera.x, GOLDENRATIO / 2, doorCamera.y]
+                return [0, GOLDENRATIO / 2, -8.5]
+            case "door-U":
+                return [0, GOLDENRATIO / 2, 0]
             default:
-                return [0, GOLDENRATIO / 2, , -3]
+                return [doorCamera.x, GOLDENRATIO / 2, doorCamera.y]
         }
     }
     useEffect(() => {

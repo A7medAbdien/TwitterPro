@@ -1,6 +1,6 @@
 import { useControls } from 'leva'
 
-export const termFreq = () => {
+const termFreq = () => {
     const { position: posTF, positionA, rA, positionB, rB, positionC, rC, positionD, rD } = useControls('TF',
         {
             position:
@@ -74,7 +74,7 @@ export const termFreq = () => {
     ]
 }
 
-export const topicsTime = () => {
+const topicsTime = () => {
     const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('TT', {
         position:
         {
@@ -130,6 +130,64 @@ export const topicsTime = () => {
         // // Right
         { img: 0, meta: 'likes', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'TFBLikes2' },
         { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'TFBFLikes2' },
+    ]
+}
+const users = () => {
+    const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('U', {
+        position:
+        {
+            value: { x: 0, y: -1.5 },
+            step: 0.1,
+        },
+        positionA:
+        {
+            value: { x: 1.1, y: 0.2 },
+            step: 0.1,
+        },
+        rA:
+        {
+            min: -Math.PI,
+            max: Math.PI,
+            step: 0.05,
+            value: 0,
+        },
+        positionC:
+        {
+            value: { x: 2.7, y: 1.3 },
+            step: 0.1,
+        },
+        rC:
+        {
+            min: -Math.PI,
+            max: Math.PI,
+            step: 0.05,
+            value: 1.05,
+        },
+        positionD:
+        {
+            value: { x: 3.4, y: 3.5 },
+            step: 0.1,
+        },
+        rD:
+        {
+            min: -Math.PI,
+            max: Math.PI,
+            step: 0.05,
+            value: 1.25,
+        },
+    })
+
+    return [
+        // Back
+        { img: 0, meta: 'tweets', position: [-positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, rA, 0], url: 'UTweets' },
+        { img: 0, meta: 'replies', position: [positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, -rA, 0], url: 'UReplies' },
+
+        // Left
+        { img: 0, meta: 'likes', position: [-positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, rC, 0], url: 'ULikes' },
+        { img: 0, meta: 'fLikes', position: [positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, -rC, 0], url: 'UFLikes' },
+        // // Right
+        { img: 0, meta: 'likes', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'ULikes2' },
+        { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'UFLikes2' },
     ]
 }
 
@@ -192,9 +250,9 @@ export const imagess = () => {
         {
             position: [-posInnerDoor.x, 0, posInnerDoor.y],
             rotation: [0, -rInnerDoor, 0],
-            image: [
-                { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-b' },
-                { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
+            image: [...users(),
+            { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-U' },
+            { img: 0, meta: 'home', position: [0, 0, 3], rotation: [-Math.PI / 2, 0, 0], url: 'home' },
             ]
         },
     ]

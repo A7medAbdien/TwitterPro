@@ -44,8 +44,8 @@ function App() {
 
       {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
-      <color attach="background" args={['#fff']} />
-      <fog attach="fog" args={['#191920', 0, 15]} />
+      {/* <color attach="background" args={['#191920']} /> */}
+      {/* <fog attach="fog" args={['#191920', 0, 15]} /> */}
       <Experience />
       {!isLoading && (
         <Gallery images={images} />
