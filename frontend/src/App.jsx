@@ -44,8 +44,8 @@ function App() {
 
       {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
-      {/* <color attach="background" args={['#191920']} /> */}
-      {/* <fog attach="fog" args={['#191920', 0, 15]} /> */}
+      <color attach="background" args={['#191920']} />
+      <fog attach="fog" args={['#191920', 0, 15]} />
       <Experience />
       {!isLoading && (
         <Gallery images={images} />
@@ -56,10 +56,10 @@ function App() {
         <Clump />
         <Plane />
       </Physics> */}
-      {/* <Floor /> */}
-      <mesh position={[0, -0.5, -10]} rotation={[-Math.PI / 2, 0, 0]}>
+      <Floor />
+      {/* <mesh position={[0, -0.5, -10]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
-      </mesh>
+      </mesh> */}
 
 
       <Environment preset="city" />
