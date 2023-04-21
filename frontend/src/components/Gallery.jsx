@@ -13,22 +13,7 @@ import { useControls } from 'leva'
 const GOLDENRATIO = 1.5
 
 
-export const Gallery = ({ images }) => (
-
-    <group position={[0, -0.5, 0]}>
-
-        <Frames images={images} />
-
-
-    </group>
-
-)
-const DOOR = "door"
-const HOME = "home"
-const isDoor = (ref) => ref.current && (ref.current.name).includes(DOOR)
-const isOut = (ref) => ref.current && (ref.current.name).includes(HOME)
-
-function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
+export const Gallery = ({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) => {
     const ref = useRef()
     const clicked = useRef()
     const door = useRef()
@@ -87,7 +72,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
         easing.damp3(state.camera.position, p, 0.4, dt)
         easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
-    return (
+    return <group position={[0, -0.5, 0]}>
+
         <group
             ref={ref}
             onClick={(e) => (e.stopPropagation(), setLocation((clicked.current === e.object) ? (doorClicked) ? '/' + DOOR : '/' : '/' + e.object.name))}
@@ -100,5 +86,10 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
             ))}
 
         </group>
-    )
+    </group>
 }
+
+const DOOR = "door"
+const HOME = "home"
+const isDoor = (ref) => ref.current && (ref.current.name).includes(DOOR)
+const isOut = (ref) => ref.current && (ref.current.name).includes(HOME)
