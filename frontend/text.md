@@ -1,10 +1,13 @@
 # Intro
 
-Hi, It seems that data analysis is another way of saying that could be a good stalker.
+Hi,
 
 This website "analyze" Elon Mask Twitter account, but it can works on any other account.
 
 There is no specific goal for the website, except FUN and I am a fan of Elon. So, I would like to know more about him.
+
+A Great man said:
+Saying that you have data analysis skills is another way of saying that could be a good stalker.
 
 Some constraints on the data:
 
