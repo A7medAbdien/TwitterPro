@@ -4,9 +4,11 @@ import { Debug, Physics, useSphere, usePlane } from "@react-three/cannon"
 import * as THREE from "three"
 import { Perf } from 'r3f-perf'
 import { Frames } from './components/rooms/Frames'
-import { Html, Environment, OrbitControls, MeshReflectorMaterial } from '@react-three/drei'
+import { Html, Environment, OrbitControls, MeshReflectorMaterial, useGLTF, useAnimations, Stage, Clone } from '@react-three/drei'
 import { Leva, useControls } from 'leva'
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, Suspense, useLayoutEffect } from 'react'
+
+
 
 import { FAll, FTweets, FReplies } from './components/Freq'
 // import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api'
@@ -20,8 +22,28 @@ import { Floor } from './components/rooms/Floor'
 import { frames } from './components/rooms/tweaks'
 
 
-function App() {
+useGLTF.preload("/robot-draco.glb");
+function Model(props) {
+  const { scene, animations, materials } = useGLTF('/robot-draco.glb')
+  const { actions } = useAnimations(animations, scene)
 
+  useLayoutEffect(() => {
+    Object.values(materials).forEach((material) => {
+      material.roughness = 0.2
+      material.metalness = 0.1
+      material.envMapIntensity = 2
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log(actions);
+    actions.Wave.play().setDuration(2.8)
+    scene.traverse((obj) => obj.isMesh)
+  }, [actions, scene])
+  return <primitive position={[0, -0.4, 6]} envMapIntensity={5} scale={0.2} object={scene} {...props} />
+}
+
+function App() {
 
   const [isLoading, setIsLoading] = useState(false)
   const images = frames()
@@ -39,13 +61,20 @@ function App() {
 
   return <>
 
-    <Leva />
+    <Leva collapsed />
     <Canvas dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
 
       {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
       <color attach="background" args={['#191920']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
+
+      <Suspense fallback={null}>
+        {/* <Stage contactShadow={{ opacity: 1, blur: 2 }}> */}
+        <Model />
+        {/* </Stage> */}
+      </Suspense>
+
       <Experience />
       {!isLoading && (
         <Frames images={images} />
