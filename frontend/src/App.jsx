@@ -20,31 +20,12 @@ import { assignUrlToImage, getBarUrl, getUrlFromData } from './components/Helper
 import { Clump, Pointer, Plane } from './components/Clump'
 import { Floor } from './components/rooms/Floor'
 import { frames } from './components/rooms/tweaks'
+import { Model } from './components/Robot'
 
-
-useGLTF.preload("/robot-draco.glb");
-function Model(props) {
-  const { scene, animations, materials } = useGLTF('/robot-draco.glb')
-  const { actions } = useAnimations(animations, scene)
-
-  useLayoutEffect(() => {
-    Object.values(materials).forEach((material) => {
-      material.roughness = 0.2
-      material.metalness = 0.1
-      material.envMapIntensity = 2
-    })
-  }, [])
-
-  useEffect(() => {
-    console.log(actions);
-    actions.Wave.play().setDuration(2.8)
-    scene.traverse((obj) => obj.isMesh)
-  }, [actions, scene])
-  return <primitive position={[0, -0.4, 6]} envMapIntensity={5} scale={0.2} object={scene} {...props} />
-}
 
 function App() {
 
+  const ro = useRef()
   const [isLoading, setIsLoading] = useState(false)
   const images = frames()
 
@@ -71,7 +52,8 @@ function App() {
 
       <Suspense fallback={null}>
         {/* <Stage contactShadow={{ opacity: 1, blur: 2 }}> */}
-        <Model />
+        <Model ref={ro} />
+
         {/* </Stage> */}
       </Suspense>
 
