@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo, Suspense, useLayoutEffect } from 'react'
-import { Html, Environment, OrbitControls, MeshReflectorMaterial, useGLTF, useAnimations, Stage, Clone } from '@react-three/drei'
+import { Text, Html, Environment, OrbitControls, MeshReflectorMaterial, useGLTF, useAnimations, Stage, Clone, Plane } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
 
@@ -41,45 +41,26 @@ export function Model(props) {
 
     }, [actions, scene])
 
-    return <><group>
-        <primitive position={[0, -0.4, 6]} envMapIntensity={5} scale={0.2} object={scene} {...props} />
-        {/* <Annotation
-            scale={0.5}
-            position={[0, 0, 6]}>
-            <h1>HI</h1>
-        </Annotation> */}
-        {/* <Html
-            position={[0, 0, 6]}
-        >
-        </Html> */}
-        <Html
-            scale={0.5}
-            position={[0.2, 0.5, 6]}
-            transform
-            occlude="blending"
+    return <><group scale={0.2} position={[0, -0.4, 6]}>
+        <primitive envMapIntensity={5} object={scene} {...props} />
+        <Text
 
+            color={'#CBA55D'}
+            fontSize={0.5}
+            maxWidth={6}
+            lineHeight={1}
+            letterSpacing={0.02}
+            textAlign={'center'}
+            font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+            anchorX="left"
+            anchorY="middle"
+            position={[0, 5, 0]}
         >
-            <div className="annotation"><h1>HI</h1></div>
-        </Html>
+            If you wanna get back..
+            Click me!
+        </Text>
     </group>
     </>
 }
 
 
-function Annotation({ children, ...props }) {
-    return (
-        <Html
-            {...props}
-            transform
-            occlude="blending"
-            geometry={
-                /** The geometry is optional, it allows you to use any shape.
-                 *  By default it would be a plane. We need round edges here ...
-                 */
-                <planeGeometry args={[1.66, 0.47, 0.24]} />
-            }>
-            <h1>HI</h1>
-            <div className="annotation">{children}</div>
-        </Html>
-    )
-}
