@@ -25,7 +25,6 @@ import { Model } from './components/Robot'
 
 function App() {
 
-  const ro = useRef()
   const [isLoading, setIsLoading] = useState(false)
   const images = frames()
 
@@ -52,8 +51,7 @@ function App() {
 
       <Suspense fallback={null}>
         {/* <Stage contactShadow={{ opacity: 1, blur: 2 }}> */}
-        <Model ref={ro} />
-
+        <Model />
         {/* </Stage> */}
       </Suspense>
 
