@@ -1,14 +1,20 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
-import { Text, useGLTF, useAnimations } from '@react-three/drei'
+import { Text, useGLTF, useAnimations, useCursor } from '@react-three/drei'
 import { useControls } from 'leva';
 
 
 useGLTF.preload("/robot-draco.glb");
-export function Robot(props) {
+export function Robot({ url, ...props }) {
     const { scene, animations, materials } = useGLTF('/robot-draco.glb')
     const { actions } = useAnimations(animations, scene)
     const [actionName, setAction] = useState("Idle")
+    const [hovered, hover] = useState(false)
+    const name = url
+    useCursor(hovered)
 
+    // const { actionName } = useControls({
+    //     actionName: { options: Object.keys(actions) }
+    // })
 
     useLayoutEffect(() => {
         Object.values(materials).forEach((material) => {
@@ -18,27 +24,32 @@ export function Robot(props) {
         })
     }, [])
 
-    // const { actionName } = useControls({
-    //     actionName: { options: Object.keys(actions) }
-    // })
-
     useEffect(() => {
 
-        const action = actions[actionName]
-        action.reset().fadeIn(0.5).play().setDuration(3)
+        // const action = actions[actionName]
+        // action.reset().fadeIn(0.5).play().setDuration(3)
 
-        const intervalId = setInterval(() => {
-            actionName == "Idle" ? setAction("Wave") : setAction("Idle")
-        }, actionName == "Idle" ? 9000 : 2500);
-        return () => {
-            action.fadeOut(0.5)
-            clearInterval(intervalId)
-        }
+        // const intervalId = setInterval(() => {
+        //     actionName == "Idle" ? setAction("Wave") : setAction("Idle")
+        // }, actionName == "Idle" ? 9000 : 2500)
+        // return () => {
+        //     action.fadeOut(0.5)
+        //     clearInterval(intervalId)
+        // }
 
     }, [actionName])
 
-    return <><group scale={0.15} position={[0, -0.5, 6]}>
-        <primitive envMapIntensity={5} object={scene} {...props} />
+    return <><group {...props} >
+
+        <mesh
+            name={name}
+            onPointerOver={(e) => (e.stopPropagation(), hover(true))}
+            onPointerOut={() => hover(false)}
+        >
+            <group>
+                <primitive envMapIntensity={5} object={scene} />
+            </group>
+        </mesh>
         {actionName == "Wave" && <RobotText />}
     </group>
     </>

@@ -9,6 +9,7 @@ import { VComm } from '../VComm'
 import { Frame } from './Frame'
 import { useControls } from 'leva'
 import { doorCameraPosition } from './tweaks'
+import { Robot } from '../Robot'
 
 
 const GOLDENRATIO = 1.5
@@ -65,8 +66,8 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
         }
     })
     useFrame((state, dt) => {
-        // easing.damp3(state.camera.position, p, 0.4, dt)
-        // easing.dampQ(state.camera.quaternion, q, 0.4, dt)
+        easing.damp3(state.camera.position, p, 0.4, dt)
+        easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
     return <group position={[0, -0.5, 0]}>
 
@@ -78,8 +79,12 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
             {images.map(({ image, position, rotation, door, home }, i) => (
 
                 <group key={i} position={position} rotation={rotation}>
+                    {/* Door */}
                     <Frame key={"i"} {...door} />
+                    {/* Home */}
+                    {/* {(home.meta == DOOR) && <Robot scale={0.15} key={i} {...home} />} */}
                     {(home.meta == DOOR) && <Frame key={i} {...home} />}
+                    {/* Frames */}
                     {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} />)}
                 </group>
             ))}
