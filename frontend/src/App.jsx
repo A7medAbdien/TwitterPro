@@ -20,7 +20,7 @@ import { assignUrlToImage, getBarUrl, getUrlFromData } from './components/Helper
 import { Clump, Pointer, Plane } from './components/Clump'
 import { Floor } from './components/rooms/Floor'
 import { frames } from './components/rooms/tweaks'
-import { Model } from './components/Robot'
+import { Robot } from './components/Robot'
 
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
       <fog attach="fog" args={['#191920', 0, 15]} />
 
       <Suspense fallback={null}>
-        <Model />
+        <Robot />
       </Suspense>
 
       <Experience />

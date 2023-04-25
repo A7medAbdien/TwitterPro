@@ -1,21 +1,14 @@
-import { useState, useEffect, useRef, useMemo, Suspense, useLayoutEffect } from 'react'
-import { Text, Html, Environment, OrbitControls, MeshReflectorMaterial, useGLTF, useAnimations, Stage, Clone, Plane } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber';
+import { useState, useEffect, useLayoutEffect } from 'react'
+import { Text, useGLTF, useAnimations } from '@react-three/drei'
+import { useControls } from 'leva';
 
 
 useGLTF.preload("/robot-draco.glb");
-export function Model(props) {
+export function Robot(props) {
     const { scene, animations, materials } = useGLTF('/robot-draco.glb')
     const { actions } = useAnimations(animations, scene)
+    const [actionName, setAction] = useState("Idle")
 
-    const waving = () => {
-        actions.Wave.fadeIn(0.8)
-        actions.Wave.play().setDuration(2.5)
-        setTimeout(() => {
-            actions.Wave.fadeOut(0.5)
-            actions.Wave.stop()
-        }, 2500);
-    }
 
     useLayoutEffect(() => {
         Object.values(materials).forEach((material) => {
@@ -25,42 +18,48 @@ export function Model(props) {
         })
     }, [])
 
+    // const { actionName } = useControls({
+    //     actionName: { options: Object.keys(actions) }
+    // })
+
     useEffect(() => {
-        actions.Idle.fadeIn()
-        actions.Idle.play().setDuration(5)
-        scene.traverse((obj) => obj.isMesh)
+
+        const action = actions[actionName]
+        action.reset().fadeIn(0.5).play().setDuration(3)
 
         const intervalId = setInterval(() => {
-            waving()
-        }, 5000);
-
-        // Clean up the interval when the component unmounts
+            actionName == "Idle" ? setAction("Wave") : setAction("Idle")
+        }, actionName == "Idle" ? 9000 : 2500);
         return () => {
-            clearInterval(intervalId);
-        };
+            action.fadeOut(0.5)
+            clearInterval(intervalId)
+        }
 
-    }, [actions, scene])
+    }, [actionName])
 
-    return <><group scale={0.2} position={[0, -0.4, 6]}>
+    return <><group scale={0.15} position={[0, -0.5, 6]}>
         <primitive envMapIntensity={5} object={scene} {...props} />
-        <Text
-
-            color={'#CBA55D'}
-            fontSize={0.5}
-            maxWidth={6}
-            lineHeight={1}
-            letterSpacing={0.02}
-            textAlign={'center'}
-            font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
-            anchorX="left"
-            anchorY="middle"
-            position={[0, 5, 0]}
-        >
-            If you wanna get back..
-            Click me!
-        </Text>
+        {actionName == "Wave" && <RobotText />}
     </group>
     </>
 }
 
+const RobotText = (props) => {
+    return <Text
+        color={'#CBA55D'}
+        fontSize={0.5}
+        maxWidth={6}
+        lineHeight={1}
+        letterSpacing={0.02}
+        textAlign={'center'}
+        font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+        anchorX="left"
+        anchorY="middle"
+        position={[0, 5, 0]}
+        {...props}
+    >
+        If you wanna get back..
+        Click me!
+    </Text>
+}
 
