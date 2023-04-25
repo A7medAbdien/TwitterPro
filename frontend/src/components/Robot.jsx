@@ -41,5 +41,45 @@ export function Model(props) {
 
     }, [actions, scene])
 
-    return <primitive position={[0, -0.4, 6]} envMapIntensity={5} scale={0.2} object={scene} {...props} />
+    return <><group>
+        <primitive position={[0, -0.4, 6]} envMapIntensity={5} scale={0.2} object={scene} {...props} />
+        {/* <Annotation
+            scale={0.5}
+            position={[0, 0, 6]}>
+            <h1>HI</h1>
+        </Annotation> */}
+        {/* <Html
+            position={[0, 0, 6]}
+        >
+        </Html> */}
+        <Html
+            scale={0.5}
+            position={[0.2, 0.5, 6]}
+            transform
+            occlude="blending"
+
+        >
+            <div className="annotation"><h1>HI</h1></div>
+        </Html>
+    </group>
+    </>
+}
+
+
+function Annotation({ children, ...props }) {
+    return (
+        <Html
+            {...props}
+            transform
+            occlude="blending"
+            geometry={
+                /** The geometry is optional, it allows you to use any shape.
+                 *  By default it would be a plane. We need round edges here ...
+                 */
+                <planeGeometry args={[1.66, 0.47, 0.24]} />
+            }>
+            <h1>HI</h1>
+            <div className="annotation">{children}</div>
+        </Html>
+    )
 }

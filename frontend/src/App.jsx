@@ -45,14 +45,12 @@ function App() {
     <Canvas dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
 
       {/* <Perf position="top-left" /> */}
-      {/* <OrbitControls makeDefault /> */}
+      <OrbitControls makeDefault />
       <color attach="background" args={['#191920']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
       <Suspense fallback={null}>
-        {/* <Stage contactShadow={{ opacity: 1, blur: 2 }}> */}
         <Model />
-        {/* </Stage> */}
       </Suspense>
 
       <Experience />
