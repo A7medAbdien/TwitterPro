@@ -44,14 +44,11 @@ function App() {
     <Leva collapsed />
     <Canvas dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
 
-      {/* <Perf position="top-left" /> */}
+      <Perf position="top-left" />
       {/* <OrbitControls makeDefault /> */}
       <color attach="background" args={['#191920']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
-      <Suspense fallback={null}>
-        <Robot scale={0.15} position={[0, -0.5, 6]} />
-      </Suspense>
 
       <Experience />
       {!isLoading && (

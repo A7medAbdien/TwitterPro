@@ -7,17 +7,17 @@ useGLTF.preload("/robot-draco.glb");
 export function Robot({ url, ...props }) {
     const { scene, animations, materials } = useGLTF('/robot-draco.glb')
     const { actions } = useAnimations(animations, scene)
-    const [actionName, setAction] = useState("Idle")
+    let stableState = "Idle"
+    const [actionName, setAction] = useState(stableState)
     const [hovered, hover] = useState(false)
     const name = url
     useCursor(hovered)
 
-    // const { actionName } = useControls({
-    //     actionName: { options: Object.keys(actions) }
-    // })
+    const { actionNam } = useControls('Robot-Chan', {
+        actionNam: { options: Object.keys(actions) }
+    })
 
     useLayoutEffect(() => {
-        console.log(scene);
         Object.values(materials).forEach((material) => {
             material.roughness = 0.2
             material.metalness = 0.1
@@ -27,16 +27,16 @@ export function Robot({ url, ...props }) {
 
     useEffect(() => {
 
-        // const action = actions[actionName]
-        // action.reset().fadeIn(0.5).play().setDuration(3)
+        const action = actions[actionName]
+        action.reset().fadeIn(1).play().setDuration(3)
 
-        // const intervalId = setInterval(() => {
-        //     actionName == "Idle" ? setAction("Wave") : setAction("Idle")
-        // }, actionName == "Idle" ? 9000 : 2500)
-        // return () => {
-        //     action.fadeOut(0.5)
-        //     clearInterval(intervalId)
-        // }
+        setTimeout(() => {
+            stableState = "Dance"
+            setAction(stableState)
+        }, 20000);
+        return () => {
+            action.fadeOut(1)
+        }
 
     }, [actionName])
 
@@ -44,8 +44,8 @@ export function Robot({ url, ...props }) {
 
         <mesh
             name={name}
-            onPointerOver={(e) => (e.stopPropagation(), hover(true))}
-            onPointerOut={() => hover(false)}
+            onPointerOver={(e) => (e.stopPropagation(), setAction("Wave"), hover(true))}
+            onPointerOut={() => setAction(stableState)}
         >
             <group>
                 <primitive envMapIntensity={5} object={scene} />
