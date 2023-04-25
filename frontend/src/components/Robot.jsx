@@ -17,6 +17,7 @@ export function Robot({ url, ...props }) {
     // })
 
     useLayoutEffect(() => {
+        console.log(scene);
         Object.values(materials).forEach((material) => {
             material.roughness = 0.2
             material.metalness = 0.1

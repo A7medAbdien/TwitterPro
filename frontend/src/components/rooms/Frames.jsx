@@ -82,8 +82,8 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
                     {/* Door */}
                     <Frame key={"i"} {...door} />
                     {/* Home */}
-                    {/* {(home.meta == DOOR) && <Robot scale={0.15} key={i} {...home} />} */}
-                    {(home.meta == DOOR) && <Frame key={i} {...home} />}
+                    {(home.meta == DOOR) && <Robot scale={0.15} key={i} {...home} />}
+                    {/* {(home.meta == DOOR) && <Frame key={i} {...home} />} */}
                     {/* Frames */}
                     {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} />)}
                 </group>
@@ -96,4 +96,16 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
 const DOOR = "door"
 const HOME = "home"
 const isDoor = (ref) => ref.current && (ref.current.name).includes(DOOR)
-const isOut = (ref) => ref.current && (ref.current.name).includes(HOME)
+const isOut = (ref) => ref.current && hasParentWithNameContainingHome(ref.current)
+
+function hasParentWithNameContainingHome(object) {
+    if (object.parent) {
+        if (object.parent.name && object.parent.name.toLowerCase().includes(HOME)) {
+            return true;
+        } else {
+            return hasParentWithNameContainingHome(object.parent);
+        }
+    } else {
+        return false;
+    }
+}
