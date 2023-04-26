@@ -1,63 +1,30 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
-import { Text, useGLTF, useAnimations, useCursor } from '@react-three/drei'
+import { Text, useGLTF, useAnimations, useTexture, useCursor } from '@react-three/drei'
 import { useControls } from 'leva';
 
 
 useGLTF.preload("/portal.glb");
 export function Door({ url, ...props }) {
-    const { nodes } = useGLTF('/portal.glb')
-    // const { actions } = useAnimations(animations, scene)
-    // let stableState = "Idle"
-    // const [actionName, setAction] = useState(stableState)
-    const [hovered, hover] = useState(false)
+
     const name = url
-    useCursor(hovered)
-
-    // const { actionNam } = useControls('Robot-Chan', {
-    //     actionNam: { options: Object.keys(actions) }
-    // })
-
-    // useLayoutEffect(() => {
-    //     Object.values(materials).forEach((material) => {
-    //         material.roughness = 0.2
-    //         material.metalness = 0.1
-    //         material.envMapIntensity = 2
-    //     })
-    // }, [])
-
-    // useEffect(() => {
-
-    //     const action = actions[actionName]
-    //     action.reset().fadeIn(1).play().setDuration(3)
-
-    //     setTimeout(() => {
-    //         stableState = "Dance"
-    //         setAction(stableState)
-    //     }, 20000);
-    //     return () => {
-    //         action.fadeOut(1)
-    //     }
-
-    // }, [actionName])
+    const { nodes } = useGLTF('/portal.glb')
+    const bakedTexture = useTexture('./baked.jpg')
+    bakedTexture.flipY = false
 
     useEffect(() => {
-        console.log(nodes)
+        // console.log(nodes)
     }, [])
 
     return <>
-        {/* <group {...props} >
 
-        <mesh
-            name={name}
-            onPointerOver={(e) => (e.stopPropagation(), hover(true))}
-            onPointerOut={() => hover(false)}
-        >
-            <group>
-                <primitive envMapIntensity={5} object={scene} />
-            </group>
-        </mesh>
-        <RobotText />
-    </group> */}
+
+
+        <group position={[0, -0.5, 6]} {...props} >
+            <mesh geometry={nodes.baked.geometry}>
+                <meshBasicMaterial map={bakedTexture} />
+            </mesh>
+            <RobotText />
+        </group>
     </>
 }
 
@@ -70,9 +37,9 @@ const RobotText = (props) => {
         letterSpacing={0.02}
         textAlign={'center'}
         font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
-        anchorX="left"
+        anchorX="center"
         anchorY="middle"
-        position={[0, 5, 0]}
+        position={[0, 2, -2]}
         {...props}
     >
         If you wanna get back..

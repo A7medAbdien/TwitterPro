@@ -43,7 +43,7 @@ function App() {
   return <>
 
     <Leva collapsed />
-    <Canvas dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
+    <Canvas flat dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
 
       <Perf position="top-left" />
       <OrbitControls makeDefault />
