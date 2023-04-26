@@ -66,8 +66,8 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
         }
     })
     useFrame((state, dt) => {
-        easing.damp3(state.camera.position, p, 0.4, dt)
-        easing.dampQ(state.camera.quaternion, q, 0.4, dt)
+        // easing.damp3(state.camera.position, p, 0.4, dt)
+        // easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
     return <group position={[0, -0.5, 0]}>
 

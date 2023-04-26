@@ -21,6 +21,7 @@ import { Clump, Pointer, Plane } from './components/Clump'
 import { Floor } from './components/rooms/Floor'
 import { frames } from './components/rooms/tweaks'
 import { Robot } from './components/Robot'
+import { Door } from './components/Door'
 
 
 function App() {
@@ -45,11 +46,11 @@ function App() {
     <Canvas dpr={[1, 1.5]} camera={{ fov: 95, position: [0, 2, 8] }}>
 
       <Perf position="top-left" />
-      {/* <OrbitControls makeDefault /> */}
+      <OrbitControls makeDefault />
       <color attach="background" args={['#191920']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
-
+      <Door />
       <Experience />
       {!isLoading && (
         <Frames images={images} />
