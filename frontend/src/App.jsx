@@ -52,9 +52,9 @@ function App() {
 
       <Door />
       <Experience />
-      {!isLoading && (
+      {/* {!isLoading && (
         <Frames images={images} />
-      )}
+      )} */}
 
       {/* <Physics gravity={[0, 2, 0]} iterations={10}>
         <Pointer />

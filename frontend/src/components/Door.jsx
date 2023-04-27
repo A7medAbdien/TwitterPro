@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
-import { Text, useGLTF, useAnimations, useTexture, useCursor } from '@react-three/drei'
+import { Text, useGLTF, Sparkles, useTexture, useCursor } from '@react-three/drei'
 import { useControls } from 'leva';
 
 
@@ -19,10 +19,17 @@ export function Door({ url, ...props }) {
 
 
 
-        <group position={[0, -0.5, 6]} {...props} >
+        <group position={[0, -0.6, 6]} {...props} >
             <mesh geometry={nodes.baked.geometry}>
                 <meshBasicMaterial map={bakedTexture} />
             </mesh>
+            <Sparkles
+                size={1}
+                scale={[2, 2, 1]}
+                position={[0, 1, -1.5]}
+                speed={0.3}
+                count={30}
+            />
             <RobotText />
         </group>
     </>
