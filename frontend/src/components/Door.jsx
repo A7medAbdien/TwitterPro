@@ -18,11 +18,13 @@ const PortalMaterial = shaderMaterial(
 )
 
 extend({ PortalMaterial })
+const GOLDENRATIO = 1.5
 
 useGLTF.preload("/portal.glb")
 export function Door({ url, ...props }) {
 
     const name = url
+    console.log(name);
     const { nodes } = useGLTF('/portal.glb')
     const portal = nodes.baked
     const portalLight = nodes.Circle
@@ -34,20 +36,23 @@ export function Door({ url, ...props }) {
         // console.log(portalMaterial.current)
         portalMaterial.current.uTime += delta
     })
-
-
-    useEffect(() => {
-        console.log(nodes.Circle)
-    }, [])
-
     return <>
-        <group position={[0, -0.6, 6]} {...props} >
+
+        <group
+            {...props} >
+            <mesh
+                name={name}
+                scale={[2, GOLDENRATIO, 0.05]}
+                position={[0, GOLDENRATIO / 2, 0]}>
+                <planeGeometry />
+                <meshStandardMaterial wireframe color="#000000" opacity={0} transparent />
+            </mesh>
             <mesh geometry={portal.geometry}>
                 <meshBasicMaterial map={bakedTexture} />
             </mesh>
             <mesh
                 geometry={portalLight.geometry}
-                position={portalLight.position}
+                position={[portalLight.position.x, portalLight.position.y, portalLight.position.z]}
                 rotation={portalLight.rotation}
             >
                 <portalMaterial ref={portalMaterial} />
@@ -75,11 +80,11 @@ const RobotText = (props) => {
         font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
         anchorX="center"
         anchorY="middle"
-        position={[0, 2, -2]}
+        position={[0, 2.2, -2]}
         {...props}
     >
         If you wanna get back..
-        Click me!
+
     </Text>
 }
 

@@ -10,6 +10,7 @@ import { Frame } from './Frame'
 import { useControls } from 'leva'
 import { doorCameraPosition } from './tweaks'
 import { Robot } from '../Robot'
+import { Door } from '../Door'
 
 
 const GOLDENRATIO = 1.5
@@ -52,8 +53,9 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
                 clicked.current.parent.getWorldQuaternion(q)
             } else if (isOut(clicked)) {
                 setDoorClicked(false)
-                // setDoor(null)
-                setTimeout(setDoor, 500, null);
+                // setDoor(null)    
+                setTimeout(setDoor, 500, 0);
+                console.log(DOOR);
                 p.set(0, 0, 7.5)
                 q.identity()
             } else {
@@ -66,8 +68,8 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
         }
     })
     useFrame((state, dt) => {
-        // easing.damp3(state.camera.position, p, 0.4, dt)
-        // easing.dampQ(state.camera.quaternion, q, 0.4, dt)
+        easing.damp3(state.camera.position, p, 0.4, dt)
+        easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
     return <group position={[0, -0.5, 0]}>
 
@@ -80,8 +82,10 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
 
                 <group key={i} position={position} rotation={rotation}>
                     {/* Door */}
-                    <Frame key={"i"} {...door} />
+                    <Door key={"i"} {...door} />
+                    {/* <Frame key={"i"} {...door} /> */}
                     {/* Home */}
+                    {console.log(home.meta, home.meta == DOOR)}
                     {(home.meta == DOOR) && <Robot scale={0.15} key={i} {...home} />}
                     {/* {(home.meta == DOOR) && <Frame key={i} {...home} />} */}
                     {/* Frames */}
