@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect } from 'react'
 import { Text, useGLTF, useAnimations, useCursor } from '@react-three/drei'
 import { useControls } from 'leva';
 
-
+const GOLDENRATIO = 1.5
 useGLTF.preload("/robot-draco.glb");
 export function Robot({ url, ...props }) {
     const { scene, animations, materials } = useGLTF('/robot-draco.glb')
@@ -41,17 +41,21 @@ export function Robot({ url, ...props }) {
     }, [actionName])
 
     return <><group {...props} >
-
         <mesh
             name={name}
             onPointerOver={(e) => (e.stopPropagation(), setAction("Wave"))}
             onPointerOut={() => setAction(stableState)}
-        >
-            <group>
-                <primitive envMapIntensity={5} object={scene} />
-            </group>
+            scale={[0.4, 0.7, 0.05]}
+            position={[0, 0.35, 0.2]}>
+            <planeGeometry />
+            <meshStandardMaterial wireframe color="#ff0000" opacity={0} transparent />
         </mesh>
-        {actionName == "Wave" && <RobotText />}
+
+        <group scale={0.15}>
+            <primitive envMapIntensity={5} object={scene} />
+            {actionName == "Wave" && <RobotText />}
+        </group>
+
     </group>
     </>
 }

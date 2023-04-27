@@ -55,7 +55,6 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
                 setDoorClicked(false)
                 // setDoor(null)    
                 setTimeout(setDoor, 500, 0);
-                console.log(DOOR);
                 p.set(0, 0, 7.5)
                 q.identity()
             } else {
@@ -85,8 +84,7 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
                     <Door key={"i"} {...door} />
                     {/* <Frame key={"i"} {...door} /> */}
                     {/* Home */}
-                    {console.log(home.meta, home.meta == DOOR)}
-                    {(home.meta == DOOR) && <Robot scale={0.15} key={i} {...home} />}
+                    {(home.meta == DOOR) && <Robot key={i} {...home} />}
                     {/* {(home.meta == DOOR) && <Frame key={i} {...home} />} */}
                     {/* Frames */}
                     {(door.url == DOOR) && image.map((props, i) => <Frame key={i} {...props} />)}
@@ -100,16 +98,4 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
 const DOOR = "door"
 const HOME = "home"
 const isDoor = (ref) => ref.current && (ref.current.name).includes(DOOR)
-const isOut = (ref) => ref.current && hasParentWithNameContainingHome(ref.current)
-
-function hasParentWithNameContainingHome(object) {
-    if (object.parent) {
-        if (object.parent.name && object.parent.name.toLowerCase().includes(HOME)) {
-            return true;
-        } else {
-            return hasParentWithNameContainingHome(object.parent);
-        }
-    } else {
-        return false;
-    }
-}
+const isOut = (ref) => ref.current && (ref.current.name).includes(HOME)
