@@ -24,7 +24,6 @@ useGLTF.preload("/portal.glb")
 export function Door({ url, ...props }) {
 
     const name = url
-    console.log(name);
     const { nodes } = useGLTF('/portal.glb')
     const portal = nodes.baked
     const portalLight = nodes.Circle
