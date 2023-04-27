@@ -1,27 +1,56 @@
-import { useState, useEffect, useLayoutEffect } from 'react'
-import { Text, useGLTF, Sparkles, useTexture, useCursor } from '@react-three/drei'
-import { useControls } from 'leva';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { shaderMaterial, Text, useGLTF, Sparkles, useTexture, useCursor } from '@react-three/drei'
+import { useControls } from 'leva'
+import * as THREE from 'three'
+import { extend, useFrame } from '@react-three/fiber'
 
+import portalFragmentShader from './shaders/portal/fragment.js'
+import portalVertexShader from './shaders/portal/vertex.js'
 
-useGLTF.preload("/portal.glb");
+const PortalMaterial = shaderMaterial(
+    {
+        uTime: 0,
+        uColorStart: new THREE.Color('#ffffff'),
+        uColorEnd: new THREE.Color('#000000'),
+    },
+    portalVertexShader,
+    portalFragmentShader
+)
+
+extend({ PortalMaterial })
+
+useGLTF.preload("/portal.glb")
 export function Door({ url, ...props }) {
 
     const name = url
     const { nodes } = useGLTF('/portal.glb')
+    const portal = nodes.baked
+    const portalLight = nodes.Circle
     const bakedTexture = useTexture('./baked.jpg')
     bakedTexture.flipY = false
 
+    const portalMaterial = useRef()
+    useFrame((state, delta) => {
+        // console.log(portalMaterial.current)
+        portalMaterial.current.uTime += delta
+    })
+
+
     useEffect(() => {
-        // console.log(nodes)
+        console.log(nodes.Circle)
     }, [])
 
     return <>
-
-
-
         <group position={[0, -0.6, 6]} {...props} >
-            <mesh geometry={nodes.baked.geometry}>
+            <mesh geometry={portal.geometry}>
                 <meshBasicMaterial map={bakedTexture} />
+            </mesh>
+            <mesh
+                geometry={portalLight.geometry}
+                position={portalLight.position}
+                rotation={portalLight.rotation}
+            >
+                <portalMaterial ref={portalMaterial} />
             </mesh>
             <Sparkles
                 size={1}
