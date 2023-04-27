@@ -38,8 +38,7 @@ export function Door({ url, ...props }) {
     })
     return <>
 
-        <group
-            {...props} >
+        <group {...props} >
             <mesh
                 name={name}
                 scale={[2, GOLDENRATIO, 0.05]}
@@ -49,6 +48,7 @@ export function Door({ url, ...props }) {
             </mesh>
             <mesh geometry={portal.geometry}>
                 <meshBasicMaterial map={bakedTexture} />
+
             </mesh>
             <mesh
                 geometry={portalLight.geometry}
@@ -57,19 +57,21 @@ export function Door({ url, ...props }) {
             >
                 <portalMaterial ref={portalMaterial} />
             </mesh>
-            <Sparkles
-                size={1}
-                scale={[2, 2, 1]}
-                position={[0, 1, -1.5]}
-                speed={0.3}
-                count={30}
-            />
-            <RobotText />
+
+            <RobotText text={name} />
         </group>
+        <Sparkles
+            size={1}
+            scale={[2, 2, 1]}
+            position={[0, 1, 4]}
+            speed={0.3}
+            count={30}
+            raycast={() => null}
+        />
     </>
 }
 
-const RobotText = (props) => {
+const RobotText = ({ text, ...props }) => {
     return <Text
         color={'#CBA55D'}
         fontSize={0.5}
@@ -83,7 +85,7 @@ const RobotText = (props) => {
         position={[0, 2.2, -2]}
         {...props}
     >
-        If you wanna get back..
+        {text}
 
     </Text>
 }
