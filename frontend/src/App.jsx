@@ -1,17 +1,15 @@
 import Experience from './Experience'
-import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
-import { Debug, Physics, useSphere, usePlane } from "@react-three/cannon"
-import * as THREE from "three"
+import { Canvas } from '@react-three/fiber'
 import { Perf } from 'r3f-perf'
 import { Frames } from './components/rooms/Frames'
-import { Html, Environment, OrbitControls, MeshReflectorMaterial, useGLTF, useAnimations, Stage, Clone } from '@react-three/drei'
+import { Environment, OrbitControls } from '@react-three/drei'
 import { Leva, useControls } from 'leva'
-import { useState, useEffect, useRef, useMemo, Suspense, useLayoutEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 
 
 import { FAll, FTweets, FReplies } from './components/Freq'
-// import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api'
+import { getComm, getTermFreqUni, getTermFreqBi, getUserFreq, getTopicFreq, getTimeFreq } from './api'
 import { TimeReplies, TimeTweets } from './components/TimeHeatmap'
 import { VComm } from './components/VComm'
 import { TwoBar } from './components/charts/TwoBar'
@@ -27,18 +25,18 @@ import { Door } from './components/Door'
 function App() {
 
   const [isLoading, setIsLoading] = useState(false)
-  const images = frames()
+  const roomFrames = frames()
 
 
   useEffect(() => {
+    const images = roomFrames.map(room => room.image)
+    getUrlFromData(getTermFreqUni, getBarUrl)
+      .then((res) => assignUrlToImage(res, images))
+      .then(() => setIsLoading(false))
+    roomFrames.map((room, i) => room.image = images[i])
+    console.log("images", roomFrames);
 
-    // getUrlFromData(getTermFreqUni, getBarUrl)
-    //   .then((res) => assignUrlToImage(res, images))
-    //   .then(() => setIsLoading(false))
-
-  }, [images])
-
-
+  }, [roomFrames])
 
   return <>
 
@@ -50,10 +48,9 @@ function App() {
       <color attach="background" args={['#191920']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
 
-      {/* <Door position={[0, -0.6, 6]} /> */}
       <Experience />
       {!isLoading && (
-        <Frames images={images} />
+        <Frames images={roomFrames} />
       )}
 
       {/* <Physics gravity={[0, 2, 0]} iterations={10}>
@@ -61,11 +58,7 @@ function App() {
         <Clump />
         <Plane />
       </Physics> */}
-      <Floor />
-      {/* <mesh position={[0, -0.5, -10]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[50, 50]} />
-      </mesh> */}
-
+      {/* <Floor /> */}
 
       <Environment preset="city" />
     </Canvas>

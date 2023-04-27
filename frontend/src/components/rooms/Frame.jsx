@@ -1,14 +1,9 @@
 import * as THREE from 'three'
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useRef, useState } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { useCursor, MeshReflectorMaterial, Text, Environment, Html, BBAnchor } from '@react-three/drei'
-import { useRoute, useLocation } from 'wouter'
+import { useCursor, Text } from '@react-three/drei'
+import { useRoute } from 'wouter'
 import { easing } from 'maath'
-import getUuid from 'uuid-by-string'
-import { VComm } from '../VComm'
-import BarChar from '../charts/Bar'
-import { useSpring, animated } from 'react-spring';
-
 
 const GOLDENRATIO = 1.5
 
@@ -17,17 +12,16 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
     const img = props.img
     const image = useRef()
     const frame = useRef()
-    const [, params] = useRoute('/termFreqUni/:id')
+    const [, params] = useRoute('/:id')
     const [hovered, hover] = useState(false)
     const [rnd] = useState(() => Math.random())
-    // const name = getUuid(url)
     const name = url
     const isActive = params?.id === name
     useCursor(hovered)
     useFrame((state, dt) => {
-        // image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
-        // easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
-        // easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
+        image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
+        easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
+        easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
     })
 
     return (
@@ -49,7 +43,7 @@ export function Frame({ url, c = new THREE.Color(), ...props }) {
                 </mesh>
 
                 {/* Image */}
-                {/* <Image ref={image} img={img} raycast={() => null} scale={0.4} position={[0, 0, 0.8]} /> */}
+                <Image ref={image} img={img} raycast={() => null} scale={0.85} position={[0, 0, 0.8]} />
 
             </mesh>
 
@@ -74,7 +68,7 @@ const Image = forwardRef((props, ref) => {
             <meshBasicMaterial
                 attach="material"
                 map={texture}
-                toneMapped={false} />
+            />
         </mesh>
     )
 })

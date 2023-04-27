@@ -40,7 +40,7 @@ export const getUrlFromData = async (data, chartType) => {
     return url
 }
 
-export const assignUrlToImage = async (res, images) => {
+export const assignUrlToImage = async (res, imagesPerRoom) => {
     const promises = Object.values(res)
 
     try {
@@ -51,7 +51,11 @@ export const assignUrlToImage = async (res, images) => {
             resolvedData[key] = responses[index]
         })
 
-        images.map((image) => image.img = resolvedData[image.meta])
+        // imagesPerRoom.map((image) => console.log(image))
+        imagesPerRoom.map(images => images.map(image => image.img = resolvedData[image.meta]))
+        // imagesPerRoom.map(images => images.map(image => console.log(image)))
+        // images.map((image) => image.img = resolvedData[image.meta])
+        // console.log(images);
     } catch (error) {
         console.error(error)
     }
