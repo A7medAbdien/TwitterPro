@@ -30,10 +30,10 @@ export function Robot({ url, ...props }) {
         const action = actions[actionName]
         action.reset().fadeIn(1).play().setDuration(3)
 
-        setTimeout(() => {
-            stableState = "Dance"
-            setAction(stableState)
-        }, 20000);
+        // setTimeout(() => {
+        //     stableState = "Dance"
+        //     setAction(stableState)
+        // }, 20000);
         return () => {
             action.fadeOut(1)
         }
@@ -44,7 +44,7 @@ export function Robot({ url, ...props }) {
 
         <mesh
             name={name}
-            onPointerOver={(e) => (e.stopPropagation(), setAction("Wave"), hover(true))}
+            onPointerOver={(e) => (e.stopPropagation(), setAction("Wave"))}
             onPointerOut={() => setAction(stableState)}
         >
             <group>
