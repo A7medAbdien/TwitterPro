@@ -40,10 +40,10 @@ export function Door({ url, ...props }) {
         <group {...props} >
             <mesh
                 name={name}
-                scale={[2, GOLDENRATIO, 0.05]}
-                position={[0, GOLDENRATIO / 2, 0]}>
+                scale={[1.7, GOLDENRATIO, 0.05]}
+                position={[0, GOLDENRATIO / 2 + 0.2, -1.5]}>
                 <planeGeometry />
-                <meshStandardMaterial wireframe color="#000000" opacity={0} transparent />
+                <meshStandardMaterial wireframe color="#ff0000" opacity={0} transparent />
             </mesh>
             <mesh geometry={portal.geometry}>
                 <meshBasicMaterial map={bakedTexture} />

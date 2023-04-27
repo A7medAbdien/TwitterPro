@@ -77,7 +77,7 @@ const topicsTime = () => {
     const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('TT', {
         position:
         {
-            value: { x: 0, y: -10 },
+            value: { x: -1, y: -10 },
             step: 0.1,
         },
         positionA:
@@ -135,7 +135,7 @@ const users = () => {
     const { position: posTF, positionA, rA, positionC, rC, positionD, rD } = useControls('U', {
         position:
         {
-            value: { x: 0, y: -5 },
+            value: { x: 1, y: -7 },
             step: 0.1,
         },
         positionA:
@@ -252,7 +252,7 @@ export const frames = () => {
     const { position: posOuterDoor, r: rOuterDoor } = useControls('Outer Doors', {
         position:
         {
-            value: { x: -8, y: 1.25 },
+            value: { x: -7.5, y: 2 },
             step: 0.01,
         },
         r:
@@ -266,7 +266,7 @@ export const frames = () => {
     const { position: posInnerDoor, r: rInnerDoor } = useControls('Inner Doors', {
         position:
         {
-            value: { x: -2.5, y: -2 },
+            value: { x: -2, y: 0.5 },
             step: 0.01,
         },
         r:
@@ -284,21 +284,21 @@ export const frames = () => {
             position: [posOuterDoor.x, 0, posOuterDoor.y],
             rotation: [0, rOuterDoor, 0],
             image: [...termFreq()],
-            home: { img: 0, meta: 'door-TF', position: [0, 0, 1.25], url: 'home' },
+            home: { img: 0, meta: 'door-TF', position: [0, 0, 0.6], url: 'home' },
             door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-TF' }
         },
         {
             position: [posInnerDoor.x, 0, posInnerDoor.y],
             rotation: [0, rInnerDoor, 0],
             image: [...topicsTime()],
-            home: { img: 0, meta: 'door-TT', position: [0, 0, -5], url: 'home' },
+            home: { img: 0, meta: 'door-TT', position: [-1, 0, -5], url: 'home' },
             door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-TT' },
         },
         {
             position: [-posInnerDoor.x, 0, posInnerDoor.y],
             rotation: [0, -rInnerDoor, 0],
             image: [...users()],
-            home: { img: 0, meta: 'door-U', position: [0, 0, 0], url: 'home' },
+            home: { img: 0, meta: 'door-U', position: [1, 0, -2], url: 'home' },
             door: { img: 0, meta: 'door', position: [0, 0, 5], rotation: [0, 0, 0], url: 'door-U' },
         },
         {
@@ -315,7 +315,7 @@ export const frames = () => {
 const GOLDENRATIO = 1.5
 export const doorCameraPosition = {
     "door-TF": [0, GOLDENRATIO / 2, -2.5],
-    "door-TT": [0, GOLDENRATIO / 2, -8.5],
-    "door-U": [0, GOLDENRATIO / 2, -3],
+    "door-TT": [-1, GOLDENRATIO / 2, -8.5],
+    "door-U": [1, GOLDENRATIO / 2, -5],
     "door-CT": [0, GOLDENRATIO / 2, -5],
 }
