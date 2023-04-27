@@ -59,18 +59,20 @@ const termFreq = () => {
         })
 
     return [
-        // Back
-        { img: 0, meta: 'tweets', position: [-positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, rA, 0], url: 'TFUtweets' },
-        { img: 0, meta: 'replies', position: [positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, -rA, 0], url: 'TFUreplies' },
-
-        { img: 0, meta: 'tweets', position: [-positionB.x + posTF.x, 0, positionB.y + posTF.y], rotation: [0, rB, 0], url: 'TFUtweets2' },
-        { img: 0, meta: 'replies', position: [positionB.x + posTF.x, 0, positionB.y + posTF.y], rotation: [0, -rB, 0], url: 'TFUreplies2' },
         // Left
-        { img: 0, meta: 'likes', position: [-positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, rC, 0], url: 'TFUlikes' },
-        { img: 0, meta: 'fLikes', position: [positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, -rC, 0], url: 'TFUfLikes' },
-        // // Right
-        { img: 0, meta: 'likes', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'TFUlikes2' },
-        { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'TFUfLikes2' },
+        { img: 0, meta: 'tweets', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'TFU-Tweets' },
+        { img: 0, meta: 'replies', position: [-positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, rC, 0], url: 'TFU-Replies' },
+
+        // Back
+        { img: 0, meta: 'likes', position: [-positionB.x + posTF.x, 0, positionB.y + posTF.y], rotation: [0, rB, 0], url: 'TFU-Likes' },
+        { img: 0, meta: 'fLikes', position: [-positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, rA, 0], url: 'TFU-FLikes' },
+
+        { img: 0, meta: 'tweets', position: [positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, -rA, 0], url: 'TFB-Tweets' },
+        { img: 0, meta: 'replies', position: [positionB.x + posTF.x, 0, positionB.y + posTF.y], rotation: [0, -rB, 0], url: 'TFB-Replies' },
+
+        // Right
+        { img: 0, meta: 'likes', position: [positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, -rC, 0], url: 'TFB-Likes' },
+        { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'TFB-FLikes' },
     ]
 }
 const topicsTime = () => {
@@ -119,16 +121,17 @@ const topicsTime = () => {
     })
 
     return [
-        // Back
-        { img: 0, meta: 'tweets', position: [-positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, rA, 0], url: 'TFBTweets' },
-        { img: 0, meta: 'replies', position: [positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, -rA, 0], url: 'TFBReplies' },
-
         // Left
-        { img: 0, meta: 'likes', position: [-positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, rC, 0], url: 'TFBLikes' },
-        { img: 0, meta: 'fLikes', position: [positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, -rC, 0], url: 'TFBFLikes' },
+        { img: 0, meta: 'tweets', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'Topics-Tweets' },
+
+        // Back
+        { img: 0, meta: 'replies', position: [-positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, rC, 0], url: 'Topics-Replies' },
+        { img: 0, meta: 'likes', position: [-positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, rA, 0], url: 'Topics-Likes' },
+        { img: 0, meta: 'fLikes', position: [positionA.x + posTF.x, 0, positionA.y + posTF.y], rotation: [0, -rA, 0], url: 'Topics-FLikes' },
+
+        { img: 0, meta: 'fLikes', position: [positionC.x + posTF.x, 0, positionC.y + posTF.y], rotation: [0, -rC, 0], url: '4' },
         // // Right
-        { img: 0, meta: 'likes', position: [-positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, rD, 0], url: 'TFBLikes2' },
-        { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: 'TFBFLikes2' },
+        { img: 0, meta: 'fLikes', position: [positionD.x + posTF.x, 0, positionD.y + posTF.y], rotation: [0, -rD, 0], url: '6' },
     ]
 }
 const users = () => {

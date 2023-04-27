@@ -25,18 +25,41 @@ import { Door } from './components/Door'
 function App() {
 
   const [isLoading, setIsLoading] = useState(false)
-  const roomFrames = frames()
+  const roomFrame = frames()
 
 
   useEffect(() => {
-    const images = roomFrames.map(room => room.image)
-    getUrlFromData(getTermFreqUni, getBarUrl)
-      .then((res) => assignUrlToImage(res, images))
-      .then(() => setIsLoading(false))
-    roomFrames.map((room, i) => room.image = images[i])
-    console.log("images", roomFrames);
 
-  }, [roomFrames])
+    // and since it is a mirror copy, no need to reassign anything 😜
+
+    const termFreqUniImage = roomFrame[0].image.slice(0, 4)
+    getUrlFromData(getTermFreqUni, getBarUrl)
+      .then((res) => assignUrlToImage(res, termFreqUniImage))
+      .then(() => setIsLoading(false))
+
+    const termFreqBiImage = roomFrame[0].image.slice(4, 8)
+    getUrlFromData(getTermFreqBi, getBarUrl)
+      .then((res) => assignUrlToImage(res, termFreqBiImage))
+      .then(() => setIsLoading(false))
+
+    const topicsFreqImage = roomFrame[1].image.slice(0, 4)
+    getUrlFromData(getTopicFreq, getBarUrl)
+      .then((res) => assignUrlToImage(res, topicsFreqImage))
+      .then(() => setIsLoading(false))
+
+    // const timeImage = roomFrame[1].image.slice(4, 6)
+    // getUrlFromData(getTimeFreq, getBarUrl)
+    //   .then((res) => assignUrlToImage(res, timeImage))
+    //   .then(() => setIsLoading(false))
+
+    // const userFreqImage = roomFrame[2].image.slice(0,4)
+    // getUrlFromData(getUserFreq, getBarUrl)
+    //   .then((res) => assignUrlToImage(res, userFreqImage))
+    //   .then(() => setIsLoading(false))
+
+
+
+  }, [roomFrame])
 
   return <>
 
@@ -50,7 +73,7 @@ function App() {
 
       <Experience />
       {!isLoading && (
-        <Frames images={roomFrames} />
+        <Frames images={roomFrame} />
       )}
 
       {/* <Physics gravity={[0, 2, 0]} iterations={10}>

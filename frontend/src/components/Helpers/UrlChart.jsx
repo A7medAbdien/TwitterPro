@@ -50,12 +50,9 @@ export const assignUrlToImage = async (res, imagesPerRoom) => {
         Object.keys(res).forEach((key, index) => {
             resolvedData[key] = responses[index]
         })
+        // console.log(resolvedData);
+        imagesPerRoom.map(image => image.img = resolvedData[image.meta])
 
-        // imagesPerRoom.map((image) => console.log(image))
-        imagesPerRoom.map(images => images.map(image => image.img = resolvedData[image.meta]))
-        // imagesPerRoom.map(images => images.map(image => console.log(image)))
-        // images.map((image) => image.img = resolvedData[image.meta])
-        // console.log(images);
     } catch (error) {
         console.error(error)
     }
