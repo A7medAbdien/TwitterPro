@@ -21,11 +21,13 @@ const BarChar = ({ data, title, xLabel, yLabel, dimension }) => {
 
 
     let allContainColon = true
-    for (const i of x)
-        if (!i.includes(':')) {
+    for (const i of x) {
+        console.log(i);
+        if (Number.isInteger(i) || !i.includes(':')) {
             allContainColon = false
             break
         }
+    }
     if (allContainColon)
         x = x.map((label) => {
             if (label.split(':').length > 1) {

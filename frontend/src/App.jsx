@@ -32,30 +32,30 @@ function App() {
 
     // and since it is a mirror copy, no need to reassign anything 😜
 
-    const termFreqUniImage = roomFrame[0].image.slice(0, 4)
-    getUrlFromData(getTermFreqUni, getBarUrl)
-      .then((res) => assignUrlToImage(res, termFreqUniImage))
-      .then(() => setIsLoading(false))
+    // const termFreqUniImage = roomFrame[0].image.slice(0, 4)
+    // getUrlFromData(getTermFreqUni, getBarUrl)
+    //   .then((res) => assignUrlToImage(res, termFreqUniImage))
+    //   .then(() => setIsLoading(false))
 
-    const termFreqBiImage = roomFrame[0].image.slice(4, 8)
-    getUrlFromData(getTermFreqBi, getBarUrl)
-      .then((res) => assignUrlToImage(res, termFreqBiImage))
-      .then(() => setIsLoading(false))
+    // const termFreqBiImage = roomFrame[0].image.slice(4, 8)
+    // getUrlFromData(getTermFreqBi, getBarUrl)
+    //   .then((res) => assignUrlToImage(res, termFreqBiImage))
+    //   .then(() => setIsLoading(false))
 
-    const topicsFreqImage = roomFrame[1].image.slice(0, 4)
-    getUrlFromData(getTopicFreq, getBarUrl)
-      .then((res) => assignUrlToImage(res, topicsFreqImage))
-      .then(() => setIsLoading(false))
+    // const topicsFreqImage = roomFrame[1].image.slice(0, 4)
+    // getUrlFromData(getTopicFreq, getBarUrl)
+    //   .then((res) => assignUrlToImage(res, topicsFreqImage))
+    //   .then(() => setIsLoading(false))
 
     // const timeImage = roomFrame[1].image.slice(4, 6)
     // getUrlFromData(getTimeFreq, getBarUrl)
     //   .then((res) => assignUrlToImage(res, timeImage))
     //   .then(() => setIsLoading(false))
 
-    // const userFreqImage = roomFrame[2].image.slice(0,4)
-    // getUrlFromData(getUserFreq, getBarUrl)
-    //   .then((res) => assignUrlToImage(res, userFreqImage))
-    //   .then(() => setIsLoading(false))
+    const userFreqImage = roomFrame[2].image.slice(0, 3)
+    getUrlFromData(getUserFreq, getBarUrl)
+      .then((res) => assignUrlToImage(res, userFreqImage))
+      .then(() => setIsLoading(false))
 
 
 
@@ -81,7 +81,8 @@ function App() {
         <Clump />
         <Plane />
       </Physics> */}
-      {/* <Floor /> */}
+      <Floor />
+
 
       <Environment preset="city" />
     </Canvas>

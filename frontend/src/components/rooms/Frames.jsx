@@ -62,7 +62,7 @@ export const Frames = ({ images, q = new THREE.Quaternion(), p = new THREE.Vecto
                 clicked.current.parent.getWorldQuaternion(q)
             }
         } else {
-            p.set(0, 0, 7.5)
+            p.set(0, 0.3, 7.5)
             q.identity()
         }
     })

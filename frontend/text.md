@@ -79,8 +79,9 @@ The reason for not adding "When he Likes a tweet", is... I am too lazy to do it.
 Here I am answering the Who questions,
 1. Who he replies to
 2. Who he likes their tweets
-3. Common Accounts he Replies and Likes their tweets
-4. Common Accounts he and his followers Likes their tweets
+3. Who his followings likes their tweets
+4. Common Accounts he Replies and Likes their tweets
+5. Common Accounts he and his followers Likes their tweets
 
 
 # Common Topics and Terms in Liked Tweets
@@ -88,3 +89,5 @@ Here I am answering the Who questions,
 The headline is self-explanatory, you can figure it yourself.😊
 
 Here you can see the Common Topics and Terms in liked tweets by Elun Musk and his followings
+
+
